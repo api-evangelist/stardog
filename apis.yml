@@ -48,6 +48,8 @@ apis:
         url: https://docs.stardog.com/developing/http-api
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/stardog-union
   - type: Website
     url: https://www.stardog.com
   - type: Documentation

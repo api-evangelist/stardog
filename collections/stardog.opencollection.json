@@ -1,0 +1,4901 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Restore checkpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/checkpoint/:db/:checkpoint",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "checkpoint",
+                "value": "",
+                "type": "path",
+                "description": "the name of the checkpoint"
+              }
+            ]
+          },
+          "docs": "Restore checkpoints"
+        },
+        {
+          "info": {
+            "name": "List checkpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/checkpoint/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List checkpoints"
+        },
+        {
+          "info": {
+            "name": "Create checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/checkpoint/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Create checkpoint"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/roles"
+          },
+          "docs": "Get the names of all roles in the system"
+        },
+        {
+          "info": {
+            "name": "Add role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add role"
+        },
+        {
+          "info": {
+            "name": "Delete role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/roles/:role",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force delete if role is assigned to users"
+              }
+            ]
+          },
+          "docs": "Delete role"
+        },
+        {
+          "info": {
+            "name": "Get users with role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/roles/:role/users",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ]
+          },
+          "docs": "Returns a list of all users that have a specific role"
+        },
+        {
+          "info": {
+            "name": "List Roles with their permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/roles/list"
+          },
+          "docs": "Retrieve a detailed list of all roles, including their permissions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Get all permissions assigned to a given user"
+        },
+        {
+          "info": {
+            "name": "Add User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/permissions/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Grant a permission directly to a specified user"
+        },
+        {
+          "info": {
+            "name": "Get effective user permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/effective/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Get all permissions assigned to a given user as well as those granted by assigned roles"
+        },
+        {
+          "info": {
+            "name": "Delete Role Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/permissions/role/:role/delete",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a permission from a given role"
+        },
+        {
+          "info": {
+            "name": "Delete User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/permissions/user/:user/delete",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a permission from a given user"
+        },
+        {
+          "info": {
+            "name": "Check User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/check"
+          },
+          "docs": "Check if the currently authenticated user has permission to perform an action on a resource, taking wildcards into account"
+        },
+        {
+          "info": {
+            "name": "Get role permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/role/:role",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ]
+          },
+          "docs": "Get all permissions attributed to a given role"
+        },
+        {
+          "info": {
+            "name": "Add Role Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/permissions/role/:role",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a permission to a specified role"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List processes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/processes",
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include all processes in cloud"
+              }
+            ]
+          },
+          "docs": "Get a list of all running processes"
+        },
+        {
+          "info": {
+            "name": "Get process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/processes/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the process"
+              }
+            ]
+          },
+          "docs": "Get details of a specific process"
+        },
+        {
+          "info": {
+            "name": "Kill process",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/processes/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the process"
+              }
+            ]
+          },
+          "docs": "Kill process"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stored Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/functions/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored function"
+              }
+            ]
+          },
+          "docs": "Get Stored Function"
+        },
+        {
+          "info": {
+            "name": "Delete Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/functions/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored function"
+              }
+            ]
+          },
+          "docs": "Delete the stored function specified in the query string parameter"
+        },
+        {
+          "info": {
+            "name": "Get Stored Functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/functions/stored",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Stored Function name"
+              }
+            ]
+          },
+          "docs": "Retrieve all stored functions on the server, or optionally just the function specified in the query string parameter"
+        },
+        {
+          "info": {
+            "name": "Add Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/functions/stored"
+          },
+          "docs": "Add Stored Function"
+        },
+        {
+          "info": {
+            "name": "Delete Stored Functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/functions/stored",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Stored Function name"
+              }
+            ]
+          },
+          "docs": "Delete all stored functions on the server, or optionally just the function specified in the query string parameter"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server Status/Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server/Database metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status"
+          },
+          "docs": "Return metric information from the registry in JSON format. If 'admin' is replaced in the path with a valid database name, metrics for just that database will be returned."
+        },
+        {
+          "info": {
+            "name": "Get Prometheus metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status/prometheus",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be included"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be excluded, takes precedence over include"
+              }
+            ]
+          },
+          "docs": "Return metric information from the registry in Prometheus format"
+        },
+        {
+          "info": {
+            "name": "Get Prometheus metrics (only accessible from a restricted cidr range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status/prometheus/internal",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be included"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be excluded, takes precedence over include"
+              }
+            ]
+          },
+          "docs": "Return metric information from the registry in Prometheus format"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SDU usage summary statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/sdu-usage/summary"
+          },
+          "docs": "Retrieve aggregated summary statistics for SDU (Stardog Data Unit) usage events. Returns total queries, total elapsed time, and breakdowns by user, database, and agent. Optionally filter by start and end timestamps in ISO-8601 format (e.g., 2023-12-18T12:00:00Z)."
+        },
+        {
+          "info": {
+            "name": "Server health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/healthcheck"
+          },
+          "docs": "Determine whether the server is running and able to accept traffic"
+        },
+        {
+          "info": {
+            "name": "Get server diagnostics report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/diagnostics"
+          },
+          "docs": "Get server diagnostics report"
+        },
+        {
+          "info": {
+            "name": "Server aliveness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/alive"
+          },
+          "docs": "Determine whether the server is running"
+        },
+        {
+          "info": {
+            "name": "Get SDU usage events (streaming)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/sdu-usage"
+          },
+          "docs": "Retrieve SDU (Stardog Data Unit) usage events from the sdu_usage.log file. Events are streamed to avoid memory issues under heavy load. Optionally filter by start and end timestamps in ISO-8601 format (e.g., 2023-12-18T12:00:00Z)."
+        },
+        {
+          "info": {
+            "name": "Get server logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/logs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve server logs as a zip file. Supports filtering by log types, including rotated logs, and limiting the number of lines returned."
+        },
+        {
+          "info": {
+            "name": "Shutdown server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/shutdown"
+          },
+          "docs": "Shutdown server"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries"
+          },
+          "docs": "Get a list of all running queries"
+        },
+        {
+          "info": {
+            "name": "Get stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              }
+            ]
+          },
+          "docs": "Get stored query"
+        },
+        {
+          "info": {
+            "name": "Rename stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              },
+              {
+                "name": "move",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rename stored query"
+        },
+        {
+          "info": {
+            "name": "Delete stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              }
+            ]
+          },
+          "docs": "Delete stored query"
+        },
+        {
+          "info": {
+            "name": "List stored queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/stored",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "query",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List stored queries"
+        },
+        {
+          "info": {
+            "name": "Add stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Add stored query"
+        },
+        {
+          "info": {
+            "name": "Update stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Add stored query, overwriting if a query with that name already exists"
+        },
+        {
+          "info": {
+            "name": "Delete all stored queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Delete all stored queries"
+        },
+        {
+          "info": {
+            "name": "Get query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query"
+              },
+              {
+                "name": "plan",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get details of a specific query"
+        },
+        {
+          "info": {
+            "name": "Kill query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query"
+              }
+            ]
+          },
+          "docs": "Kill query"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users"
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "Add user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add user"
+        },
+        {
+          "info": {
+            "name": "User is Superuser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/superuser",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether or not a user is a Superuser"
+        },
+        {
+          "info": {
+            "name": "User enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/enabled",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether or not a user is enabled (active) in the system"
+        },
+        {
+          "info": {
+            "name": "Enable/Disable User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/enabled",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable/Disable User"
+        },
+        {
+          "info": {
+            "name": "Change user's password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/pwd",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change user's password"
+        },
+        {
+          "info": {
+            "name": "Get user's roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all roles explicitly assigned to a user"
+        },
+        {
+          "info": {
+            "name": "Add role to user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add role to user"
+        },
+        {
+          "info": {
+            "name": "Set user's roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrite the list of roles explicitly assigned to a user"
+        },
+        {
+          "info": {
+            "name": "Remove role from user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/users/:user/roles/:role",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ]
+          },
+          "docs": "Remove role from user"
+        },
+        {
+          "info": {
+            "name": "User auto-created",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/auto_created",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether a user was auto-created as a result the OAuth jwt authentication process"
+        },
+        {
+          "info": {
+            "name": "List users with attributes, roles and permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/list"
+          },
+          "docs": "Retrieve a detailed list of all users, including their roles, permissions, and status"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Retrieve attributes, roles, and permissions of a User"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Delete User"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DB Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases"
+          },
+          "docs": "List all the databases in the server"
+        },
+        {
+          "info": {
+            "name": "Create database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Add a new database to the server, optionally with RDF bulk-loaded"
+        },
+        {
+          "info": {
+            "name": "Get all DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Get the value of every metadata option for a database"
+        },
+        {
+          "info": {
+            "name": "Set DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of specific metadata options for a database"
+        },
+        {
+          "info": {
+            "name": "Get DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the value of specific metadata options for a database"
+        },
+        {
+          "info": {
+            "name": "Restore database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/restore",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The location on the server of the backup"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to overwrite an existing database with this backup"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the restored database, if different"
+              }
+            ]
+          },
+          "docs": "Restore a database from backup"
+        },
+        {
+          "info": {
+            "name": "Get all metadata properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/config_properties"
+          },
+          "docs": "Get information on all database metadata properties, including description and example values"
+        },
+        {
+          "info": {
+            "name": "Return transaction Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/:db/txlog",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Return a chunk (or the entirety) of this database's transaction log for point in time recovers."
+        },
+        {
+          "info": {
+            "name": "Replay Transaction Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/txlog",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "path",
+                "description": "Server should validate the transaction log before applying it. Checks if the last committed transaction is at the beginning of the Log. Default is true"
+              }
+            ]
+          },
+          "docs": "Replay a transaction log onto an existing database. This operation applies the provided transaction log to the database, typically for point in time restore."
+        },
+        {
+          "info": {
+            "name": "Verify database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/verify",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Checks that the data in the database is not corrupted, for example, there're no inconsistencies across indexes"
+        },
+        {
+          "info": {
+            "name": "Repair database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/repair",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Attempt to recover a corrupted database"
+        },
+        {
+          "info": {
+            "name": "Online database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/online",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bring a database online"
+        },
+        {
+          "info": {
+            "name": "Backup all databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/backup_all",
+            "params": [
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "File location on the server to which to save the backups (defaults to $STARDOG_HOME/.backup)"
+              }
+            ]
+          },
+          "docs": "Create a backup of all databases on the server"
+        },
+        {
+          "info": {
+            "name": "Backup a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/backup",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "File location on the server to which to save the backup (defaults to $STARDOG_HOME/.backup)"
+              }
+            ]
+          },
+          "docs": "Create a backup of a database on the server"
+        },
+        {
+          "info": {
+            "name": "Drop database",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/databases/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Delete the database"
+        },
+        {
+          "info": {
+            "name": "Return all databases along with their configuration options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/options"
+          },
+          "docs": "List all the databases in the server including all database configuration options"
+        },
+        {
+          "info": {
+            "name": "Rename database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/rename",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Make existing database to be identified by a new name"
+        },
+        {
+          "info": {
+            "name": "Offline database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/offline",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Take a database offline"
+        },
+        {
+          "info": {
+            "name": "Optimize database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/optimize",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Optimize a database"
+        },
+        {
+          "info": {
+            "name": "Get server properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/properties",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Specific names of server properties to retrieve (multiple params can be specified)"
+              }
+            ]
+          },
+          "docs": "Gets the property value for a server configuration option. This value will be the default for the option or the override in the properties file."
+        },
+        {
+          "info": {
+            "name": "Set server properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/properties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of specific server properties"
+        },
+        {
+          "info": {
+            "name": "Get DB Size",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/size",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "exact",
+                "value": "",
+                "type": "query",
+                "description": "Whether to request that the database size be exact instead of approximate"
+              }
+            ]
+          },
+          "docs": "Retrieve the size of the db. Size is approximate unless the exact parameter is set to true"
+        },
+        {
+          "info": {
+            "name": "Generate Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/model",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Desired output format (text, owl, shacl, sql, graphql)"
+              }
+            ]
+          },
+          "docs": "Generate the reasoning model used by this database in various formats"
+        },
+        {
+          "info": {
+            "name": "Export database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/export",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "obf",
+                "value": "",
+                "type": "query",
+                "description": "Path to an obfuscation configuration file, or DEFAULT"
+              }
+            ]
+          },
+          "docs": "Export database"
+        },
+        {
+          "info": {
+            "name": "Export database (obfuscated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/export",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Export database (obfuscated)"
+        },
+        {
+          "info": {
+            "name": "Get namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/namespaces",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Retrieve the namespaces stored in the database"
+        },
+        {
+          "info": {
+            "name": "Import namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/namespaces",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Add namespaces to the database via a block or blocks of RDF that declares them"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integrity Constraints / SHACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/icv",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List constraints"
+        },
+        {
+          "info": {
+            "name": "Validate constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/validate",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Determine whether or not the given constraints are valid"
+        },
+        {
+          "info": {
+            "name": "Validate constraints in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/:txid/validate",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Determine whether or not the given constraints are valid"
+        },
+        {
+          "info": {
+            "name": "SHACL validation report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/report",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "shapes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shapes to validate"
+              },
+              {
+                "name": "shacl.shape.graphs",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shape graphs to validate"
+              },
+              {
+                "name": "nodes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL focus node(s) to validate"
+              },
+              {
+                "name": "countLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of violations to report"
+              },
+              {
+                "name": "shacl.targetClass.simple",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "shacl.violation.limit.shape",
+                "value": "",
+                "type": "query",
+                "description": "number of violation limits per SHACL shapes"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              }
+            ]
+          },
+          "docs": "Produces a SHACL validation report against the specified shape(s)"
+        },
+        {
+          "info": {
+            "name": "SHACL validation report in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/:txid/report",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "shapes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shapes to validate"
+              },
+              {
+                "name": "shacl.shape.graphs",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shape graphs to validate"
+              },
+              {
+                "name": "nodes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL focus node(s) to validate"
+              },
+              {
+                "name": "countLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of violations to report"
+              },
+              {
+                "name": "shacl.targetClass.simple",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "shacl.violation.limit.shape",
+                "value": "",
+                "type": "query",
+                "description": "number of violation limits per SHACL shapes"
+              }
+            ]
+          },
+          "docs": "Produces a SHACL validation report against the specified shape(s)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Virtual Graphs External Compute",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs_compute/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a delimited file into the knowledge graph"
+        },
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs_compute/import_db",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a virtual graph directly into the local knowledge graph"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Caching",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Refresh cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/refresh/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cache"
+              }
+            ]
+          },
+          "docs": "Refresh cache"
+        },
+        {
+          "info": {
+            "name": "Create cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new cached dataset from a virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get cached graphs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cache/graphs"
+          },
+          "docs": "Get cached graphs"
+        },
+        {
+          "info": {
+            "name": "Orphan cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/target/:name/orphan",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the target"
+              }
+            ]
+          },
+          "docs": "Orphan a cache target but do not destroy the contents"
+        },
+        {
+          "info": {
+            "name": "Drop cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cache"
+              }
+            ]
+          },
+          "docs": "Drop cache"
+        },
+        {
+          "info": {
+            "name": "Remove cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/target/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the target"
+              }
+            ]
+          },
+          "docs": "Remove a cache target and destroy its contents"
+        },
+        {
+          "info": {
+            "name": "List cache targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cache/target"
+          },
+          "docs": "List cache targets"
+        },
+        {
+          "info": {
+            "name": "Add cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/target",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add cache target"
+        },
+        {
+          "info": {
+            "name": "Get cache status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the status of one or more cached graphs or queries"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Graph Store Protocol",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the named graph to retrieve"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Retrieves an RDF payload that is a serialization of the named graph paired with the graph IRI in the database"
+        },
+        {
+          "info": {
+            "name": "POST graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Merges the enclosed RDF payload with the specified graph content"
+        },
+        {
+          "info": {
+            "name": "PUT graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/:db",
+            "headers": [
+              {
+                "name": "Content-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Stores the enclosed RDF payload as RDF graph content"
+        },
+        {
+          "info": {
+            "name": "DELETE graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the named graph to delete"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Deletes the RDF graph content identified by either the request or encoded IRI"
+        },
+        {
+          "info": {
+            "name": "HEAD graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Test dereferenceable IRIs for validity and accessibility"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Matcher, aligning schemas from various data sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aligns the source and target data source schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/matcher/suggestions"
+          },
+          "docs": "Aligns the source and target data source schemas"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reasoning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Explain inference in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/reasoning/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain how the inference engine inferred a specific piece of data"
+        },
+        {
+          "info": {
+            "name": "Explain inconsistency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/explain/inconsistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Explain how, if at all, the data are inconsistent with respect to the ontology"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/query/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query with reasoning enabled"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/query/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query with reasoning enabled"
+        },
+        {
+          "info": {
+            "name": "Explain inference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/reasoning/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Explain how the inference engine inferred a specific piece of data"
+        },
+        {
+          "info": {
+            "name": "Check consistency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/consistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the data in the database are consistent with respect to the ontology"
+        },
+        {
+          "info": {
+            "name": "Get reasoning schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Retrieve the reasoning schema in RDF of the given database"
+        },
+        {
+          "info": {
+            "name": "Explain inconsistency in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/:txid/explain/inconsistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain how, if at all, the data are inconsistent with respect to the ontology"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Begin a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/begin",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Begin a transaction"
+        },
+        {
+          "info": {
+            "name": "Begin a transaction with specified txid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/begin/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Begin a transaction with specified txid"
+        },
+        {
+          "info": {
+            "name": "Commit a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/commit/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Commit a transaction"
+        },
+        {
+          "info": {
+            "name": "Rollback a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/rollback/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Rollback a transaction"
+        },
+        {
+          "info": {
+            "name": "Clear database within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/clear",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Clear database within a transaction"
+        },
+        {
+          "info": {
+            "name": "Remove data within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/remove",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Remove data within a transaction"
+        },
+        {
+          "info": {
+            "name": "Add data within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/add",
+            "headers": [
+              {
+                "name": "Content-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Add data within a transaction"
+        },
+        {
+          "info": {
+            "name": "List all open transactions on a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/transaction",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List all open transactions on a database"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources"
+          },
+          "docs": "List data sources"
+        },
+        {
+          "info": {
+            "name": "Add data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add data source"
+        },
+        {
+          "info": {
+            "name": "Test the connection for a new data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/test_new_connection",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test the connection for a new data source"
+        },
+        {
+          "info": {
+            "name": "Get data source options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/options",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Get data source options"
+        },
+        {
+          "info": {
+            "name": "Refresh metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/refresh_metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh metadata"
+        },
+        {
+          "info": {
+            "name": "Update data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/data_sources/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update data source"
+        },
+        {
+          "info": {
+            "name": "Delete data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/data_sources/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Delete data source"
+        },
+        {
+          "info": {
+            "name": "Query data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/query",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query data source"
+        },
+        {
+          "info": {
+            "name": "List data sources' info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/list"
+          },
+          "docs": "List data sources' info"
+        },
+        {
+          "info": {
+            "name": "Get data source info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/info",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Get data source info"
+        },
+        {
+          "info": {
+            "name": "Online data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/online",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Online data source"
+        },
+        {
+          "info": {
+            "name": "Refresh table row-count estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/refresh_counts",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh table row-count estimates"
+        },
+        {
+          "info": {
+            "name": "Share data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/share",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Share data source"
+        },
+        {
+          "info": {
+            "name": "Test an existing data source connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/test_data_source",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Test an existing data source connection"
+        },
+        {
+          "info": {
+            "name": "Describe the supported data source types and their options.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/data_source_type_description"
+          },
+          "docs": "Describe the supported data source types and their options."
+        },
+        {
+          "info": {
+            "name": "Available",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/available",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the data source is available"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/schemas",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List schemas"
+        },
+        {
+          "info": {
+            "name": "Clear schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db/graphql/schemas",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Clear schemas"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query with schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Perform GraphQL query with schema"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query with schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform GraphQL query with schema"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Perform GraphQL query"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform GraphQL query"
+        },
+        {
+          "info": {
+            "name": "Get schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Get schema"
+        },
+        {
+          "info": {
+            "name": "Add schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Add schema"
+        },
+        {
+          "info": {
+            "name": "Update schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Update schema"
+        },
+        {
+          "info": {
+            "name": "Remove schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Remove schema"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Knowledge Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validates cron string",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/is_valid"
+          },
+          "docs": "Checks if the string is a valid Quartz cron schedule.  Returns true if valid and false if it is not valid."
+        },
+        {
+          "info": {
+            "name": "Remove credentials from catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/catalog/credentials/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The credential key"
+              }
+            ]
+          },
+          "docs": "Removes the credentials for the specified key"
+        },
+        {
+          "info": {
+            "name": "Reloads metadata from a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/reload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Drops and reloads the metadata for the specified provider"
+        },
+        {
+          "info": {
+            "name": "Drops and reloads the built-in model for the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/reloadModel"
+          },
+          "docs": "Drops and reloads the built-in model for the catalog"
+        },
+        {
+          "info": {
+            "name": "Runs the specified job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/run",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers the scheduled job to run immediately"
+        },
+        {
+          "info": {
+            "name": "Get credentials list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/catalog/credentials"
+          },
+          "docs": "Returns a list of stored credentials"
+        },
+        {
+          "info": {
+            "name": "Stores username and password data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stores username and password data and returns an associated access key"
+        },
+        {
+          "info": {
+            "name": "Provides a cron summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/summary"
+          },
+          "docs": "Returns a text explanation of the cron string."
+        },
+        {
+          "info": {
+            "name": "Returns the next scheduled date",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/next_date"
+          },
+          "docs": "Returns the next date the cron schedule would fire a job."
+        },
+        {
+          "info": {
+            "name": "Knowledge Catalog status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/catalog/status"
+          },
+          "docs": "Returns status information about the catalog, metadata providers and scheduled jobs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SPARQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform SPARQL Update query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL Update query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL Update query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL Update query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL Update query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              }
+            ]
+          },
+          "docs": "Explain SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "query",
+                "description": "Run query profiler"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Verbose output"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Explain SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "query",
+                "description": "Run query profiler"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Verbose output"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Explain SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query (within tx)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EntityResolution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Resolve entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/entityresolution",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Resolve entities"
+        },
+        {
+          "info": {
+            "name": "Resolve entities with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/entityresolution/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Resolve entities with reasoning enabled"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Virtual Graphs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List virtual graphs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs"
+          },
+          "docs": "List virtual graphs"
+        },
+        {
+          "info": {
+            "name": "Add virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/database",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get the database associated with a virtual graph"
+        },
+        {
+          "info": {
+            "name": "Online virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/online",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Online virtual graph"
+        },
+        {
+          "info": {
+            "name": "Import file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/import",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Import a CSV or JSON file as a virtual graph into the knowledge graph"
+        },
+        {
+          "info": {
+            "name": "Update virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update virtual graph"
+        },
+        {
+          "info": {
+            "name": "Delete virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Delete virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get virtual graph options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/options",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get virtual graph options"
+        },
+        {
+          "info": {
+            "name": "Get mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/mappingsString/:syntax",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              },
+              {
+                "name": "syntax",
+                "value": "",
+                "type": "path",
+                "description": "The desired RDF syntax of the mappings (R2RML or SMS)"
+              }
+            ]
+          },
+          "docs": "Get mappings"
+        },
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/import_db",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a virtual graph directly into the local knowledge graph"
+        },
+        {
+          "info": {
+            "name": "List virtual graphs' info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/list"
+          },
+          "docs": "List virtual graphs' info"
+        },
+        {
+          "info": {
+            "name": "Available",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/available",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the virtual graph is available"
+        },
+        {
+          "info": {
+            "name": "Get virtual graph info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/info",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get virtual graph info"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cluster Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List standby nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/registry"
+          },
+          "docs": "List standby nodes"
+        },
+        {
+          "info": {
+            "name": "Get standby pause status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/pause"
+          },
+          "docs": "Get the pause status of a standby node"
+        },
+        {
+          "info": {
+            "name": "Pause/Unpause standby node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/standby/pause",
+            "params": [
+              {
+                "name": "pause",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Pause/Unpause standby node"
+        },
+        {
+          "info": {
+            "name": "Revoke standby access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cluster/standby/registry/:standbyid",
+            "params": [
+              {
+                "name": "standbyid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the standby node"
+              }
+            ]
+          },
+          "docs": "Instruct a standby node to leave its cluster"
+        },
+        {
+          "info": {
+            "name": "Repair ZK transaction IDs if they don't match all Stardog nodes. All Stardog nodes must agree.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/repairZk"
+          },
+          "docs": "Repair ZK transaction IDs if they don't match all Stardog nodes. All Stardog nodes must agree."
+        },
+        {
+          "info": {
+            "name": "Read replica check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/readreplica"
+          },
+          "docs": "Determine if a specific standby node is read replica"
+        },
+        {
+          "info": {
+            "name": "Get cluster info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster"
+          },
+          "docs": "Get cluster info"
+        },
+        {
+          "info": {
+            "name": "Get cluster diagnostics report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cluster/diagnostics"
+          },
+          "docs": "Get cluster diagnostics report"
+        },
+        {
+          "info": {
+            "name": "Start read only mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/readonly"
+          },
+          "docs": "Start read only mode"
+        },
+        {
+          "info": {
+            "name": "Stop read only mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cluster/readonly"
+          },
+          "docs": "Stop read only mode"
+        },
+        {
+          "info": {
+            "name": "Shutdown all nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/shutdownAll"
+          },
+          "docs": "Shutdown all nodes"
+        },
+        {
+          "info": {
+            "name": "Coordinator check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/coordinator"
+          },
+          "docs": "Determine if a specific cluster node is the cluster coordinator"
+        },
+        {
+          "info": {
+            "name": "Attempt to sync a standby or read replica node with the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/standby/attemptSync"
+          },
+          "docs": "Attempt to sync a standby or read replica node with the cluster"
+        },
+        {
+          "info": {
+            "name": "Get standby node status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/status"
+          },
+          "docs": "Get standby node status"
+        },
+        {
+          "info": {
+            "name": "Get cluster status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/status"
+          },
+          "docs": "Get cluster status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

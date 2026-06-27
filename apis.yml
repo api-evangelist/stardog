@@ -58,7 +58,7 @@ common:
   url: https://docs.stardog.com/
 - type: Pricing
   url: https://www.stardog.com/pricing/
-- type: SignUp
+- type: Signup
   url: https://cloud.stardog.com/
 - type: GitHub
   url: https://github.com/stardog-union

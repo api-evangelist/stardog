@@ -50,6 +50,10 @@ apis:
   - url: graphql/stardog-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/stardog-trust-center.yml
+- type: DomainSecurity
+  url: security/stardog-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/stardog-union
 - type: Website
@@ -62,6 +66,8 @@ common:
   url: https://cloud.stardog.com/
 - type: GitHub
   url: https://github.com/stardog-union
+- url: https://www.stardog.com/blog/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

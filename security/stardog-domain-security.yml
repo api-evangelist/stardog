@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.stardog.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  7 14:00:44 2026 GMT
+  hsts: false
+- host: cloud.stardog.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Nov 13 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: stardog.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

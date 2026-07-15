@@ -50,6 +50,8 @@ apis:
   - url: graphql/stardog-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/stardog-agentic-access.yml
 - type: TrustCenter
   url: security/stardog-trust-center.yml
 - type: DomainSecurity

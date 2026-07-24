@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints Monitoring API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Monitoring
+  description: Operations relating to monitoring processes on the server
+paths:
+  /admin/processes:
+    get:
+      tags:
+      - Monitoring
+      summary: List processes
+      description: Get a list of all running processes
+      operationId: listProcesses
+      parameters:
+      - name: all
+        in: query
+        description: Whether to include all processes in cloud
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/PROCESS_LIST'
+  /admin/processes/{name}:
+    get:
+      tags:
+      - Monitoring
+      summary: Get process
+      description: Get details of a specific process
+      operationId: getProcess
+      parameters:
+      - $ref: '#/components/parameters/name_process'
+      responses:
+        '200':
+          $ref: '#/components/responses/PROCESS'
+        '404':
+          $ref: '#/components/responses/NAME_PROCESS_404'
+    delete:
+      tags:
+      - Monitoring
+      summary: Kill process
+      operationId: killProcess
+      parameters:
+      - $ref: '#/components/parameters/name_process'
+      responses:
+        '204':
+          description: Process killed
+        '404':
+          $ref: '#/components/responses/NAME_PROCESS_404'
+components:
+  responses:
+    NAME_PROCESS_404:
+      description: Process does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Process does not exist
+              code:
+                type: string
+                example: QEQNF2
+    PROCESS_LIST:
+      description: List of Processes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS_LIST'
+    PROCESS:
+      description: Process
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS'
+  schemas:
+    PROCESS:
+      required:
+      - type
+      - db
+      - endTime
+      - startTime
+      - id
+      - user
+      - status
+      properties:
+        type:
+          type: string
+          example: query
+        db:
+          type: string
+          description: The database on which the query is running
+        endTime:
+          type: integer
+          description: The UNIX timestamp at which the process ended, or -1 if it is still running
+          format: int64
+        startTime:
+          type: integer
+          description: The UNIX timestamp when the process started running
+          format: int64
+        id:
+          type: string
+        user:
+          type: string
+          description: The user that initiated the query
+        status:
+          type: string
+          enum:
+          - Not started
+          - Pre-execution
+          - Running
+          - Terminating
+          - Done
+    PROCESS_LIST:
+      required:
+      - processes
+      properties:
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PROCESS'
+  parameters:
+    name_process:
+      name: name
+      in: path
+      description: The name of the process
+      required: true
+      schema:
+        type: string
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

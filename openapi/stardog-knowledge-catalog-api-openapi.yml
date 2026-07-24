@@ -1,0 +1,290 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints Knowledge Catalog API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Knowledge Catalog
+  description: Operations for managing the Knowledge Catalog module
+paths:
+  /admin/catalog/jobs/cron/is_valid:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Validates cron string
+      description: Checks if the string is a valid Quartz cron schedule.  Returns true if valid and false if it is not valid.
+      operationId: isValidSchedule
+      responses:
+        '200':
+          description: Validation Result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CATALOG_JOB_CRON_VALID'
+  /admin/catalog/credentials/{key}:
+    delete:
+      tags:
+      - Knowledge Catalog
+      summary: Remove credentials from catalog
+      description: Removes the credentials for the specified key
+      operationId: deleteCredentials
+      parameters:
+      - name: key
+        in: path
+        description: The credential key
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Credential successfully removed
+  /admin/catalog/reload:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Reloads metadata from a provider
+      description: Drops and reloads the metadata for the specified provider
+      operationId: reloadCatalog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CATALOG_RELOAD'
+        required: true
+      responses:
+        '204':
+          description: Virtual graph imported
+  /admin/catalog/reloadModel:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Drops and reloads the built-in model for the catalog
+      description: Drops and reloads the built-in model for the catalog
+      operationId: reloadModel
+      responses:
+        '200':
+          description: Model reloaded
+  /admin/catalog/jobs/run:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Runs the specified job
+      description: Triggers the scheduled job to run immediately
+      operationId: runJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CATALOG_JOB'
+        required: true
+      responses:
+        '204':
+          description: Job Submitted
+  /admin/catalog/credentials:
+    get:
+      tags:
+      - Knowledge Catalog
+      summary: Get credentials list
+      description: Returns a list of stored credentials
+      operationId: getCredentials
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CREDENTIALS_LIST'
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Stores username and password data
+      description: Stores username and password data and returns an associated access key
+      operationId: createAccessKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CREDENTIALS_ADD'
+        required: true
+      responses:
+        '201':
+          description: Access key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ACCESS_KEY'
+  /admin/catalog/jobs/cron/summary:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Provides a cron summary
+      description: Returns a text explanation of the cron string.
+      operationId: getScheduleSummary
+      responses:
+        '200':
+          description: Cron Summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CATALOG_JOB_CRON_SUMMARY'
+  /admin/catalog/jobs/cron/next_date:
+    post:
+      tags:
+      - Knowledge Catalog
+      summary: Returns the next scheduled date
+      description: Returns the next date the cron schedule would fire a job.
+      operationId: getNextScheduleDate
+      responses:
+        '200':
+          description: Next Date
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CATALOG_JOB_CRON_NEXT_DATE'
+  /admin/catalog/status:
+    get:
+      tags:
+      - Knowledge Catalog
+      summary: Knowledge Catalog status
+      description: Returns status information about the catalog, metadata providers and scheduled jobs
+      operationId: getStatus
+      responses:
+        '200':
+          description: Knowledge Catalog status data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CATALOG_STATUS'
+components:
+  schemas:
+    CATALOG_STATUS:
+      properties:
+        scheduler:
+          type: string
+        started:
+          type: string
+        threads:
+          type: integer
+          format: int64
+          example: 42
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CATALOG_PROVIDER'
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CATALOG_JOB_STATUS'
+    CATALOG_JOB:
+      properties:
+        jobname:
+          type: string
+    CREDENTIALS_ADD:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        label:
+          type: string
+    CATALOG_RELOAD:
+      properties:
+        provider:
+          type: string
+          format: URI
+    CATALOG_JOB_STATUS:
+      properties:
+        name:
+          type: string
+        group:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+    CATALOG_JOB_CRON_NEXT_DATE:
+      properties:
+        cron:
+          type: string
+        next_date:
+          type: string
+    CATALOG_JOB_CRON_VALID:
+      properties:
+        cron:
+          type: string
+        is_valid:
+          type: boolean
+    CATALOG_PROVIDER:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        schedule:
+          type: string
+        lastupdate:
+          type: string
+    CREDENTIALS_LIST:
+      properties:
+        label:
+          type: string
+        key:
+          type: string
+    CATALOG_JOB_CRON_SUMMARY:
+      properties:
+        cron:
+          type: string
+        summary:
+          type: string
+    ACCESS_KEY:
+      properties:
+        accessKey:
+          type: string
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

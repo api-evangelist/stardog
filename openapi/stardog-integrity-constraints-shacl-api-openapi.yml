@@ -1,0 +1,583 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints Integrity Constraints / SHACL API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Integrity Constraints / SHACL
+  description: ''
+paths:
+  /{db}/icv:
+    get:
+      tags:
+      - Integrity Constraints / SHACL
+      summary: List constraints
+      operationId: getConstraints
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          description: Constraints in RDF format
+          content:
+            text/turtle:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_TTL:
+                  description: ICV_CONSTRAINT_TTL
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+            application/trig:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_TTL:
+                  description: ICV_CONSTRAINT_TTL
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+            application/rdf+xml:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_RDFXML:
+                  description: ICV_CONSTRAINT_RDFXML
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_RDFXML'
+            application/n-triples:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_TTL:
+                  description: ICV_CONSTRAINT_TTL
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+            application/n-quads:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_TTL:
+                  description: ICV_CONSTRAINT_TTL
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+            application/ld+json:
+              schema:
+                type: String
+              examples:
+                ICV_CONSTRAINT_JSONLD:
+                  description: ICV_CONSTRAINT_JSONLD
+                  value: null
+                  $ref: '#/components/examples/ICV_CONSTRAINT_JSONLD'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+      x-sort-order:
+        group: '0'
+  /{db}/icv/validate:
+    post:
+      tags:
+      - Integrity Constraints / SHACL
+      summary: Validate constraints
+      description: Determine whether or not the given constraints are valid
+      operationId: validateConstraints
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        $ref: '#/components/requestBodies/ICV_CONSTRAINT'
+      responses:
+        '200':
+          $ref: '#/components/responses/ICV_CONSTRAINT_VALIDATION'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+      x-sort-order:
+        group: '1'
+        order: '1'
+  /{db}/icv/{txid}/validate:
+    post:
+      tags:
+      - Integrity Constraints / SHACL
+      summary: Validate constraints in transaction
+      description: Determine whether or not the given constraints are valid
+      operationId: validateInTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: txid
+        $ref: '#/components/parameters/txid'
+      requestBody:
+        $ref: '#/components/requestBodies/ICV_CONSTRAINT'
+      responses:
+        '200':
+          $ref: '#/components/responses/ICV_CONSTRAINT_VALIDATION'
+        '404':
+          description: Database/Transaction does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+      x-sort-order:
+        group: '1'
+        order: '2'
+  /{db}/icv/report:
+    post:
+      tags:
+      - Integrity Constraints / SHACL
+      summary: SHACL validation report
+      description: Produces a SHACL validation report against the specified shape(s)
+      externalDocs:
+        url: https://www.w3.org/TR/shacl/#validation-report
+      operationId: shaclValidationReport
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: shapes
+        in: query
+        description: SHACL shapes to validate
+        schema:
+          type: string
+      - name: shacl.shape.graphs
+        in: query
+        description: SHACL shape graphs to validate
+        schema:
+          type: string
+      - name: nodes
+        in: query
+        description: SHACL focus node(s) to validate
+        schema:
+          type: string
+      - name: countLimit
+        in: query
+        description: Maximum number of violations to report
+        schema:
+          type: string
+      - name: shacl.targetClass.simple
+        in: query
+        schema:
+          $ref: '#/components/schemas/SHACL_TARGETCLASS_SIMPLE'
+      - name: shacl.violation.limit.shape
+        in: query
+        description: number of violation limits per SHACL shapes
+        schema:
+          type: string
+      - $ref: '#/components/parameters/graph-uri'
+      - $ref: '#/components/parameters/reasoning'
+      responses:
+        '200':
+          $ref: '#/components/responses/SHACL_VALIDATION_REPORT'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+      x-sort-order:
+        group: '3'
+        order: '1'
+  /{db}/icv/{txid}/report:
+    post:
+      tags:
+      - Integrity Constraints / SHACL
+      summary: SHACL validation report in transaction
+      description: Produces a SHACL validation report against the specified shape(s)
+      externalDocs:
+        url: https://www.w3.org/TR/shacl/#validation-report
+      operationId: shaclValidationReportInTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: txid
+        $ref: '#/components/parameters/txid'
+      - name: shapes
+        in: query
+        description: SHACL shapes to validate
+        schema:
+          type: string
+      - name: shacl.shape.graphs
+        in: query
+        description: SHACL shape graphs to validate
+        schema:
+          type: string
+      - name: nodes
+        in: query
+        description: SHACL focus node(s) to validate
+        schema:
+          type: string
+      - name: countLimit
+        in: query
+        description: Maximum number of violations to report
+        schema:
+          type: string
+      - name: shacl.targetClass.simple
+        in: query
+        schema:
+          $ref: '#/components/schemas/SHACL_TARGETCLASS_SIMPLE'
+      - name: shacl.violation.limit.shape
+        in: query
+        description: number of violation limits per SHACL shapes
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/SHACL_VALIDATION_REPORT'
+        '404':
+          description: Database/Transaction does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+      x-sort-order:
+        group: '3'
+        order: '2'
+components:
+  schemas:
+    SHACL_TARGETCLASS_SIMPLE:
+      type: boolean
+      description: If true, sh:targetClass will be evaluated based on rdf:type triples only, without following rdfs:subClassOf relations
+    SPARQL_RESULTS_JSON:
+      required:
+      - head
+      - results
+      properties:
+        head:
+          required:
+          - vars
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+        results:
+          required:
+          - bindings
+          properties:
+            bindings:
+              type: array
+              items:
+                additionalProperties:
+                  required:
+                  - type
+                  - value
+                  properties:
+                    type:
+                      type: string
+                      example: literal
+                    value:
+                      type: string
+                      example: '42'
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
+    BOOLEAN:
+      type: boolean
+    ICV_VALIDATION:
+      required:
+      - valid
+      properties:
+        valid:
+          type: boolean
+  parameters:
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    graph-uri:
+      name: graph-uri
+      in: query
+      description: Named Graph / Context
+      required: false
+      schema:
+        type: string
+        format: URI
+      example: https://stardog.com/graphs/myGraph
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
+      schema:
+        type: boolean
+    txid:
+      name: txid
+      in: path
+      description: Transaction ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+  examples:
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    ICV_CONSTRAINT_TTL:
+      value: <urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> .
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_CSV:
+      value: 's,label
+
+        http://example.org/stardog#Example1,42
+
+        http://example.org/stardog#Example2,foo'
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    ICV_CONSTRAINT_JSONLD:
+      value: "[\n  {\n    \"@id\": \"urn:Employee\",\n    \"http://www.w3.org/2000/01/rdf-schema#subClassOf\": [\n      {\n        \"@id\": \"urn:Person\"\n      }\n    ]\n  }\n]"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    ICV_CONSTRAINT_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <rdf:Description rdf:about=\"urn:Employee\">\n        <subClassOf xmlns=\"http://www.w3.org/2000/01/rdf-schema#\" rdf:resource=\"urn:Person\"/>\n    </rdf:Description>\n</rdf:RDF>"
+  responses:
+    ICV_CONSTRAINT_VALIDATION:
+      description: ICV Constraint Validation
+      content:
+        text/boolean:
+          schema:
+            $ref: '#/components/schemas/BOOLEAN'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ICV_VALIDATION'
+    SHACL_VALIDATION_REPORT:
+      description: SHACL validation report
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD'
+        application/sparql-results+xml:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_XML:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_XML'
+        application/sparql-results+json:
+          schema:
+            $ref: '#/components/schemas/SPARQL_RESULTS_JSON'
+        text/csv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_CSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_CSV'
+        text/tsv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_TSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_TSV'
+  requestBodies:
+    ICV_CONSTRAINT:
+      description: The ICV constraint(s)
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_TTL:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_TTL:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_RDFXML:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_TTL:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_TTL:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_TTL'
+        application/ld+json:
+          schema:
+            type: string
+          examples:
+            ICV_CONSTRAINT_JSONLD:
+              value: null
+              $ref: '#/components/examples/ICV_CONSTRAINT_JSONLD'
+      required: true
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

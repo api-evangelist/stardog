@@ -1,0 +1,1331 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints DB Admin API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: DB Admin
+  description: Database administration operations
+paths:
+  /admin/databases:
+    get:
+      tags:
+      - DB Admin
+      summary: List databases
+      description: List all the databases in the server
+      operationId: listDatabases
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DATABASE_LIST'
+    post:
+      tags:
+      - DB Admin
+      summary: Create database
+      description: Add a new database to the server, optionally with RDF bulk-loaded
+      operationId: createNewDatabase
+      requestBody:
+        description: A multipart request with a JSON root element and optionally RDF file contents
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DB_CREATE'
+      responses:
+        '201':
+          description: Database created
+        '400':
+          description: Invalid or malformed request body
+  /admin/databases/{db}/options:
+    get:
+      tags:
+      - DB Admin
+      summary: Get all DB options
+      description: Get the value of every metadata option for a database
+      operationId: getAllDatabaseOptions
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          description: JSON object detailing all database metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    put:
+      tags:
+      - DB Admin
+      summary: Get DB options
+      description: Get the value of specific metadata options for a database
+      operationId: getDatabaseOptions
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+            example:
+              spatial.result.limit: null
+              query.all.graphs: null
+        required: true
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+              example:
+                spatial.result.limit: 10000
+                query.all.graphs: true
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - DB Admin
+      summary: Set DB options
+      description: Set the value of specific metadata options for a database
+      operationId: setDatabaseOption
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        description: A JSON object with keys and values equal to the desired metadata options
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+            example:
+              spatial.result.limit: 10000
+              query.all.graphs: true
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/restore:
+    put:
+      tags:
+      - DB Admin
+      summary: Restore database
+      description: Restore a database from backup
+      operationId: restoreDatabase
+      parameters:
+      - name: from
+        in: query
+        description: The location on the server of the backup
+        required: true
+        schema:
+          type: string
+      - name: force
+        in: query
+        description: Whether or not to overwrite an existing database with this backup
+        schema:
+          type: boolean
+      - name: name
+        in: query
+        description: The name of the restored database, if different
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+  /admin/config_properties:
+    get:
+      tags:
+      - DB Admin
+      summary: Get all metadata properties
+      description: Get information on all database metadata properties, including description and example values
+      operationId: getAllMetaProperties
+      responses:
+        '200':
+          description: JSON object detailing all metadata options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSON_CONFIG_PROPERTIES'
+  /admin/databases/{db}/txlog:
+    get:
+      tags:
+      - DB Admin
+      summary: Return transaction Log
+      description: Return a chunk (or the entirety) of this database's transaction log for point in time recovers.
+      operationId: transactionLog
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          description: Transaction Log
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - DB Admin
+      summary: Replay Transaction Log
+      description: Replay a transaction log onto an existing database. This operation applies the provided transaction log to the database, typically for point in time restore.
+      operationId: replayTransactionLog
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: validate
+        in: path
+        description: Server should validate the transaction log before applying it. Checks if the last committed transaction is at the beginning of the Log. Default is true
+        required: true
+        schema:
+          type: boolean
+      requestBody:
+        description: Binary transaction log file to be applied to the database.
+        content:
+          application/octet-stream: {}
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}/verify:
+    post:
+      tags:
+      - DB Admin
+      summary: Verify database
+      description: Checks that the data in the database is not corrupted, for example, there're no inconsistencies across indexes
+      operationId: verifyDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          $ref: '#/components/responses/VERIFY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}/repair:
+    post:
+      tags:
+      - DB Admin
+      summary: Repair database
+      description: Attempt to recover a corrupted database
+      operationId: repairDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}/online:
+    put:
+      tags:
+      - DB Admin
+      summary: Online database
+      description: Bring a database online
+      operationId: onlineDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        $ref: '#/components/requestBodies/DB_OFFLINE_ONLINE'
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/backup_all:
+    put:
+      tags:
+      - DB Admin
+      summary: Backup all databases
+      description: Create a backup of all databases on the server
+      operationId: backupAllDatabases
+      parameters:
+      - name: to
+        in: query
+        description: File location on the server to which to save the backups (defaults to $STARDOG_HOME/.backup)
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+  /admin/databases/{db}/backup:
+    put:
+      tags:
+      - DB Admin
+      summary: Backup a database
+      description: Create a backup of a database on the server
+      operationId: backupDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: to
+        in: query
+        description: File location on the server to which to save the backup (defaults to $STARDOG_HOME/.backup)
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}:
+    delete:
+      tags:
+      - DB Admin
+      summary: Drop database
+      description: Delete the database
+      operationId: dropDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/options:
+    get:
+      tags:
+      - DB Admin
+      summary: Return all databases along with their configuration options
+      description: List all the databases in the server including all database configuration options
+      operationId: listDatabasesWithOptions
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DATABASE_LIST_WITH_CONFIG'
+              example: "{ DATABASE_LIST = [{\n  \"database.name\": \"db1\",\n  \"query.all.graphs\": true\n},\n  \"database.name\": \"db2\",\n  \"query.all.graphs\": true\n}]}"
+  /admin/databases/{db}/rename:
+    post:
+      tags:
+      - DB Admin
+      summary: Rename database
+      description: Make existing database to be identified by a new name
+      operationId: renameDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        description: String value of the new name
+        content:
+          text/plain:
+            schema:
+              type: String
+            example: new_name
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}/offline:
+    put:
+      tags:
+      - DB Admin
+      summary: Offline database
+      description: Take a database offline
+      operationId: offlineDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        $ref: '#/components/requestBodies/DB_OFFLINE_ONLINE'
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '400':
+          $ref: '#/components/responses/MALFORMED_REQUEST_400'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/databases/{db}/optimize:
+    put:
+      tags:
+      - DB Admin
+      summary: Optimize database
+      description: Optimize a database
+      operationId: optimizeDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        description: Configuration parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+        '400':
+          $ref: '#/components/responses/MALFORMED_REQUEST_400'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /admin/properties:
+    get:
+      tags:
+      - DB Admin
+      summary: Get server properties
+      description: Gets the property value for a server configuration option. This value will be the default for the option or the override in the properties file.
+      operationId: getServerProperty
+      parameters:
+      - name: name
+        in: query
+        description: Specific names of server properties to retrieve (multiple params can be specified)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: JSON object detailing all server properties
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+    post:
+      tags:
+      - DB Admin
+      summary: Set server properties
+      description: Set the value of specific server properties
+      operationId: setServerProperty
+      requestBody:
+        description: A JSON object with keys and values equal to the desired server properties
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GENERIC_JSON_OBJECT'
+            example:
+              query.plan.reuse: ALWAYS
+              logging.access.enabled: true
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GENERIC_RESPONSE_MESSAGE'
+  /{db}/size:
+    get:
+      tags:
+      - DB Admin
+      summary: Get DB Size
+      description: Retrieve the size of the db. Size is approximate unless the exact parameter is set to true
+      operationId: getDBSize
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: exact
+        in: query
+        description: Whether to request that the database size be exact instead of approximate
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: The size (in triples) of the database
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/model:
+    get:
+      tags:
+      - DB Admin
+      summary: Generate Model
+      description: Generate the reasoning model used by this database in various formats
+      operationId: generateModel
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/reasoning'
+      - name: output
+        in: query
+        description: Desired output format (text, owl, shacl, sql, graphql)
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/REASONING_MODEL'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/export:
+    get:
+      tags:
+      - DB Admin
+      summary: Export database
+      operationId: exportDatabase
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - name: obf
+        in: query
+        description: Path to an obfuscation configuration file, or DEFAULT
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/DATABASE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - DB Admin
+      summary: Export database (obfuscated)
+      operationId: exportDatabaseObfuscated
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        description: Obfuscation configuration
+        content:
+          text/turtle:
+            schema:
+              type: String
+            examples:
+              OBFUSCATION_CONFIG:
+                description: OBFUSCATION_CONFIG
+                value: null
+                $ref: '#/components/examples/OBFUSCATION_CONFIG'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DATABASE_OBF'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/namespaces:
+    get:
+      tags:
+      - DB Admin
+      summary: Get namespaces
+      description: Retrieve the namespaces stored in the database
+      operationId: getNamespaces
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          description: A JSON object listing the prefixes and IRIs of the stored namespaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSON_NAMESPACES'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - DB Admin
+      summary: Import namespaces
+      description: Add namespaces to the database via a block or blocks of RDF that declares them
+      operationId: importNamespaces
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      requestBody:
+        $ref: '#/components/requestBodies/RDF_REQUIRED'
+      responses:
+        '200':
+          description: A JSON object listing the prefixes and IRIs of the stored namespaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSON_NAMESPACES'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+components:
+  responses:
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    GENERIC_RESPONSE_MESSAGE:
+      description: Operation successful
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_MESSAGE'
+    REASONING_MODEL:
+      description: RDF serialization of the reasoning model
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD'
+        application/sparql-results+xml:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_XML:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_XML'
+        application/sparql-results+json:
+          schema:
+            $ref: '#/components/schemas/SPARQL_RESULTS_JSON'
+        text/csv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_CSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_CSV'
+        text/tsv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_TSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_TSV'
+    DATABASE:
+      description: RDF serialization of the database
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD'
+        application/sparql-results+xml:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_XML:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_XML'
+        application/sparql-results+json:
+          schema:
+            $ref: '#/components/schemas/SPARQL_RESULTS_JSON'
+        text/csv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_CSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_CSV'
+        text/tsv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_TSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_TSV'
+    DATABASE_OBF:
+      description: Obfuscated RDF serialization of the database
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE_OBF:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE_OBF'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG_OBF:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG_OBF'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML_OBF:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML_OBF'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES_OBF:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES_OBF'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS_OBF:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS_OBF'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD_OBF'
+    VERIFY:
+      description: Validation succeeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_MESSAGE'
+  parameters:
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
+      schema:
+        type: boolean
+  examples:
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    GENERIC_NTRIPLES_OBF:
+      value: '<tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42> .
+
+        <tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> <tag:stardog:api:obf:d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7> "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2" .'
+    GENERIC_NQUADS_OBF:
+      value: '<tag:stardog:api:obf:e603eb75c220e3110eb1d4143ffd6d3abd5679154b55b5d6354699b339940e8b> <tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42> .
+
+        <tag:stardog:api:obf:e603eb75c220e3110eb1d4143ffd6d3abd5679154b55b5d6354699b339940e8b> <tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> <tag:stardog:api:obf:d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7> "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2" .'
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_CSV:
+      value: 's,label
+
+        http://example.org/stardog#Example1,42
+
+        http://example.org/stardog#Example2,foo'
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_RDFXML_OBF:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154\">\n\t<rdf:type rdf:resource=\"tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42\"/>\n\t<d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7 xmlns=\"tag:stardog:api:obf:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2</d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_TURTLE_OBF:
+      value: "@prefix : <http://api.stardog.com/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix stardog: <tag:stardog:api:> .\n\n<tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> a <tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42> ;\n   <tag:stardog:api:obf:d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7> \"c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2\" ."
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    GENERIC_TRIG_OBF:
+      value: "@prefix : <http://api.stardog.com/> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix stardog: <tag:stardog:api:> .\n\n{\n    <tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154> a <tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42> ;\n      <tag:stardog:api:obf:d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7> \"c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2\" .\n}"
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    OBFUSCATION_CONFIG:
+      value: "@prefix obf: <tag:stardog:api:obf:> .\n\n[] a obf:Obfuscation ;\n    obf:digest \"SHA-256\" ;\n    obf:include [\n        obf:position obf:any ;\n        obf:pattern \".*\"\n    ] ;\n\n    obf:exclude [\n        obf:position obf:any ;\n        obf:namespace \"rdf\"\n    ] ;\n    obf:exclude [\n        obf:position obf:any ;\n        obf:namespace \"owl\"\n    ] ;\n    obf:exclude [\n        obf:position obf:predicate ;\n        obf:namespace \"rdfs\"\n    ] ;"
+  schemas:
+    JSON_CONFIG_PROPERTIES:
+      minProperties: 1
+      additionalProperties:
+        properties:
+          name:
+            type: string
+            example: reasoning.sameas
+          type:
+            type: string
+            example: Enum
+          mutable:
+            type: boolean
+          mutableWhileOnline:
+            type: boolean
+            description: Can be changed while the database is online
+          category:
+            type: string
+            example: Reasoning
+          label:
+            type: string
+            example: SameAs
+          description:
+            type: string
+            example: Option to enable owl:sameAs reasoning. When this option is set to ON reflexive, symmetric, and transitive closure of the owl:sameAs triples in the database is computed. When it is set to FULL, owl:sameAs inferences are computed based on the schema axioms such as functional properties
+          possibleValues:
+            type: array
+            example:
+            - 'OFF'
+            - 'ON'
+            - FULL
+            items:
+              type: string
+          defaultValue:
+            type: string
+            example: 'OFF'
+    SPARQL_RESULTS_JSON:
+      required:
+      - head
+      - results
+      properties:
+        head:
+          required:
+          - vars
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+        results:
+          required:
+          - bindings
+          properties:
+            bindings:
+              type: array
+              items:
+                additionalProperties:
+                  required:
+                  - type
+                  - value
+                  properties:
+                    type:
+                      type: string
+                      example: literal
+                    value:
+                      type: string
+                      example: '42'
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
+    DB_OFFLINE_ONLINE:
+      required:
+      - timeout
+      properties:
+        timeout:
+          type: integer
+          description: timeout in ms
+          format: int32
+          example: 42
+    GENERIC_RESPONSE_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Successfully executed request
+    DB_CREATE:
+      required:
+      - root
+      properties:
+        root:
+          required:
+          - dbname
+          - options
+          - files
+          properties:
+            dbname:
+              type: string
+              example: myDb
+            options:
+              type: object
+            files:
+              type: array
+              items:
+                required:
+                - filename
+                properties:
+                  filename:
+                    type: string
+                    example: fileX.ttl
+                  context:
+                    type: string
+                    example: urn:my:graph
+          example: '{"dbname": "myDb", "options": {}, "files": [ {"filename": "file1.ttl"} ] }'
+      additionalProperties:
+        type: string
+        format: binary
+    JSON_NAMESPACES:
+      required:
+      - namespaces
+      properties:
+        namespaces:
+          type: array
+          items:
+            required:
+            - prefix
+            - name
+            properties:
+              prefix:
+                type: string
+                example: rdfs
+              name:
+                type: string
+                example: http://www.w3.org/2000/01/rdf-schema#
+    GENERIC_JSONLD_OBF:
+      properties:
+        '@id':
+          type: string
+          example: tag:stardog:api:obf:b55b5d6354699b339940e8be603eb75c220e3110eb1d4143ffd6d3abd5679154
+        '@type':
+          type: string
+          example: tag:stardog:api:obf:9f8e6dca5e5e240793e4ebf3c3a8b23f3654018b38457dbb58a6ba802a120a42
+        tag:stardog:api:obf:223ca9493ab57efa04fdc9b245cb86c22d00c88cf6de8f99135f78d06fd10fab:
+          type: array
+          items:
+            properties:
+              '@type':
+                type: string
+                example: tag:stardog:api:obf:d00c88d06fd10fa223ca9493ab57efa04fdc9b245cb86c22b8cf6de8f99135f7
+              '@value':
+                type: string
+                example: c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2
+    DATABASE_LIST:
+      required:
+      - databases
+      properties:
+        databases:
+          type: array
+          items:
+            type: string
+    DATABASE_LIST_WITH_CONFIG:
+      type: array
+      items:
+        required:
+        - database.name
+        properties:
+          database.name:
+            type: string
+        additionalProperties:
+          type: string
+    GENERIC_JSON_OBJECT:
+      type: object
+      additionalProperties:
+        type: string
+  requestBodies:
+    RDF_REQUIRED:
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD'
+      required: true
+    DB_OFFLINE_ONLINE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DB_OFFLINE_ONLINE'
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

@@ -1,0 +1,371 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints Cluster Admin API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Cluster Admin
+  description: Cluster administration operations
+paths:
+  /admin/cluster/standby/registry:
+    get:
+      tags:
+      - Cluster Admin
+      summary: List standby nodes
+      operationId: getStandbyNodes
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STANDBY_NODE_LIST'
+      x-sort-order:
+        group: '1'
+        order: '1'
+  /admin/cluster/standby/pause:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Get standby pause status
+      description: Get the pause status of a standby node
+      operationId: getPauseState
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STANDBY_PAUSED'
+        '400':
+          description: Node is not a standby node
+      x-sort-order:
+        group: '1'
+        order: '4'
+    put:
+      tags:
+      - Cluster Admin
+      summary: Pause/Unpause standby node
+      operationId: standbyPause
+      parameters:
+      - name: pause
+        in: query
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Pause/Unpause requested
+        '400':
+          description: Node is not a standby node
+      x-sort-order:
+        group: '1'
+        order: '3'
+  /admin/cluster/standby/registry/{standbyid}:
+    delete:
+      tags:
+      - Cluster Admin
+      summary: Revoke standby access
+      description: Instruct a standby node to leave its cluster
+      operationId: standbyRevokeAccess
+      parameters:
+      - name: standbyid
+        $ref: '#/components/parameters/standbyid'
+      responses:
+        '200':
+          description: Node has been instructed to leave
+        '400':
+          description: Node is not a standby node
+      x-sort-order:
+        group: '1'
+        order: '5'
+  /admin/cluster/repairZk:
+    put:
+      tags:
+      - Cluster Admin
+      summary: Repair ZK transaction IDs if they don't match all Stardog nodes. All Stardog nodes must agree.
+      operationId: repairZk
+      responses:
+        '200':
+          description: ZooKeeper repaired
+  /admin/cluster/readreplica:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Read replica check
+      description: Determine if a specific standby node is read replica
+      operationId: isReadReplica
+      responses:
+        '200':
+          description: Node is read replica
+        '400':
+          description: Node is not a read replica
+  /admin/cluster:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Get cluster info
+      operationId: clusterInfo
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NODE_LIST'
+        '404':
+          description: Not part of a cluster
+  /admin/cluster/diagnostics:
+    post:
+      tags:
+      - Cluster Admin
+      summary: Get cluster diagnostics report
+      operationId: generateClusterDiagnosticsReport
+      responses:
+        '200':
+          description: Cluster diagnostics report zip created
+  /admin/cluster/readonly:
+    put:
+      tags:
+      - Cluster Admin
+      summary: Start read only mode
+      operationId: readOnlyStart
+      responses:
+        '200':
+          description: Read only mode started
+    delete:
+      tags:
+      - Cluster Admin
+      summary: Stop read only mode
+      operationId: readOnlyStop
+      responses:
+        '200':
+          description: Read only mode stopped
+  /admin/shutdownAll:
+    post:
+      tags:
+      - Cluster Admin
+      summary: Shutdown all nodes
+      operationId: shutdownAll
+      responses:
+        '200':
+          description: Shutdown request received
+        '405':
+          description: Remote shutdown not supported
+  /admin/cluster/coordinator:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Coordinator check
+      description: Determine if a specific cluster node is the cluster coordinator
+      operationId: isCoordinator
+      responses:
+        '200':
+          description: Node is coordinator
+        '503':
+          description: Node is not coordinator
+  /admin/cluster/standby/attemptSync:
+    put:
+      tags:
+      - Cluster Admin
+      summary: Attempt to sync a standby or read replica node with the cluster
+      operationId: attemptSync
+      responses:
+        '200':
+          description: A sync attempt for a standby or read replica node has been initiated
+  /admin/cluster/standby/status:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Get standby node status
+      operationId: getStandbyStatus
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STANDBY_STATUS'
+  /admin/cluster/status:
+    get:
+      tags:
+      - Cluster Admin
+      summary: Get cluster status
+      operationId: packStatus
+      responses:
+        '200':
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CLUSTER_STATUS'
+components:
+  parameters:
+    standbyid:
+      name: standbyid
+      in: path
+      description: The UUID of the standby node
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+  schemas:
+    NODE_LIST:
+      required:
+      - nodes
+      properties:
+        nodes:
+          type: array
+          items:
+            pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
+            type: string
+            example: 165.7.29.42:5820
+    STANDBY_PAUSED:
+      required:
+      - STATE
+      properties:
+        STATE:
+          type: string
+          enum:
+          - WAITING
+          - SYNCING
+          - PAUSING
+          - PAUSED
+    STANDBY_NODE_LIST:
+      required:
+      - standbynodes
+      properties:
+        standbynodes:
+          type: array
+          items:
+            pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
+            type: string
+            example: 165.7.29.42:5820
+    CLUSTER_STATUS:
+      properties:
+        nodes:
+          required:
+          - nodes
+          type: array
+          items:
+            required:
+            - address
+            - metadata
+            - type
+            - role
+            properties:
+              address:
+                pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
+                type: string
+                example: 165.7.29.42:5820
+              metadata:
+                type: object
+              type:
+                type: string
+                enum:
+                - FULL
+                - STANDBY
+              role:
+                type: string
+                enum:
+                - COORDINATOR
+                - PARTICIPANT
+                - STANDBY
+    STANDBY_STATUS:
+      required:
+      - address
+      - state
+      - readReplica
+      - geoReplica
+      - totalBytesToSync
+      - syncCount
+      - stardogVersion
+      - syncIntervalMs
+      - lastClusterAdminTx
+      - lastStandbyNodeAdminTx
+      - dbSyncBytes
+      properties:
+        address:
+          type: string
+        state:
+          type: string
+        readReplica:
+          type: boolean
+          description: Whether this is a read replica
+          default: false
+        geoReplica:
+          type: boolean
+          description: Whether this is a geo replica
+          default: false
+        totalBytesToSync:
+          type: integer
+          description: The total bytes estimated to sync
+          format: int64
+        syncCount:
+          type: integer
+          description: The number of times the standby has sync'd
+          format: int64
+        stardogVersion:
+          type: string
+        syncIntervalMs:
+          type: integer
+          description: The interval the standby node syncs (ms)
+          format: int64
+        lastClusterAdminTx:
+          type: string
+        lastStandbyNodeAdminTx:
+          type: string
+        dbSyncBytes:
+          additionalProperties:
+            type: integer
+            format: int64
+            example: 42
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

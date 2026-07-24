@@ -1,0 +1,1222 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints SPARQL API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: SPARQL
+  description: SPARQL Update Queries
+paths:
+  /{db}/update:
+    get:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL Update query
+      operationId: updateGet
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/update'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/graph-uri'
+      - $ref: '#/components/parameters/using-graph-uri'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/using-named-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - $ref: '#/components/parameters/insert-graph-uri'
+      - $ref: '#/components/parameters/remove-graph-uri'
+      responses:
+        '200':
+          description: Update query succeeded
+        '400':
+          description: Invalid query sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL Update query
+      operationId: updatePost
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/UPDATE_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/graph-uri'
+      - $ref: '#/components/parameters/using-graph-uri'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/using-named-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - $ref: '#/components/parameters/insert-graph-uri'
+      - $ref: '#/components/parameters/remove-graph-uri'
+      requestBody:
+        content:
+          application/sparql-update:
+            schema:
+              type: String
+            examples:
+              SPARQL_UPDATE:
+                description: SPARQL_UPDATE
+                value: null
+                $ref: '#/components/examples/SPARQL_UPDATE'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SPARQL_UPDATE_QUERY'
+        required: true
+      responses:
+        '200':
+          description: Update query succeeded
+        '400':
+          description: Invalid query sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/{txid}/update:
+    get:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL Update query (within tx)
+      operationId: updateGetinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/update'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/graph-uri'
+      - $ref: '#/components/parameters/using-graph-uri'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/using-named-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - $ref: '#/components/parameters/insert-graph-uri'
+      - $ref: '#/components/parameters/remove-graph-uri'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      responses:
+        '200':
+          description: Update query succeeded
+        '400':
+          description: Invalid query sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+    post:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL Update query (within tx)
+      operationId: updatePostinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/UPDATE_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/graph-uri'
+      - $ref: '#/components/parameters/using-graph-uri'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/using-named-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - $ref: '#/components/parameters/insert-graph-uri'
+      - $ref: '#/components/parameters/remove-graph-uri'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      requestBody:
+        content:
+          application/sparql-update:
+            schema:
+              type: String
+            examples:
+              SPARQL_UPDATE:
+                description: SPARQL_UPDATE
+                value: null
+                $ref: '#/components/examples/SPARQL_UPDATE'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SPARQL_UPDATE_QUERY'
+        required: true
+      responses:
+        '200':
+          description: Update query succeeded
+        '400':
+          description: Invalid query sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/explain:
+    get:
+      tags:
+      - SPARQL
+      summary: Explain SPARQL query
+      operationId: explainQueryGet
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/reasoning'
+      responses:
+        '200':
+          description: Query plan
+          content:
+            text/plain:
+              examples:
+                QUERY_PLAN_TEST:
+                  description: QUERY_PLAN_TEST
+                  value: null
+                  $ref: '#/components/examples/QUERY_PLAN_TEST'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QUERY_PLAN_JSON'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '501':
+          $ref: '#/components/responses/FUNCTIONALITY_NOT_SUPPORTED'
+    post:
+      tags:
+      - SPARQL
+      summary: Explain SPARQL query
+      operationId: explainQueryPost
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/profile'
+      - $ref: '#/components/parameters/verbose'
+      requestBody:
+        content:
+          application/sparql-query:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+            examples:
+              SPARQL_QUERY:
+                description: SPARQL_QUERY
+                value: null
+                $ref: '#/components/examples/SPARQL_QUERY'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+        required: true
+      responses:
+        '200':
+          description: Query plan
+          content:
+            text/plain:
+              examples:
+                QUERY_PLAN_TEST:
+                  description: QUERY_PLAN_TEST
+                  value: null
+                  $ref: '#/components/examples/QUERY_PLAN_TEST'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QUERY_PLAN_JSON'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '501':
+          $ref: '#/components/responses/FUNCTIONALITY_NOT_SUPPORTED'
+  /{db}/{txid}/explain:
+    get:
+      tags:
+      - SPARQL
+      summary: Explain SPARQL query (within tx)
+      operationId: explainQueryGetinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/reasoning'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      responses:
+        '200':
+          description: Query plan
+          content:
+            text/plain:
+              examples:
+                QUERY_PLAN_TEST:
+                  description: QUERY_PLAN_TEST
+                  value: null
+                  $ref: '#/components/examples/QUERY_PLAN_TEST'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QUERY_PLAN_JSON'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '501':
+          $ref: '#/components/responses/FUNCTIONALITY_NOT_SUPPORTED'
+    post:
+      tags:
+      - SPARQL
+      summary: Explain SPARQL query (within tx)
+      operationId: explainQueryPostinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/profile'
+      - $ref: '#/components/parameters/verbose'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      requestBody:
+        content:
+          application/sparql-query:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+            examples:
+              SPARQL_QUERY:
+                description: SPARQL_QUERY
+                value: null
+                $ref: '#/components/examples/SPARQL_QUERY'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+        required: true
+      responses:
+        '200':
+          description: Query plan
+          content:
+            text/plain:
+              examples:
+                QUERY_PLAN_TEST:
+                  description: QUERY_PLAN_TEST
+                  value: null
+                  $ref: '#/components/examples/QUERY_PLAN_TEST'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QUERY_PLAN_JSON'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '501':
+          $ref: '#/components/responses/FUNCTIONALITY_NOT_SUPPORTED'
+  /{db}/query:
+    get:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL query
+      operationId: getSparqlQuery
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      responses:
+        '200':
+          $ref: '#/components/responses/SPARQL_RESULTS'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '406':
+          description: Accept header invalid for type of query sent
+    post:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL query
+      operationId: postSparqlQuery
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      requestBody:
+        content:
+          application/sparql-query:
+            examples:
+              SPARQL_QUERY:
+                description: SPARQL_QUERY
+                value: null
+                $ref: '#/components/examples/SPARQL_QUERY'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/SPARQL_RESULTS'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '406':
+          description: Accept header invalid for type of query sent
+  /{db}/{txid}/query:
+    get:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL query (within tx)
+      operationId: getSparqlQueryinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      responses:
+        '200':
+          $ref: '#/components/responses/SPARQL_RESULTS'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '406':
+          description: Accept header invalid for type of query sent
+    post:
+      tags:
+      - SPARQL
+      summary: Perform SPARQL query (within tx)
+      operationId: postSparqlQueryinTx
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/QUERY_NOT_REQ'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      - name: txid
+        in: query
+        description: Transaction ID
+        schema:
+          type: string
+          format: UUID
+      - $ref: '#/components/parameters/baseURI'
+      - $ref: '#/components/parameters/timeout'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/useNamespaces'
+      - $ref: '#/components/parameters/default-graph-uri'
+      - $ref: '#/components/parameters/named-graph-uri'
+      - $ref: '#/components/parameters/exclude-graph-uri'
+      - name: txid
+        in: path
+        description: Transaction ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+      requestBody:
+        content:
+          application/sparql-query:
+            examples:
+              SPARQL_QUERY:
+                description: SPARQL_QUERY
+                value: null
+                $ref: '#/components/examples/SPARQL_QUERY'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SPARQL_QUERY'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/SPARQL_RESULTS'
+        '400':
+          $ref: '#/components/responses/INVALID_QUERY'
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+        '406':
+          description: Accept header invalid for type of query sent
+components:
+  parameters:
+    timeout:
+      name: timeout
+      in: query
+      description: The number of ms after which the query should timeout
+      schema:
+        type: integer
+        format: int64
+        example: 42
+    baseURI:
+      name: baseURI
+      in: query
+      description: Base URI against which to resolve relative URIs
+      schema:
+        type: string
+      example: 'tag:stardog:api:'
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    using-named-graph-uri:
+      name: using-named-graph-uri
+      in: query
+      description: URI(s) to be used as named graphs (equivalent to USING NAMED)
+      schema:
+        type: string
+        format: URI
+    graph-uri:
+      name: graph-uri
+      in: query
+      description: Named Graph / Context
+      required: false
+      schema:
+        type: string
+        format: URI
+      example: https://stardog.com/graphs/myGraph
+    QUERY_NOT_REQ:
+      name: query
+      in: query
+      description: Query to run
+      schema:
+        type: string
+    update:
+      name: update
+      in: query
+      description: Update query to run
+      required: true
+      schema:
+        type: string
+    named-graph-uri:
+      name: named-graph-uri
+      in: query
+      description: URI(s) to be used as named graphs (equivalent to FROM NAMED)
+      schema:
+        type: string
+        format: URI
+    insert-graph-uri:
+      name: insert-graph-uri
+      in: query
+      description: URI of the graph to be inserted into
+      schema:
+        type: string
+        format: URI
+    remove-graph-uri:
+      name: remove-graph-uri
+      in: query
+      description: URI of the graph to be removed from
+      schema:
+        type: string
+        format: URI
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
+      schema:
+        type: boolean
+    default-graph-uri:
+      name: default-graph-uri
+      in: query
+      description: URI(s) to be used as the default graph (equivalent to FROM)
+      schema:
+        type: string
+        format: URI
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of results to return
+      schema:
+        type: integer
+        format: int64
+        example: 42
+    useNamespaces:
+      name: useNamespaces
+      in: query
+      description: Request query results with namespace substitution/prefix lines
+      schema:
+        type: boolean
+    query:
+      name: query
+      in: query
+      description: Query to run
+      required: true
+      schema:
+        type: string
+    schema:
+      name: schema
+      in: query
+      description: The name of the schema
+      schema:
+        type: string
+    verbose:
+      name: verbose
+      in: query
+      description: Verbose output
+      schema:
+        type: boolean
+    profile:
+      name: profile
+      in: query
+      description: Run query profiler
+      schema:
+        type: boolean
+    using-graph-uri:
+      name: using-graph-uri
+      in: query
+      description: URI(s) to be used as the default graph (equivalent to USING)
+      schema:
+        type: string
+        format: URI
+    offset:
+      name: offset
+      in: query
+      description: How far into the result set to offset
+      schema:
+        type: integer
+        format: int64
+        example: 42
+    UPDATE_NOT_REQ:
+      name: update
+      in: query
+      description: Update query to run
+      schema:
+        type: string
+  examples:
+    SPARQL_UPDATE:
+      value: "PREFIX : <http://example.org/stardog#>\n\nDELETE {\n   ?s a :OldType\n}\nINSERT {\n   ?s a :NewType\n}\nWHERE {\n   ?s a :OldType\n}"
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    QUERY_PLAN_TEST:
+      value: "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix : <http://example.org/stardog#>\n\nProjection(?s, ?label) [#625]\n`─ MergeJoin(?s) [#625]\n   +─ Scan[POSC](?s, <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, :Example) [#1]\n   `─ Scan[PSOC](?s, rdfs:label, ?label) [#718K]"
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_CSV:
+      value: 's,label
+
+        http://example.org/stardog#Example1,42
+
+        http://example.org/stardog#Example2,foo'
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    SPARQL_QUERY:
+      value: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+  responses:
+    FUNCTIONALITY_NOT_SUPPORTED:
+      description: Function not implemented
+    SPARQL_RESULTS:
+      description: Query results
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            GENERIC_TURTLE:
+              value: null
+              $ref: '#/components/examples/GENERIC_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            GENERIC_TRIG:
+              value: null
+              $ref: '#/components/examples/GENERIC_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            GENERIC_RDFXML:
+              value: null
+              $ref: '#/components/examples/GENERIC_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            GENERIC_NTRIPLES:
+              value: null
+              $ref: '#/components/examples/GENERIC_NTRIPLES'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            GENERIC_NQUADS:
+              value: null
+              $ref: '#/components/examples/GENERIC_NQUADS'
+        application/ld+json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_JSONLD'
+        application/sparql-results+xml:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_XML:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_XML'
+        application/sparql-results+json:
+          schema:
+            $ref: '#/components/schemas/SPARQL_RESULTS_JSON'
+        text/csv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_CSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_CSV'
+        text/tsv:
+          schema:
+            type: string
+          examples:
+            SPARQL_RESULTS_TSV:
+              value: null
+              $ref: '#/components/examples/SPARQL_RESULTS_TSV'
+    INVALID_QUERY:
+      description: Invalid query sent
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+  schemas:
+    PLAN_NODE:
+      properties:
+        label:
+          type: string
+          example: MergeJoin(?s)
+        cardinality:
+          type: integer
+          format: int64
+          example: 42
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/PLAN_NODE'
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
+    SPARQL_RESULTS_JSON:
+      required:
+      - head
+      - results
+      properties:
+        head:
+          required:
+          - vars
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+        results:
+          required:
+          - bindings
+          properties:
+            bindings:
+              type: array
+              items:
+                additionalProperties:
+                  required:
+                  - type
+                  - value
+                  properties:
+                    type:
+                      type: string
+                      example: literal
+                    value:
+                      type: string
+                      example: '42'
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
+    SPARQL_QUERY:
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          example: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
+        update:
+          type: string
+          example: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
+        reasoning:
+          type: boolean
+          description: Enable Reasoning
+        schema:
+          type: string
+          description: The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter
+        txid:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+        baseURI:
+          type: string
+          format: URI
+        timeout:
+          type: integer
+          description: The number of ms after which the query should timeout
+          format: int32
+          example: 42
+        limit:
+          type: integer
+          description: The maximum number of results to return
+          format: int32
+          example: 42
+        offset:
+          type: integer
+          description: How far into the result set to offset
+          format: int32
+          example: 42
+        useNamespaces:
+          type: boolean
+          description: Use namespace substitution and prefix lines
+          default: false
+        default-graph-uri:
+          type: string
+          description: URI(s) to be used as the default graph (equivalent to FROM)
+        named-graph-uri:
+          type: string
+          description: URI(s) to be used as named graphs (equivalent to FROM NAMED)
+        exclude-graph-uri:
+          type: string
+          description: URI(s) of graphs to exclude from the query dataset (from both default and named scopes)
+    QUERY_PLAN_JSON:
+      required:
+      - prefixes
+      - dataset
+      - plan
+      properties:
+        prefixes:
+          additionalProperties:
+            type: string
+        dataset:
+          type: object
+        plan:
+          $ref: '#/components/schemas/PLAN_NODE'
+    SPARQL_UPDATE_QUERY:
+      required:
+      - update
+      properties:
+        query:
+          type: string
+          example: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nINSERT {\n    ?s ?p ?newO\n}\nWHERE {\n    ?s ?p ?o .\n    BIND(CONCAT(?o, \" \", - New) as ?newO)\n}"
+        update:
+          type: string
+          example: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nINSERT {\n    ?s ?p ?newO\n}\nWHERE {\n    ?s ?p ?o .\n    BIND(CONCAT(?o, \" \", - New) as ?newO)\n}"
+        reasoning:
+          type: boolean
+          description: Enable Reasoning
+        schema:
+          type: string
+          description: The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter
+        txid:
+          type: string
+          format: uuid
+          example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+        baseURI:
+          type: string
+          format: URI
+        timeout:
+          type: integer
+          description: The number of ms after which the query should timeout
+          format: int32
+          example: 42
+        limit:
+          type: integer
+          description: The maximum number of results to return
+          format: int32
+          example: 42
+        offset:
+          type: integer
+          description: How far into the result set to offset
+          format: int32
+          example: 42
+        useNamespaces:
+          type: boolean
+          description: Use namespace substitution and prefix lines
+          default: false
+        using-graph-uri:
+          type: string
+          description: URI(s) to be used as the default graph (equivalent to USING)
+        using-named-graph-uri:
+          type: string
+          description: URI(s) to be used as named graphs (equivalent to USING NAMED)
+        exclude-graph-uri:
+          type: string
+          description: URI(s) of graphs to exclude from the WHERE dataset (from both default and named scopes)
+        insert-graph-uri:
+          type: string
+          description: URI of the graph to be inserted into
+        remove-graph-uri:
+          type: string
+          description: URI of the graph to be removed from
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

@@ -1,0 +1,485 @@
+openapi: 3.0.1
+info:
+  title: Stardog HTTP Checkpoints Queries API
+  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Queries
+  description: Operations relating to queries running on the server
+paths:
+  /admin/queries:
+    get:
+      tags:
+      - Queries
+      summary: List queries
+      description: Get a list of all running queries
+      operationId: listQueries
+      responses:
+        '200':
+          $ref: '#/components/responses/QUERY_LIST'
+  /admin/queries/stored/{name}:
+    get:
+      tags:
+      - Queries
+      summary: Get stored query
+      operationId: getStoredQuery
+      parameters:
+      - $ref: '#/components/parameters/name_stored_query'
+      responses:
+        '200':
+          $ref: '#/components/responses/STORED_QUERIES'
+        '404':
+          $ref: '#/components/responses/NAME_STORED_QUERY_404'
+    post:
+      tags:
+      - Queries
+      summary: Rename stored query
+      operationId: renameStoredQuery
+      parameters:
+      - $ref: '#/components/parameters/name_stored_query'
+      - name: move
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GENERIC_NAME'
+        required: true
+      responses:
+        '204':
+          description: Query renamed
+        '404':
+          $ref: '#/components/responses/NAME_STORED_QUERY_404'
+    delete:
+      tags:
+      - Queries
+      summary: Delete stored query
+      operationId: deleteStoredQuery
+      parameters:
+      - $ref: '#/components/parameters/name_stored_query'
+      responses:
+        '204':
+          description: Query deleted
+        '404':
+          $ref: '#/components/responses/NAME_STORED_QUERY_404'
+  /admin/queries/stored:
+    get:
+      tags:
+      - Queries
+      summary: List stored queries
+      operationId: listStoredQueries
+      parameters:
+      - $ref: '#/components/parameters/name_db'
+      responses:
+        '200':
+          $ref: '#/components/responses/STORED_QUERIES'
+    put:
+      tags:
+      - Queries
+      summary: Update stored query
+      description: Add stored query, overwriting if a query with that name already exists
+      operationId: updateStoredQuery
+      requestBody:
+        $ref: '#/components/requestBodies/STORED_QUERY'
+      responses:
+        '204':
+          description: Stored query updated
+        '400':
+          $ref: '#/components/responses/MALFORMED_REQUEST_400'
+    post:
+      tags:
+      - Queries
+      summary: Add stored query
+      operationId: addStoredQuery
+      parameters:
+      - $ref: '#/components/parameters/STORED_QUERY_ID'
+      requestBody:
+        $ref: '#/components/requestBodies/STORED_QUERY'
+      responses:
+        '204':
+          description: Stored query added
+        '400':
+          $ref: '#/components/responses/MALFORMED_REQUEST_400'
+        '422':
+          description: Stored query already exists
+    delete:
+      tags:
+      - Queries
+      summary: Delete all stored queries
+      operationId: clearAllStoredQueries
+      responses:
+        '204':
+          description: All stored queries deleted
+  /admin/queries/{name}:
+    get:
+      tags:
+      - Queries
+      summary: Get query
+      description: Get details of a specific query
+      operationId: getQuery
+      parameters:
+      - $ref: '#/components/parameters/name_query'
+      - name: plan
+        in: query
+        schema:
+          type: string
+      - name: verbose
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/PROCESS'
+        '404':
+          $ref: '#/components/responses/NAME_QUERY_404'
+    delete:
+      tags:
+      - Queries
+      summary: Kill query
+      operationId: killQuery
+      parameters:
+      - $ref: '#/components/parameters/name_query'
+      responses:
+        '204':
+          description: Query killed
+        '404':
+          $ref: '#/components/responses/NAME_QUERY_404'
+components:
+  responses:
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    QUERY_LIST:
+      description: List of Queries in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QUERY_LIST'
+    NAME_STORED_QUERY_404:
+      description: Stored query does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Stored query does not exist
+              code:
+                type: string
+                example: QEQNF2
+    STORED_QUERIES:
+      description: RDF serialization of server's stored queries
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_TURTLE:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_TRIG:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_RDFXML:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_NTRIPLESQUADS:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_NTRIPLESQUADS'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_NTRIPLESQUADS:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_NTRIPLESQUADS'
+        application/ld+json:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_JSONLD:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_JSONLD'
+    NAME_QUERY_404:
+      description: Query does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Query does not exist
+              code:
+                type: string
+                example: QEQNF2
+    PROCESS:
+      description: Process
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS'
+  schemas:
+    PROCESS:
+      required:
+      - type
+      - db
+      - endTime
+      - startTime
+      - id
+      - user
+      - status
+      properties:
+        type:
+          type: string
+          example: query
+        db:
+          type: string
+          description: The database on which the query is running
+        endTime:
+          type: integer
+          description: The UNIX timestamp at which the process ended, or -1 if it is still running
+          format: int64
+        startTime:
+          type: integer
+          description: The UNIX timestamp when the process started running
+          format: int64
+        id:
+          type: string
+        user:
+          type: string
+          description: The user that initiated the query
+        status:
+          type: string
+          enum:
+          - Not started
+          - Pre-execution
+          - Running
+          - Terminating
+          - Done
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
+    GENERIC_NAME:
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    QUERY_LIST:
+      required:
+      - queries
+      properties:
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/QUERY'
+    QUERY:
+      required:
+      - query
+      - db
+      - endTime
+      - startTime
+      - id
+      - kernelId
+      - timeout
+      - user
+      - reasoning
+      - status
+      properties:
+        query:
+          type: string
+          example: SELECT * WHERE {?s ?p ?o}
+        db:
+          type: string
+          description: The database on which the query is running
+        endTime:
+          type: integer
+          description: The UNIX timestamp at which the query ended, or -1 if it is still running
+          format: int64
+        startTime:
+          type: integer
+          description: The UNIX timestamp when the query started running
+          format: int64
+        id:
+          type: string
+        kernelId:
+          type: string
+        timeout:
+          type: integer
+          description: The amount of time (in ms) after which the query will time out, or -1 if it will not time out
+          format: int64
+        user:
+          type: string
+          description: The user that initiated the query
+        reasoning:
+          type: boolean
+          description: Whether reasoning/inference is enabled on the query
+        reasoningSchema:
+          type: string
+        status:
+          type: string
+          enum:
+          - Not started
+          - Pre-execution
+          - Running
+          - Terminating
+          - Done
+  parameters:
+    name_stored_query:
+      name: name
+      in: path
+      description: The name of the stored query
+      required: true
+      schema:
+        type: string
+    name_db:
+      name: db
+      in: query
+      description: Database name
+      required: false
+      schema:
+        type: string
+      example: myDb
+    name_query:
+      name: name
+      in: path
+      description: The name of the query
+      required: true
+      schema:
+        type: string
+  examples:
+    STORED_QUERY_NTRIPLESQUADS:
+      value: "<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/StoredQuery> .\n<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/SharedQuery> . \n<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/ReasoningQuery> . \n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryName> \"myQuery\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryString> \"select * {?s ?p ?o}\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryCreator> \"admin\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryDatabase> \"myDb\" ."
+    STORED_QUERY_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:system=\"http://system.stardog.com/\">\n    <rdf:Description rdf:about=\"http://system.stardog.com/QuerymyQuery\">\n        <rdf:type rdf:resource=\"http://system.stardog.com/StoredQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/SharedQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/ReasoningQuery\"/>\n        <system:queryName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myQuery</system:queryName>\n        <system:queryString rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">select * {?s ?p ?o}</system:queryString>\n        <system:queryCreator rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">admin</system:queryCreator>\n        <system:queryDatabase rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myDb</system:queryDatabase>\n    </rdf:Description>\n</rdf:RDF>"
+    STORED_QUERY_TURTLE:
+      value: "@prefix system: <http://system.stardog.com/> .\n\nsystem:QuerymyQuery a system:StoredQuery, system:SharedQuery , system:ReasoningQuery ;\n   system:queryName \"myQuery\" ;\n   system:queryString \"select * {?s ?p ?o}\" ;\n   system:queryCreator \"admin\" ;\n   system:queryDatabase \"myDb\" ."
+    STORED_QUERY_JSONLD:
+      value: "{\n  \"@context\" : {\n    \"rdf\" : \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\n    \"system\" : \"http://system.stardog.com/\",\n    \"owl\" : \"http://www.w3.org/2002/07/owl#\",\n    \"@vocab\" : \"http://api.stardog.com/\",\n    \"rdfs\" : \"http://www.w3.org/2000/01/rdf-schema#\",\n    \"stardog\" : \"tag:stardog:api:\",\n    \"xsd\" : \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@graph\" : [ {\n    \"@id\" : \"system:QuerymyQuery\",\n    \"@type\" : [ \"system:StoredQuery\", \"system:SharedQuery\", \"system:ReasoningQuery\" ],\n    \"system:queryString\" : {\n      \"@value\" : \"select * {?s ?p ?o}\"\n    },\n    \"system:queryCreator\" : {\n      \"@value\" : \"admin\"\n    },\n    \"system:queryDatabase\" : {\n      \"@value\" : \"myDb\"\n    },\n    \"system:queryName\" : {\n      \"@value\" : \"myQuery\"\n    }\n  } ]\n}"
+    STORED_QUERY_TRIG:
+      value: "@prefix system: <http://system.stardog.com/> .\n\n{\n    system:QuerymyQuery a system:StoredQuery , system:SharedQuery , system:ReasoningQuery ;\n      system:queryName \"myQuery\" ;\n      system:queryString \"select * {?s ?p ?o}\" ;\n      system:queryCreator \"admin\" ;\n      system:queryDatabase \"myDb\" .\n}"
+  requestBodies:
+    STORED_QUERY:
+      description: RDF serialization of the stored query
+      content:
+        text/turtle:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_TURTLE:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_TURTLE'
+        application/trig:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_TRIG:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_TRIG'
+        application/rdf+xml:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_RDFXML:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_RDFXML'
+        application/n-triples:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_NTRIPLESQUADS:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_NTRIPLESQUADS'
+        application/n-quads:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_NTRIPLESQUADS:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_NTRIPLESQUADS'
+        application/ld+json:
+          schema:
+            type: string
+          examples:
+            STORED_QUERY_JSONLD:
+              value: null
+              $ref: '#/components/examples/STORED_QUERY_JSONLD'
+      required: true
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

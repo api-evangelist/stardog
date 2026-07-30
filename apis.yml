@@ -9,7 +9,18 @@ description: >-
   HTTP API for database, query, transaction, and admin operations using HTTP
   Basic or OAuth Bearer authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/stardog.png
 tags:
 - Knowledge Graph
 - Graph Database
@@ -26,10 +37,9 @@ apis:
 - aid: stardog:http-api
   name: Stardog HTTP API
   description: >-
-    Comprehensive HTTP API for managing Stardog databases, executing SPARQL
-    queries, running transactions, managing users and roles, and administering
-    the server. Authentication supports HTTP Basic over SSL or OAuth Bearer
-    tokens via JWT in the Authorization header.
+    Comprehensive HTTP API for managing Stardog databases, executing SPARQL queries, running transactions,
+    managing users and roles, and administering the server. Authentication supports HTTP Basic over SSL
+    or OAuth Bearer tokens via JWT in the Authorization header.
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
@@ -46,9 +56,252 @@ apis:
     url: https://cloud.stardog.com/api/v1/docs
   - type: Developer Docs
     url: https://docs.stardog.com/developing/http-api
-
   - url: graphql/stardog-graphql.md
     type: GraphQL
+- aid: stardog:stardog-checkpoints-api
+  name: Stardog Checkpoints API
+  description: Operations for database checkpoints
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Checkpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-checkpoints-api-openapi.yml
+- aid: stardog:stardog-cluster-admin-api
+  name: Stardog Cluster Admin API
+  description: Cluster administration operations
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Cluster Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-cluster-admin-api-openapi.yml
+- aid: stardog:stardog-data-caching-api
+  name: Stardog Data Caching API
+  description: Operations for working with cached data
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Data Caching
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-data-caching-api-openapi.yml
+- aid: stardog:stardog-data-sources-api
+  name: Stardog Data Sources API
+  description: Operations for managing data sources, which are used by virtual graphs
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Data Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-data-sources-api-openapi.yml
+- aid: stardog:stardog-db-admin-api
+  name: Stardog DB Admin API
+  description: Database administration operations
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - DB Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-db-admin-api-openapi.yml
+- aid: stardog:stardog-entityresolution-api
+  name: Stardog EntityResolution API
+  description: Operations for running Entity Resolution
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - EntityResolution
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-entityresolution-api-openapi.yml
+- aid: stardog:stardog-graph-store-protocol-api
+  name: Stardog Graph Store Protocol API
+  description: >-
+    Operations on named graphs as detailed in https://www.w3.org/TR/sparql11-http-rdf-update/
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Graph Store Protocol
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-graph-store-protocol-api-openapi.yml
+- aid: stardog:stardog-graphql-api
+  name: Stardog GraphQL API
+  description: GraphQL Queries
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - GraphQL
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-graphql-api-openapi.yml
+- aid: stardog:stardog-integrity-constraints-shacl-api
+  name: Stardog Integrity Constraints / SHACL API
+  description: >-
+    The Integrity Constraints / SHACL API from Stardog — 5 operation(s) for integrity constraints / shacl.
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Integrity Constraints / SHACL
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-integrity-constraints-shacl-api-openapi.yml
+- aid: stardog:stardog-knowledge-catalog-api
+  name: Stardog Knowledge Catalog API
+  description: Operations for managing the Knowledge Catalog module
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Knowledge Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-knowledge-catalog-api-openapi.yml
+- aid: stardog:stardog-matcher-aligning-schemas-from-various-data-sources-api
+  name: Stardog Matcher, aligning schemas from various data sources API
+  description: >-
+    The Matcher, aligning schemas from various data sources API from Stardog — 1 operation(s) for matcher,
+    aligning schemas from various data sources.
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Matcher, aligning schemas from various data sources
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-matcher-aligning-schemas-from-various-data-sources-api-openapi.yml
+- aid: stardog:stardog-monitoring-api
+  name: Stardog Monitoring API
+  description: Operations relating to monitoring processes on the server
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-monitoring-api-openapi.yml
+- aid: stardog:stardog-permissions-api
+  name: Stardog Permissions API
+  description: Operations on system permissions
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-permissions-api-openapi.yml
+- aid: stardog:stardog-queries-api
+  name: Stardog Queries API
+  description: Operations relating to queries running on the server
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-queries-api-openapi.yml
+- aid: stardog:stardog-reasoning-api
+  name: Stardog Reasoning API
+  description: Operations for interacting with the inference engine
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Reasoning
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-reasoning-api-openapi.yml
+- aid: stardog:stardog-roles-api
+  name: Stardog Roles API
+  description: Operations on system roles
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-roles-api-openapi.yml
+- aid: stardog:stardog-server-admin-api
+  name: Stardog Server Admin API
+  description: Server administration operations. May require superuser permissions
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Server Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-server-admin-api-openapi.yml
+- aid: stardog:stardog-server-status-metrics-api
+  name: Stardog Server Status/Metrics API
+  description: The Server Status/Metrics API from Stardog — 3 operation(s) for server status/metrics.
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Server Status/Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-server-status-metrics-api-openapi.yml
+- aid: stardog:stardog-sparql-api
+  name: Stardog SPARQL API
+  description: SPARQL Update Queries
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - SPARQL
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-sparql-api-openapi.yml
+- aid: stardog:stardog-stored-functions-api
+  name: Stardog Stored Functions API
+  description: Operations relating to user-defined functions stored on the server
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Stored Functions
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-stored-functions-api-openapi.yml
+- aid: stardog:stardog-transactions-api
+  name: Stardog Transactions API
+  description: Transactional operations
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-transactions-api-openapi.yml
+- aid: stardog:stardog-users-api
+  name: Stardog Users API
+  description: Operations on system users
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-users-api-openapi.yml
+- aid: stardog:stardog-virtual-graphs-api
+  name: Stardog Virtual Graphs API
+  description: Operations for virtualizing structured data
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Virtual Graphs
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-virtual-graphs-api-openapi.yml
+- aid: stardog:stardog-virtual-graphs-external-compute-api
+  name: Stardog Virtual Graphs External Compute API
+  description: Operations for virtualizing structured data on external compute engines
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Virtual Graphs External Compute
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-virtual-graphs-external-compute-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/stardog-agentic-access.yml

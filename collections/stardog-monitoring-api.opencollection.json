@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Monitoring API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List processes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/processes",
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include all processes in cloud"
+              }
+            ]
+          },
+          "docs": "Get a list of all running processes"
+        },
+        {
+          "info": {
+            "name": "Get process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/processes/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the process"
+              }
+            ]
+          },
+          "docs": "Get details of a specific process"
+        },
+        {
+          "info": {
+            "name": "Kill process",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/processes/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the process"
+              }
+            ]
+          },
+          "docs": "Kill process"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

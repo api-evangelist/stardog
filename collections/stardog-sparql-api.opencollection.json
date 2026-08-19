@@ -1,0 +1,1050 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints SPARQL API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SPARQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform SPARQL Update query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL Update query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL Update query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL Update query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL Update query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/update",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "update",
+                "value": "",
+                "type": "query",
+                "description": "Update query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "using-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to USING)"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "using-named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to USING NAMED)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "insert-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be inserted into"
+              },
+              {
+                "name": "remove-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI of the graph to be removed from"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL Update query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              }
+            ]
+          },
+          "docs": "Explain SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "query",
+                "description": "Run query profiler"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Verbose output"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Explain SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Explain SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "profile",
+                "value": "",
+                "type": "query",
+                "description": "Run query profiler"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query",
+                "description": "Verbose output"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Explain SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/:txid/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query (within tx)"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query (within tx)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/query",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "baseURI",
+                "value": "tag:stardog:api:",
+                "type": "query",
+                "description": "Base URI against which to resolve relative URIs"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query",
+                "description": "The number of ms after which the query should timeout"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "How far into the result set to offset"
+              },
+              {
+                "name": "useNamespaces",
+                "value": "",
+                "type": "query",
+                "description": "Request query results with namespace substitution/prefix lines"
+              },
+              {
+                "name": "default-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+              },
+              {
+                "name": "named-graph-uri",
+                "value": "",
+                "type": "query",
+                "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query (within tx)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

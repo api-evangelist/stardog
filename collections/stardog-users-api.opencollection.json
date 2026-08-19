@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Users API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users"
+          },
+          "docs": "List users"
+        },
+        {
+          "info": {
+            "name": "Add user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add user"
+        },
+        {
+          "info": {
+            "name": "User is Superuser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/superuser",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether or not a user is a Superuser"
+        },
+        {
+          "info": {
+            "name": "User enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/enabled",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether or not a user is enabled (active) in the system"
+        },
+        {
+          "info": {
+            "name": "Enable/Disable User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/enabled",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable/Disable User"
+        },
+        {
+          "info": {
+            "name": "Change user's password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/pwd",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change user's password"
+        },
+        {
+          "info": {
+            "name": "Get user's roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all roles explicitly assigned to a user"
+        },
+        {
+          "info": {
+            "name": "Add role to user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add role to user"
+        },
+        {
+          "info": {
+            "name": "Set user's roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/users/:user/roles",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrite the list of roles explicitly assigned to a user"
+        },
+        {
+          "info": {
+            "name": "Remove role from user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/users/:user/roles/:role",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ]
+          },
+          "docs": "Remove role from user"
+        },
+        {
+          "info": {
+            "name": "User auto-created",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user/auto_created",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Return whether a user was auto-created as a result the OAuth jwt authentication process"
+        },
+        {
+          "info": {
+            "name": "List users with attributes, roles and permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/list"
+          },
+          "docs": "Retrieve a detailed list of all users, including their roles, permissions, and status"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Retrieve attributes, roles, and permissions of a User"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Delete User"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

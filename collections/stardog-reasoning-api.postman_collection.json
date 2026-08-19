@@ -1,0 +1,1981 @@
+{
+  "item": [
+    {
+      "id": "337cd436-5775-41ca-b60b-f1edcbe01bd1",
+      "name": "Reasoning",
+      "description": {
+        "content": "Operations for interacting with the inference engine",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e87456df-4615-44b4-bfb9-e2990d4fd9fc",
+          "name": "Explain inference in transaction",
+          "request": {
+            "name": "Explain inference in transaction",
+            "description": {
+              "content": "Explain how the inference engine inferred a specific piece of data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                ":txid",
+                "explain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<String>"
+            }
+          },
+          "response": [
+            {
+              "id": "a7ef4011-c5cb-45a1-9d2f-fe1643367a89",
+              "name": "List of reasoning proofs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    ":txid",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> ."
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"proofs\": [\n    {\n      \"status\": \"ASSERTED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"status\": \"INFERRED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e7f32da-e963-4c47-9546-b7678fb5740d",
+              "name": "Database/Transaction does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    ":txid",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> ."
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb6dc5a8-dc0c-4d77-8fcd-bcbc4d9e17ea",
+          "name": "Explain inconsistency",
+          "request": {
+            "name": "Explain inconsistency",
+            "description": {
+              "content": "Explain how, if at all, the data are inconsistent with respect to the ontology",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                "explain",
+                "inconsistency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "435ac2d5-cec2-4b0e-9cc6-5d26d77f7662",
+              "name": "List of reasoning proofs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "explain",
+                    "inconsistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"proofs\": [\n    {\n      \"status\": \"INFERRED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"status\": \"VIOLATED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2189820-a765-431e-9f8b-8d2500b59204",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "explain",
+                    "inconsistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c640c353-2a03-4c34-af75-ab7e2eaf67ea",
+          "name": "Perform SPARQL query with reasoning enabled",
+          "request": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "description": {},
+            "url": {
+              "path": [
+                ":db",
+                "query",
+                "reasoning"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Query to run"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sparql-results+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3156a72-0213-4f39-866e-e8cf61eb74c9",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sparql-results+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sparql-results+json"
+                }
+              ],
+              "body": "{\n  \"head\": {\n    \"vars\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"results\": {\n    \"bindings\": [\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_1\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_2\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_3\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_1\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_2\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_3\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_4\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79424a7a-5c57-4a46-83bf-f31192d109c6",
+              "name": "Invalid query sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected end of file [L9]\",\n  \"code\": \"QEIVR2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1b7494d-08a7-479f-a5c3-bf3adc6ef825",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc9c84e6-df17-431c-bc3a-8481f7439f9e",
+              "name": "Accept header invalid for type of query sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5e17e37-ff81-40d4-9a0a-ae02ebb96a18",
+          "name": "Perform SPARQL query with reasoning enabled",
+          "request": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "description": {},
+            "url": {
+              "path": [
+                ":db",
+                "query",
+                "reasoning"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Query to run"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/sparql-results+xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "query",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "update",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "reasoning",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Enable Reasoning"
+                },
+                {
+                  "key": "schema",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter"
+                },
+                {
+                  "key": "txid",
+                  "value": "<uuid>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "baseURI",
+                  "value": "<URI>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "The number of ms after which the query should timeout"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "The maximum number of results to return"
+                },
+                {
+                  "key": "offset",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "How far into the result set to offset"
+                },
+                {
+                  "key": "useNamespaces",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Use namespace substitution and prefix lines"
+                },
+                {
+                  "key": "default-graph-uri",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URI(s) to be used as the default graph (equivalent to FROM)"
+                },
+                {
+                  "key": "named-graph-uri",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URI(s) to be used as named graphs (equivalent to FROM NAMED)"
+                },
+                {
+                  "key": "exclude-graph-uri",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "URI(s) of graphs to exclude from the query dataset (from both default and named scopes)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cfd83758-aa4a-4821-bb7b-79eeae963fcc",
+              "name": "Query results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sparql-results+xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "update",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Enable Reasoning",
+                        "type": "text/plain"
+                      },
+                      "key": "reasoning",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter",
+                        "type": "text/plain"
+                      },
+                      "key": "schema",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "txid",
+                      "value": "4ea1ebac-48f0-459c-a9a7-6cad7189403d",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "baseURI",
+                      "value": "<URI>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The number of ms after which the query should timeout",
+                        "type": "text/plain"
+                      },
+                      "key": "timeout",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The maximum number of results to return",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "How far into the result set to offset",
+                        "type": "text/plain"
+                      },
+                      "key": "offset",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Use namespace substitution and prefix lines",
+                        "type": "text/plain"
+                      },
+                      "key": "useNamespaces",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as the default graph (equivalent to FROM)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as named graphs (equivalent to FROM NAMED)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) of graphs to exclude from the query dataset (from both default and named scopes)",
+                        "type": "text/plain"
+                      },
+                      "key": "exclude-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sparql-results+json"
+                }
+              ],
+              "body": "{\n  \"head\": {\n    \"vars\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"results\": {\n    \"bindings\": [\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_1\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        },\n        \"key_2\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"type\": \"literal\",\n          \"value\": \"42\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23b1e9e4-e612-4eb1-9e6e-6e949670156a",
+              "name": "Invalid query sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "update",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Enable Reasoning",
+                        "type": "text/plain"
+                      },
+                      "key": "reasoning",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter",
+                        "type": "text/plain"
+                      },
+                      "key": "schema",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "txid",
+                      "value": "4ea1ebac-48f0-459c-a9a7-6cad7189403d",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "baseURI",
+                      "value": "<URI>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The number of ms after which the query should timeout",
+                        "type": "text/plain"
+                      },
+                      "key": "timeout",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The maximum number of results to return",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "How far into the result set to offset",
+                        "type": "text/plain"
+                      },
+                      "key": "offset",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Use namespace substitution and prefix lines",
+                        "type": "text/plain"
+                      },
+                      "key": "useNamespaces",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as the default graph (equivalent to FROM)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as named graphs (equivalent to FROM NAMED)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) of graphs to exclude from the query dataset (from both default and named scopes)",
+                        "type": "text/plain"
+                      },
+                      "key": "exclude-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected end of file [L9]\",\n  \"code\": \"QEIVR2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8af8c1ca-d174-4482-b01e-4d2a543c93f5",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "update",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Enable Reasoning",
+                        "type": "text/plain"
+                      },
+                      "key": "reasoning",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter",
+                        "type": "text/plain"
+                      },
+                      "key": "schema",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "txid",
+                      "value": "4ea1ebac-48f0-459c-a9a7-6cad7189403d",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "baseURI",
+                      "value": "<URI>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The number of ms after which the query should timeout",
+                        "type": "text/plain"
+                      },
+                      "key": "timeout",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The maximum number of results to return",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "How far into the result set to offset",
+                        "type": "text/plain"
+                      },
+                      "key": "offset",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Use namespace substitution and prefix lines",
+                        "type": "text/plain"
+                      },
+                      "key": "useNamespaces",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as the default graph (equivalent to FROM)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as named graphs (equivalent to FROM NAMED)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) of graphs to exclude from the query dataset (from both default and named scopes)",
+                        "type": "text/plain"
+                      },
+                      "key": "exclude-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9852c12-8e80-4565-8890-7520f4c58faf",
+              "name": "Accept header invalid for type of query sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "query",
+                    "reasoning"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "query",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "update",
+                      "value": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Enable Reasoning",
+                        "type": "text/plain"
+                      },
+                      "key": "reasoning",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The name of the reasoning schema to use. Will automatically enable reasoning even without the 'reasoning' parameter",
+                        "type": "text/plain"
+                      },
+                      "key": "schema",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "txid",
+                      "value": "4ea1ebac-48f0-459c-a9a7-6cad7189403d",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "baseURI",
+                      "value": "<URI>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The number of ms after which the query should timeout",
+                        "type": "text/plain"
+                      },
+                      "key": "timeout",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The maximum number of results to return",
+                        "type": "text/plain"
+                      },
+                      "key": "limit",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "How far into the result set to offset",
+                        "type": "text/plain"
+                      },
+                      "key": "offset",
+                      "value": "42",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Use namespace substitution and prefix lines",
+                        "type": "text/plain"
+                      },
+                      "key": "useNamespaces",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as the default graph (equivalent to FROM)",
+                        "type": "text/plain"
+                      },
+                      "key": "default-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) to be used as named graphs (equivalent to FROM NAMED)",
+                        "type": "text/plain"
+                      },
+                      "key": "named-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "URI(s) of graphs to exclude from the query dataset (from both default and named scopes)",
+                        "type": "text/plain"
+                      },
+                      "key": "exclude-graph-uri",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47aa02d2-f19d-4a44-8975-11f99e386a38",
+          "name": "Explain inference",
+          "request": {
+            "name": "Explain inference",
+            "description": {
+              "content": "Explain how the inference engine inferred a specific piece of data",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                "explain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<String>"
+            }
+          },
+          "response": [
+            {
+              "id": "6fd59cc9-c6bb-4a5f-82c1-18cd0f726114",
+              "name": "List of reasoning proofs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> ."
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"proofs\": [\n    {\n      \"status\": \"INFERRED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"status\": \"VIOLATED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91566e0e-fee1-45f7-8dfe-49f8abbeae75",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "explain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> ."
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3682cbd-b47c-4550-a6e6-2f0054953f79",
+          "name": "Check consistency",
+          "request": {
+            "name": "Check consistency",
+            "description": {
+              "content": "Returns whether or not the data in the database are consistent with respect to the ontology",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                "consistency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/boolean"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "611c8bb2-9232-4c0e-a1c7-9e8e77b6c956",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "consistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/boolean"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consistent\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13f9b925-56fc-4cf4-a7cf-8c480503a4bf",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "consistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e4e4cc2-442c-4c4c-80b0-2e3615a25acf",
+          "name": "Get reasoning schema",
+          "request": {
+            "name": "Get reasoning schema",
+            "description": {
+              "content": "Retrieve the reasoning schema in RDF of the given database",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64c74742-56d0-440e-ad11-2c0a624cce33",
+              "name": "Reasoning schema in RDF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/turtle"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"urn:example:Entity1\",\n  \"@type\": \"urn:example:Entity\",\n  \"urn:example:hasProp\": [\n    {\n      \"@value\": \"42\",\n      \"@type\": \"http://www.w3.org/2001/XMLSchema#integer\"\n    },\n    {\n      \"@value\": \"42\",\n      \"@type\": \"http://www.w3.org/2001/XMLSchema#integer\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab66074c-2cca-4c43-a801-be26009c259c",
+              "name": "Database does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0247ae0e-9f1e-4843-94a0-9b4ca8785c1a",
+          "name": "Explain inconsistency in transaction",
+          "request": {
+            "name": "Explain inconsistency in transaction",
+            "description": {
+              "content": "Explain how, if at all, the data are inconsistent with respect to the ontology",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":db",
+                "reasoning",
+                ":txid",
+                "explain",
+                "inconsistency"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "db",
+                  "description": "(Required) Database name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "txid",
+                  "description": "(Required) Transaction ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07e05e11-6ba2-4e6c-9352-b46e9b983a36",
+              "name": "List of reasoning proofs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    ":txid",
+                    "explain",
+                    "inconsistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"proofs\": [\n    {\n      \"status\": \"INFERRED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"status\": \"VIOLATED\",\n      \"expression\": \"string\",\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/REASONING_PROOF detected>\"\n        }\n      ],\n      \"namedGraphs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9be87100-14e7-484b-af98-cf048f6fbba8",
+              "name": "Database/Transaction does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":db",
+                    "reasoning",
+                    ":txid",
+                    "explain",
+                    "inconsistency"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "db",
+                      "description": "(Required) Database name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "txid",
+                      "description": "(Required) Transaction ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Database does not exist\",\n  \"code\": \"0D0DU2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5820",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "52e4ec67-cbc4-4d37-b0ef-07e5a3ae4ec4",
+    "name": "Stardog HTTP Checkpoints Reasoning API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n",
+      "type": "text/plain"
+    }
+  }
+}

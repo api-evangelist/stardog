@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Transactions API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Begin a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/begin",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Begin a transaction"
+        },
+        {
+          "info": {
+            "name": "Begin a transaction with specified txid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/begin/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Begin a transaction with specified txid"
+        },
+        {
+          "info": {
+            "name": "Commit a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/commit/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Commit a transaction"
+        },
+        {
+          "info": {
+            "name": "Rollback a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/transaction/rollback/:txid",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Rollback a transaction"
+        },
+        {
+          "info": {
+            "name": "Clear database within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/clear",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Clear database within a transaction"
+        },
+        {
+          "info": {
+            "name": "Remove data within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/remove",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Remove data within a transaction"
+        },
+        {
+          "info": {
+            "name": "Add data within a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/:txid/add",
+            "headers": [
+              {
+                "name": "Content-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              }
+            ]
+          },
+          "docs": "Add data within a transaction"
+        },
+        {
+          "info": {
+            "name": "List all open transactions on a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/transaction",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List all open transactions on a database"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

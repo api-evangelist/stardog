@@ -1,0 +1,1228 @@
+{
+  "item": [
+    {
+      "id": "1af4f313-aab5-4fac-872b-a616ac428faa",
+      "name": "Queries",
+      "description": {
+        "content": "Operations relating to queries running on the server",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "279fdfd2-b3c0-48ba-8595-a6b9cd0cf283",
+          "name": "List queries",
+          "request": {
+            "name": "List queries",
+            "description": {
+              "content": "Get a list of all running queries",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "queries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2506cd3e-e9bd-4d78-a51c-42d9f054d657",
+              "name": "List of Queries in system",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queries\": [\n    {\n      \"query\": \"SELECT * WHERE {?s ?p ?o}\",\n      \"db\": \"string\",\n      \"endTime\": 5065,\n      \"startTime\": 5668,\n      \"id\": \"string\",\n      \"kernelId\": \"string\",\n      \"timeout\": 3543,\n      \"user\": \"string\",\n      \"reasoning\": true,\n      \"status\": \"Not started\",\n      \"reasoningSchema\": \"string\"\n    },\n    {\n      \"query\": \"SELECT * WHERE {?s ?p ?o}\",\n      \"db\": \"string\",\n      \"endTime\": 1374,\n      \"startTime\": 4223,\n      \"id\": \"string\",\n      \"kernelId\": \"string\",\n      \"timeout\": 5856,\n      \"user\": \"string\",\n      \"reasoning\": false,\n      \"status\": \"Not started\",\n      \"reasoningSchema\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05993b82-02a7-435c-8a1b-825eeeec5b05",
+          "name": "Get stored query",
+          "request": {
+            "name": "Get stored query",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the stored query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed49035c-ce14-4454-952f-669441aa0ebc",
+              "name": "RDF serialization of server's stored queries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/turtle"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "\"{\\n  \\\"@context\\\" : {\\n    \\\"rdf\\\" : \\\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\\\",\\n    \\\"system\\\" : \\\"http://system.stardog.com/\\\",\\n    \\\"owl\\\" : \\\"http://www.w3.org/2002/07/owl#\\\",\\n    \\\"@vocab\\\" : \\\"http://api.stardog.com/\\\",\\n    \\\"rdfs\\\" : \\\"http://www.w3.org/2000/01/rdf-schema#\\\",\\n    \\\"stardog\\\" : \\\"tag:stardog:api:\\\",\\n    \\\"xsd\\\" : \\\"http://www.w3.org/2001/XMLSchema#\\\"\\n  },\\n  \\\"@graph\\\" : [ {\\n    \\\"@id\\\" : \\\"system:QuerymyQuery\\\",\\n    \\\"@type\\\" : [ \\\"system:StoredQuery\\\", \\\"system:SharedQuery\\\", \\\"system:ReasoningQuery\\\" ],\\n    \\\"system:queryString\\\" : {\\n      \\\"@value\\\" : \\\"select * {?s ?p ?o}\\\"\\n    },\\n    \\\"system:queryCreator\\\" : {\\n      \\\"@value\\\" : \\\"admin\\\"\\n    },\\n    \\\"system:queryDatabase\\\" : {\\n      \\\"@value\\\" : \\\"myDb\\\"\\n    },\\n    \\\"system:queryName\\\" : {\\n      \\\"@value\\\" : \\\"myQuery\\\"\\n    }\\n  } ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb6294cb-5369-4fb6-a8d4-5c71453f42b2",
+              "name": "Stored query does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Stored query does not exist\",\n  \"code\": \"QEQNF2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8afd6970-dae0-47e4-84d9-99f2982d8a0e",
+          "name": "Rename stored query",
+          "request": {
+            "name": "Rename stored query",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "move",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the stored query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88598702-68f5-40ab-9026-5089312a9f62",
+              "name": "Query renamed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "move",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa8c113f-26ee-45fc-8dfa-3e5ff1441aac",
+              "name": "Stored query does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "move",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Stored query does not exist\",\n  \"code\": \"QEQNF2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08f2eea5-a263-4a53-bd0e-bbbfd990788e",
+          "name": "Delete stored query",
+          "request": {
+            "name": "Delete stored query",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the stored query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5eb2668f-7e44-4362-b8bd-9f8c5a3d766c",
+              "name": "Query deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6d64990-dce1-4dbc-b59c-ea002e65b0f0",
+              "name": "Stored query does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the stored query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Stored query does not exist\",\n  \"code\": \"QEQNF2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e80bfc4-2643-4575-8be1-6a9f05da0c0c",
+          "name": "List stored queries",
+          "request": {
+            "name": "List stored queries",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "db",
+                  "value": "<string>",
+                  "description": "Database name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "000958be-d0e2-4a5d-bcea-63d33b1d64fb",
+              "name": "RDF serialization of server's stored queries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "db",
+                      "value": "myDb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/turtle"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "\"{\\n  \\\"@context\\\" : {\\n    \\\"rdf\\\" : \\\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\\\",\\n    \\\"system\\\" : \\\"http://system.stardog.com/\\\",\\n    \\\"owl\\\" : \\\"http://www.w3.org/2002/07/owl#\\\",\\n    \\\"@vocab\\\" : \\\"http://api.stardog.com/\\\",\\n    \\\"rdfs\\\" : \\\"http://www.w3.org/2000/01/rdf-schema#\\\",\\n    \\\"stardog\\\" : \\\"tag:stardog:api:\\\",\\n    \\\"xsd\\\" : \\\"http://www.w3.org/2001/XMLSchema#\\\"\\n  },\\n  \\\"@graph\\\" : [ {\\n    \\\"@id\\\" : \\\"system:QuerymyQuery\\\",\\n    \\\"@type\\\" : [ \\\"system:StoredQuery\\\", \\\"system:SharedQuery\\\", \\\"system:ReasoningQuery\\\" ],\\n    \\\"system:queryString\\\" : {\\n      \\\"@value\\\" : \\\"select * {?s ?p ?o}\\\"\\n    },\\n    \\\"system:queryCreator\\\" : {\\n      \\\"@value\\\" : \\\"admin\\\"\\n    },\\n    \\\"system:queryDatabase\\\" : {\\n      \\\"@value\\\" : \\\"myDb\\\"\\n    },\\n    \\\"system:queryName\\\" : {\\n      \\\"@value\\\" : \\\"myQuery\\\"\\n    }\\n  } ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16f59e62-70a2-43e7-b914-d780603c2bfc",
+          "name": "Update stored query",
+          "request": {
+            "name": "Update stored query",
+            "description": {
+              "content": "Add stored query, overwriting if a query with that name already exists",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "4b2f85c2-a9fa-4391-885c-19e0888625e0",
+              "name": "Stored query updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "812a4a26-f485-43dd-acbd-c37ba5c6b8e8",
+              "name": "Malformed request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected end of file [L9]\",\n  \"code\": \"QEIVR2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bebc9de-3460-4e83-82de-b0b1d744d7ff",
+          "name": "Add stored query",
+          "request": {
+            "name": "Add stored query",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/turtle"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>"
+            }
+          },
+          "response": [
+            {
+              "id": "cb2c8d99-f802-42fd-a18c-21cbe70c2d2d",
+              "name": "Stored query added",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa7d92b4-6a84-4e39-b03a-17067a4dfe46",
+              "name": "Malformed request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected end of file [L9]\",\n  \"code\": \"QEIVR2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d5ac383-4c1f-44f1-bd29-bb80c4369ef4",
+              "name": "Stored query already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69e0cd05-9080-4ad4-aba6-7201262ec88d",
+          "name": "Delete all stored queries",
+          "request": {
+            "name": "Delete all stored queries",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                "stored"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07362019-7d6a-4ba2-9ba2-3fbd1b30ba66",
+              "name": "All stored queries deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    "stored"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1125042-06e9-44e3-813e-368c88170e59",
+          "name": "Get query",
+          "request": {
+            "name": "Get query",
+            "description": {
+              "content": "Get details of a specific query",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "plan",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "verbose",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8006de82-0447-4565-aa43-43d1a6921ec5",
+              "name": "Process",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verbose",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"query\",\n  \"db\": \"string\",\n  \"endTime\": 2918,\n  \"startTime\": 9242,\n  \"id\": \"string\",\n  \"user\": \"string\",\n  \"status\": \"Done\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b854f1e-e41d-450b-96e6-a307ac810f0d",
+              "name": "Query does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "verbose",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Query does not exist\",\n  \"code\": \"QEQNF2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cf7e72a-d416-4460-83c0-e13958eeb2bf",
+          "name": "Kill query",
+          "request": {
+            "name": "Kill query",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "queries",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da0984e9-c341-4709-98cb-5df60feaff63",
+              "name": "Query killed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the query"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "005fead9-1bb7-4445-8254-7537607582c4",
+              "name": "Query does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "queries",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Query does not exist\",\n  \"code\": \"QEQNF2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5820",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b9394d07-5848-43d3-a128-a1dc1c9e74b1",
+    "name": "Stardog HTTP Checkpoints Queries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n",
+      "type": "text/plain"
+    }
+  }
+}

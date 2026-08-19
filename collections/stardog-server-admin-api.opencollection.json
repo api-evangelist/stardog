@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Server Admin API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SDU usage summary statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/sdu-usage/summary"
+          },
+          "docs": "Retrieve aggregated summary statistics for SDU (Stardog Data Unit) usage events. Returns total queries, total elapsed time, and breakdowns by user, database, and agent. Optionally filter by start and end timestamps in ISO-8601 format (e.g., 2023-12-18T12:00:00Z)."
+        },
+        {
+          "info": {
+            "name": "Server health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/healthcheck"
+          },
+          "docs": "Determine whether the server is running and able to accept traffic"
+        },
+        {
+          "info": {
+            "name": "Get server diagnostics report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/diagnostics"
+          },
+          "docs": "Get server diagnostics report"
+        },
+        {
+          "info": {
+            "name": "Server aliveness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/alive"
+          },
+          "docs": "Determine whether the server is running"
+        },
+        {
+          "info": {
+            "name": "Get SDU usage events (streaming)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/sdu-usage"
+          },
+          "docs": "Retrieve SDU (Stardog Data Unit) usage events from the sdu_usage.log file. Events are streamed to avoid memory issues under heavy load. Optionally filter by start and end timestamps in ISO-8601 format (e.g., 2023-12-18T12:00:00Z)."
+        },
+        {
+          "info": {
+            "name": "Get server logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/logs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve server logs as a zip file. Supports filtering by log types, including rotated logs, and limiting the number of lines returned."
+        },
+        {
+          "info": {
+            "name": "Shutdown server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/shutdown"
+          },
+          "docs": "Shutdown server"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Integrity Constraints / SHACL API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrity Constraints / SHACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/icv",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List constraints"
+        },
+        {
+          "info": {
+            "name": "Validate constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/validate",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Determine whether or not the given constraints are valid"
+        },
+        {
+          "info": {
+            "name": "Validate constraints in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/:txid/validate",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Determine whether or not the given constraints are valid"
+        },
+        {
+          "info": {
+            "name": "SHACL validation report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/report",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "shapes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shapes to validate"
+              },
+              {
+                "name": "shacl.shape.graphs",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shape graphs to validate"
+              },
+              {
+                "name": "nodes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL focus node(s) to validate"
+              },
+              {
+                "name": "countLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of violations to report"
+              },
+              {
+                "name": "shacl.targetClass.simple",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "shacl.violation.limit.shape",
+                "value": "",
+                "type": "query",
+                "description": "number of violation limits per SHACL shapes"
+              },
+              {
+                "name": "graph-uri",
+                "value": "https://stardog.com/graphs/myGraph",
+                "type": "query",
+                "description": "Named Graph / Context"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              }
+            ]
+          },
+          "docs": "Produces a SHACL validation report against the specified shape(s)"
+        },
+        {
+          "info": {
+            "name": "SHACL validation report in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/icv/:txid/report",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              },
+              {
+                "name": "shapes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shapes to validate"
+              },
+              {
+                "name": "shacl.shape.graphs",
+                "value": "",
+                "type": "query",
+                "description": "SHACL shape graphs to validate"
+              },
+              {
+                "name": "nodes",
+                "value": "",
+                "type": "query",
+                "description": "SHACL focus node(s) to validate"
+              },
+              {
+                "name": "countLimit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of violations to report"
+              },
+              {
+                "name": "shacl.targetClass.simple",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "shacl.violation.limit.shape",
+                "value": "",
+                "type": "query",
+                "description": "number of violation limits per SHACL shapes"
+              }
+            ]
+          },
+          "docs": "Produces a SHACL validation report against the specified shape(s)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

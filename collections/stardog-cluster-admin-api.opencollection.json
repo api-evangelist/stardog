@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Cluster Admin API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List standby nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/registry"
+          },
+          "docs": "List standby nodes"
+        },
+        {
+          "info": {
+            "name": "Get standby pause status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/pause"
+          },
+          "docs": "Get the pause status of a standby node"
+        },
+        {
+          "info": {
+            "name": "Pause/Unpause standby node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/standby/pause",
+            "params": [
+              {
+                "name": "pause",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Pause/Unpause standby node"
+        },
+        {
+          "info": {
+            "name": "Revoke standby access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cluster/standby/registry/:standbyid",
+            "params": [
+              {
+                "name": "standbyid",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the standby node"
+              }
+            ]
+          },
+          "docs": "Instruct a standby node to leave its cluster"
+        },
+        {
+          "info": {
+            "name": "Repair ZK transaction IDs if they don't match all Stardog nodes. All Stardog nodes must agree.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/repairZk"
+          },
+          "docs": "Repair ZK transaction IDs if they don't match all Stardog nodes. All Stardog nodes must agree."
+        },
+        {
+          "info": {
+            "name": "Read replica check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/readreplica"
+          },
+          "docs": "Determine if a specific standby node is read replica"
+        },
+        {
+          "info": {
+            "name": "Get cluster info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster"
+          },
+          "docs": "Get cluster info"
+        },
+        {
+          "info": {
+            "name": "Get cluster diagnostics report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cluster/diagnostics"
+          },
+          "docs": "Get cluster diagnostics report"
+        },
+        {
+          "info": {
+            "name": "Start read only mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/readonly"
+          },
+          "docs": "Start read only mode"
+        },
+        {
+          "info": {
+            "name": "Stop read only mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cluster/readonly"
+          },
+          "docs": "Stop read only mode"
+        },
+        {
+          "info": {
+            "name": "Shutdown all nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/shutdownAll"
+          },
+          "docs": "Shutdown all nodes"
+        },
+        {
+          "info": {
+            "name": "Coordinator check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/coordinator"
+          },
+          "docs": "Determine if a specific cluster node is the cluster coordinator"
+        },
+        {
+          "info": {
+            "name": "Attempt to sync a standby or read replica node with the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/cluster/standby/attemptSync"
+          },
+          "docs": "Attempt to sync a standby or read replica node with the cluster"
+        },
+        {
+          "info": {
+            "name": "Get standby node status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/standby/status"
+          },
+          "docs": "Get standby node status"
+        },
+        {
+          "info": {
+            "name": "Get cluster status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cluster/status"
+          },
+          "docs": "Get cluster status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

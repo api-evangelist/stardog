@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Queries API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries"
+          },
+          "docs": "Get a list of all running queries"
+        },
+        {
+          "info": {
+            "name": "Get stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              }
+            ]
+          },
+          "docs": "Get stored query"
+        },
+        {
+          "info": {
+            "name": "Rename stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              },
+              {
+                "name": "move",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rename stored query"
+        },
+        {
+          "info": {
+            "name": "Delete stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored query"
+              }
+            ]
+          },
+          "docs": "Delete stored query"
+        },
+        {
+          "info": {
+            "name": "List stored queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/stored",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "query",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List stored queries"
+        },
+        {
+          "info": {
+            "name": "Add stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Add stored query"
+        },
+        {
+          "info": {
+            "name": "Update stored query",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Add stored query, overwriting if a query with that name already exists"
+        },
+        {
+          "info": {
+            "name": "Delete all stored queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/stored"
+          },
+          "docs": "Delete all stored queries"
+        },
+        {
+          "info": {
+            "name": "Get query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/queries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query"
+              },
+              {
+                "name": "plan",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "verbose",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get details of a specific query"
+        },
+        {
+          "info": {
+            "name": "Kill query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/queries/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the query"
+              }
+            ]
+          },
+          "docs": "Kill query"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

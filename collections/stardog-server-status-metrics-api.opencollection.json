@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Server Status/Metrics API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Status/Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server/Database metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status"
+          },
+          "docs": "Return metric information from the registry in JSON format. If 'admin' is replaced in the path with a valid database name, metrics for just that database will be returned."
+        },
+        {
+          "info": {
+            "name": "Get Prometheus metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status/prometheus",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be included"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be excluded, takes precedence over include"
+              }
+            ]
+          },
+          "docs": "Return metric information from the registry in Prometheus format"
+        },
+        {
+          "info": {
+            "name": "Get Prometheus metrics (only accessible from a restricted cidr range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/status/prometheus/internal",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be included"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Regex used to match metric names to be excluded, takes precedence over include"
+              }
+            ]
+          },
+          "docs": "Return metric information from the registry in Prometheus format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

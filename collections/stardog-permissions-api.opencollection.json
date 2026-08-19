@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Permissions API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Get all permissions assigned to a given user"
+        },
+        {
+          "info": {
+            "name": "Add User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/permissions/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Grant a permission directly to a specified user"
+        },
+        {
+          "info": {
+            "name": "Get effective user permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/effective/user/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ]
+          },
+          "docs": "Get all permissions assigned to a given user as well as those granted by assigned roles"
+        },
+        {
+          "info": {
+            "name": "Delete Role Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/permissions/role/:role/delete",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a permission from a given role"
+        },
+        {
+          "info": {
+            "name": "Delete User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/permissions/user/:user/delete",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "Username"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a permission from a given user"
+        },
+        {
+          "info": {
+            "name": "Check User Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/check"
+          },
+          "docs": "Check if the currently authenticated user has permission to perform an action on a resource, taking wildcards into account"
+        },
+        {
+          "info": {
+            "name": "Get role permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/permissions/role/:role",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ]
+          },
+          "docs": "Get all permissions attributed to a given role"
+        },
+        {
+          "info": {
+            "name": "Add Role Permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/permissions/role/:role",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "path",
+                "description": "Role name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a permission to a specified role"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

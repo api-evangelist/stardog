@@ -1,0 +1,1546 @@
+{
+  "item": [
+    {
+      "id": "c6b735d5-45db-42ec-a5ab-d3a663deaa70",
+      "name": "Virtual Graphs",
+      "description": {
+        "content": "Operations for virtualizing structured data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bef0e76-2c8f-4e23-a3e4-53459bec0c35",
+          "name": "List virtual graphs",
+          "request": {
+            "name": "List virtual graphs",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2fa63db-cfac-4d39-aa20-67821b87061d",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"virtual_graphs\": [\n    \"virtual://myVG\",\n    \"virtual://myVG\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bc8bfdd-ab4d-4429-a1c6-6d0ed9afb464",
+          "name": "Add virtual graph",
+          "request": {
+            "name": "Add virtual graph",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"data_source\": \"<string>\",\n  \"db\": \"<string>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": \"<integer>\",\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"<string>\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "121efb1c-62ce-44fc-908e-1d809d2316e4",
+              "name": "Virtual graph created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59319e98-d941-441d-a341-818b3cf81d48",
+          "name": "Get database",
+          "request": {
+            "name": "Get database",
+            "description": {
+              "content": "Get the database associated with a virtual graph",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "database"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bf27c11-bcdc-403c-af7c-7b9d48f7689a",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8a00165-ac46-47aa-8eda-0f280afe5aaa",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "database"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec4a211c-f480-49fc-982a-8cf03afa47d5",
+          "name": "Online virtual graph",
+          "request": {
+            "name": "Online virtual graph",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "online"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5fd9318-479b-4fdc-a865-5a89c8cccd2b",
+              "name": "Virtual graph onlined",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f8efd5b-f087-42b1-9b5c-b4f7bde416cc",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a414aa2-3593-4c59-920b-5ff8a89b841d",
+          "name": "Import file",
+          "request": {
+            "name": "Import file",
+            "description": {
+              "content": "Import a CSV or JSON file as a virtual graph into the knowledge graph",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "database",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The database into which to import the file"
+                },
+                {
+                  "key": "mappings",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "options",
+                  "value": "{\"csv.separator\":\",\",\"csv.quote\":\"\\\"\",\"csv.header\":true,\"csv.skip.empty\":true,\"csv.class\":\"<string>\",\"csv.hash.function\":\"SHA1\",\"unique.key.sets\":\"<string>\"}",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "input_file_type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required)  (This can only be one of JSON,DELIMITED)"
+                },
+                {
+                  "key": "input_file",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "named_graph",
+                  "value": "<URI>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ffd5d208-8b78-4f3d-a7a4-9cf9e4a847bc",
+              "name": "File imported successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The database into which to import the file",
+                        "type": "text/plain"
+                      },
+                      "key": "database",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "mappings",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "options",
+                      "value": "{\"csv.separator\":\",\",\"csv.quote\":\"\\\"\",\"csv.header\":true,\"csv.skip.empty\":true,\"csv.class\":\"<string>\",\"csv.hash.function\":\"SHA1\",\"unique.key.sets\":\"<string>\"}",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required)  (This can only be one of JSON,DELIMITED)",
+                        "type": "text/plain"
+                      },
+                      "key": "input_file_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "input_file",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "named_graph",
+                      "value": "<URI>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71a1c930-87c5-4293-9a4b-80277e63dc30",
+          "name": "Update virtual graph",
+          "request": {
+            "name": "Update virtual graph",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mappings\": \"<string>\",\n  \"data_source\": \"<string>\",\n  \"db\": \"<string>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": \"<integer>\",\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"<string>\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0561401-553f-4621-b046-23553a59b3f6",
+              "name": "Virtual graph updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "517efdda-409b-49bf-a334-98c22b364a2d",
+          "name": "Delete virtual graph",
+          "request": {
+            "name": "Delete virtual graph",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f23b979d-08e5-488f-8bf9-284db2f68083",
+              "name": "Virtual graph deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c3c6bd38-a3ba-4e80-b3e8-4978ba946631",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12f441c0-90be-4256-9f96-ff00985ea867",
+          "name": "Get virtual graph options",
+          "request": {
+            "name": "Get virtual graph options",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a76eb43c-c4ae-4f8d-94a5-a0ca1c3f4772",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"base\": \"<URI>\",\n  \"jdbc.url\": \"<string>\",\n  \"jdbc.username\": \"<string>\",\n  \"jdbc.password\": \"<string>\",\n  \"jdbc.driver\": \"<string>\",\n  \"jdbc.statement.fetch.size\": 42,\n  \"mappings.syntax\": \"<string>\",\n  \"mappings.format\": \"<string>\",\n  \"mongodb.uri\": \"<string>\",\n  \"elasticsearch.rest.urls\": \"https://server1:9200 http://server2:9200 server3:9200\",\n  \"elasticsearch.indexes\": \"my_index1,other_index\",\n  \"elasticsearch.username\": \"<string>\",\n  \"elasticsearch.password\": \"<string>\",\n  \"cassandra.contact.point\": \"<string>\",\n  \"cassandra.port\": 42,\n  \"cassandra.keyspace\": \"<string>\",\n  \"cassandra.username\": \"<string>\",\n  \"cassandra.password\": \"<string>\",\n  \"cassandra.allow.filtering\": false,\n  \"sparql.url\": \"http://myhost:26023/testdb/query\",\n  \"sparql.username\": \"<string>\",\n  \"sparql.password\": \"<string>\",\n  \"sparql.graphname\": \"<string>\",\n  \"sparql.statsbasedoptimization\": true,\n  \"parser.sql.quoting\": \"ANSI\",\n  \"sql.functions\": \"<string>\",\n  \"percent.encode\": true,\n  \"unique.key.sets\": \"<string>\",\n  \"sql.dialect\": \"MYSQL\",\n  \"sql.schemas\": \"<string>\",\n  \"sql.default.schema\": \"<string>\",\n  \"default.mapping.include.tables\": \"<string>\",\n  \"default.mapping.exclude.tables\": \"<string>\",\n  \"schema.in.generated.mappings\": \"<boolean>\",\n  \"union.strategy\": \"<string>\",\n  \"charset.handling\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f96ce45-6623-4b2a-ae00-25d77500358f",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "556ee45e-f45c-4752-acf2-5bdf259e86b7",
+          "name": "Get mappings",
+          "request": {
+            "name": "Get mappings",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "mappingsString",
+                ":syntax"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "syntax",
+                  "description": "(Required) The desired RDF syntax of the mappings (R2RML or SMS)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/turtle"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05473352-ae42-4ec7-b031-eecbb5ad67be",
+              "name": "Virtual graph mappings as RDF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "mappingsString",
+                    ":syntax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "syntax",
+                      "description": "(Required) The desired RDF syntax of the mappings (R2RML or SMS)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/turtle"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{\n  \"@id\": \"urn:example:Entity1\",\n  \"@type\": \"urn:example:Entity\",\n  \"urn:example:hasProp\": [\n    {\n      \"@value\": \"42\",\n      \"@type\": \"http://www.w3.org/2001/XMLSchema#integer\"\n    },\n    {\n      \"@value\": \"42\",\n      \"@type\": \"http://www.w3.org/2001/XMLSchema#integer\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f69e9a43-5ab6-4c5f-919a-7a88c1bc2d8e",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "mappingsString",
+                    ":syntax"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "syntax",
+                      "description": "(Required) The desired RDF syntax of the mappings (R2RML or SMS)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c330f7f-a056-4987-9cc9-46ff0edf9f26",
+          "name": "Import virtual graph",
+          "request": {
+            "name": "Import virtual graph",
+            "description": {
+              "content": "Import (materialize) a virtual graph directly into the local knowledge graph",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                "import_db"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"db\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"named_graph\": \"<string>\",\n  \"remove_all\": \"<boolean>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": \"<integer>\",\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"<string>\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  },\n  \"data_source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61fd3b26-368f-469f-b86e-4b6a56fa8679",
+              "name": "Virtual graph imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    "import_db"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"db\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"named_graph\": \"<string>\",\n  \"remove_all\": \"<boolean>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": 42,\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"https://server1:9200 http://server2:9200 server3:9200\",\n    \"elasticsearch.indexes\": \"my_index1,other_index\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 42,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"http://myhost:26023/testdb/query\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"ANSI\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"MYSQL\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  },\n  \"data_source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ac2fe81-1900-465b-b3b6-c7504abc2121",
+          "name": "List virtual graphs' info",
+          "request": {
+            "name": "List virtual graphs' info",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "920c0524-7c92-4d95-a9d9-dafd5408a429",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"virtual_graphs\": [\n    {\n      \"name\": \"string\",\n      \"available\": false,\n      \"database\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"available\": true,\n      \"database\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "617ad243-2923-487f-a90d-ac52305cf1bd",
+          "name": "Available",
+          "request": {
+            "name": "Available",
+            "description": {
+              "content": "Returns whether or not the virtual graph is available",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7ab8f82-d498-454f-9995-b489e413e614",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "289aaa8a-cee5-4c20-9898-8984213ea3b8",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d5b90b3-e5e5-4dac-82d3-cd74d0da85ef",
+          "name": "Get virtual graph info",
+          "request": {
+            "name": "Get virtual graph info",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs",
+                ":name",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the virtual graph"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f17ba0b-2353-4629-abe2-85cf470ac74c",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"name\": \"string\",\n    \"available\": false,\n    \"database\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5905e20-8163-45dc-b910-07b2c34cd81f",
+              "name": "Virtual Graph does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs",
+                    ":name",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the virtual graph"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Virtual Graph does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5820",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "207edca2-6eae-425f-a482-35d1d74ae0d6",
+    "name": "Stardog HTTP Checkpoints Virtual Graphs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n",
+      "type": "text/plain"
+    }
+  }
+}

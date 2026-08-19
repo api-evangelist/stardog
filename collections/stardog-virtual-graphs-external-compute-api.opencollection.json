@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Virtual Graphs External Compute API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Graphs External Compute",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs_compute/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a delimited file into the knowledge graph"
+        },
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs_compute/import_db",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a virtual graph directly into the local knowledge graph"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

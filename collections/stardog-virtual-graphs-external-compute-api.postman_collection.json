@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "26ce2a00-34b0-4c40-9245-3da077a7dd4d",
+      "name": "Virtual Graphs External Compute",
+      "description": {
+        "content": "Operations for virtualizing structured data on external compute engines",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf76c3bf-4683-4049-bd96-3863836407b5",
+          "name": "Import virtual graph",
+          "request": {
+            "name": "Import virtual graph",
+            "description": {
+              "content": "Import (materialize) a delimited file into the knowledge graph",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs_compute",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"database\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"options\": {\n    \"csv.separator\": \",\",\n    \"csv.quote\": \"\\\"\",\n    \"csv.header\": true,\n    \"csv.skip.empty\": true,\n    \"csv.class\": \"<string>\",\n    \"csv.hash.function\": \"SHA1\",\n    \"unique.key.sets\": \"<string>\"\n  },\n  \"input_file_type\": \"<string>\",\n  \"input_file\": \"<string>\",\n  \"named_graph\": \"<URI>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fef223f-c8d5-4139-b718-8b4e80b26c44",
+              "name": "File imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs_compute",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"options\": {\n    \"csv.separator\": \",\",\n    \"csv.quote\": \"\\\"\",\n    \"csv.header\": true,\n    \"csv.skip.empty\": true,\n    \"csv.class\": \"<string>\",\n    \"csv.hash.function\": \"SHA1\",\n    \"unique.key.sets\": \"<string>\"\n  },\n  \"input_file_type\": \"<string>\",\n  \"input_file\": \"<string>\",\n  \"named_graph\": \"<URI>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aeaf81ad-9c07-4841-a812-774916b06568",
+          "name": "Import virtual graph",
+          "request": {
+            "name": "Import virtual graph",
+            "description": {
+              "content": "Import (materialize) a virtual graph directly into the local knowledge graph",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "virtual_graphs_compute",
+                "import_db"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"db\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"named_graph\": \"<string>\",\n  \"remove_all\": \"<boolean>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": \"<integer>\",\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"<string>\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  },\n  \"data_source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf15e8f3-32c1-4c0c-ad5b-f138f0cc57d6",
+              "name": "Virtual graph imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "virtual_graphs_compute",
+                    "import_db"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"db\": \"<string>\",\n  \"mappings\": \"<string>\",\n  \"named_graph\": \"<string>\",\n  \"remove_all\": \"<boolean>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": 42,\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"https://server1:9200 http://server2:9200 server3:9200\",\n    \"elasticsearch.indexes\": \"my_index1,other_index\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 42,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"http://myhost:26023/testdb/query\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"ANSI\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"MYSQL\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  },\n  \"data_source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5820",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "62f9b5ef-0f68-4930-b514-aeb26bd3aeec",
+    "name": "Stardog HTTP Checkpoints Virtual Graphs External Compute API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n",
+      "type": "text/plain"
+    }
+  }
+}

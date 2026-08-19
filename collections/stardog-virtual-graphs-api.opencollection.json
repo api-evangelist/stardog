@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Virtual Graphs API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Graphs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List virtual graphs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs"
+          },
+          "docs": "List virtual graphs"
+        },
+        {
+          "info": {
+            "name": "Add virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/database",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get the database associated with a virtual graph"
+        },
+        {
+          "info": {
+            "name": "Online virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/online",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Online virtual graph"
+        },
+        {
+          "info": {
+            "name": "Import file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/import",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Import a CSV or JSON file as a virtual graph into the knowledge graph"
+        },
+        {
+          "info": {
+            "name": "Update virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update virtual graph"
+        },
+        {
+          "info": {
+            "name": "Delete virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Delete virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get virtual graph options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/options",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get virtual graph options"
+        },
+        {
+          "info": {
+            "name": "Get mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/mappingsString/:syntax",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              },
+              {
+                "name": "syntax",
+                "value": "",
+                "type": "path",
+                "description": "The desired RDF syntax of the mappings (R2RML or SMS)"
+              }
+            ]
+          },
+          "docs": "Get mappings"
+        },
+        {
+          "info": {
+            "name": "Import virtual graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/virtual_graphs/import_db",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import (materialize) a virtual graph directly into the local knowledge graph"
+        },
+        {
+          "info": {
+            "name": "List virtual graphs' info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/list"
+          },
+          "docs": "List virtual graphs' info"
+        },
+        {
+          "info": {
+            "name": "Available",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/available",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the virtual graph is available"
+        },
+        {
+          "info": {
+            "name": "Get virtual graph info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/virtual_graphs/:name/info",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the virtual graph"
+              }
+            ]
+          },
+          "docs": "Get virtual graph info"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

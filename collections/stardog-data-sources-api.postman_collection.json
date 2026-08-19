@@ -1,0 +1,1888 @@
+{
+  "item": [
+    {
+      "id": "a870b188-2217-4117-8452-f198706557a3",
+      "name": "Data Sources",
+      "description": {
+        "content": "Operations for managing data sources, which are used by virtual graphs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "260e5366-0806-4311-a7ee-da622e692970",
+          "name": "List data sources",
+          "request": {
+            "name": "List data sources",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03b5c92f-8d04-4bb9-9cb2-3c7465c8ec96",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_sources\": [\n    \"data-source://myDS\",\n    \"data-source://myDS\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7686068-07ba-4bb0-9c20-b614a041db5e",
+          "name": "Add data source",
+          "request": {
+            "name": "Add data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"options\": {\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bca78688-1800-4819-be57-7d993dcd250a",
+              "name": "Data source created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2902128e-bc8c-4de5-a25a-3fda400cad3b",
+          "name": "Test the connection for a new data source",
+          "request": {
+            "name": "Test the connection for a new data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                "test_new_connection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jdbc.url\": \"<string>\",\n  \"jdbc.username\": \"<string>\",\n  \"jdbc.password\": \"<string>\",\n  \"jdbc.driver\": \"<string>\",\n  \"mongodb.uri\": \"<string>\",\n  \"elasticsearch.rest.urls\": \"<string>\",\n  \"elasticsearch.indexes\": \"<string>\",\n  \"elasticsearch.username\": \"<string>\",\n  \"elasticsearch.password\": \"<string>\",\n  \"cassandra.contact.point\": \"<string>\",\n  \"cassandra.port\": 9042,\n  \"cassandra.keyspace\": \"<string>\",\n  \"cassandra.username\": \"<string>\",\n  \"cassandra.password\": \"<string>\",\n  \"sparql.url\": \"<URI>\",\n  \"sparql.username\": \"<string>\",\n  \"sparql.password\": \"<string>\",\n  \"sparql.graphname\": \"<string>\",\n  \"unique.key.sets\": \"<string>\",\n  \"sql.dialect\": \"<string>\",\n  \"sql.schemas\": \"<string>\",\n  \"sql.default.schema\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0a4ed4fc-66a4-4669-a7af-5a37f65a2f31",
+              "name": "Data source test successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    "test_new_connection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42b90585-faa8-429f-9cbd-6cfa4da9e0b6",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    "test_new_connection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "caf1706d-55c1-4d12-bbdc-eadef2a0f18b",
+              "name": "Data source test failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    "test_new_connection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3d1e1a5-e0bb-4b16-8db1-05aede2dfeaf",
+          "name": "Get data source options",
+          "request": {
+            "name": "Get data source options",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c9928c9-9653-4a52-8c85-ee1ea2b449d8",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"jdbc.url\": \"<string>\",\n  \"jdbc.username\": \"<string>\",\n  \"jdbc.password\": \"<string>\",\n  \"jdbc.driver\": \"<string>\",\n  \"mongodb.uri\": \"<string>\",\n  \"elasticsearch.rest.urls\": \"https://server1:9200 http://server2:9200 server3:9200\",\n  \"elasticsearch.indexes\": \"my_index1,other_index\",\n  \"elasticsearch.username\": \"<string>\",\n  \"elasticsearch.password\": \"<string>\",\n  \"cassandra.contact.point\": \"<string>\",\n  \"cassandra.port\": 42,\n  \"cassandra.keyspace\": \"<string>\",\n  \"cassandra.username\": \"<string>\",\n  \"cassandra.password\": \"<string>\",\n  \"sparql.url\": \"http://myhost:26023/testdb/query\",\n  \"sparql.username\": \"<string>\",\n  \"sparql.password\": \"<string>\",\n  \"sparql.graphname\": \"<string>\",\n  \"unique.key.sets\": \"<string>\",\n  \"sql.dialect\": \"MYSQL\",\n  \"sql.schemas\": \"<string>\",\n  \"sql.default.schema\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e40eab27-ef06-497e-b3a1-1c5e09a04c6e",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "321a2104-e186-4fa8-8630-207d09c32384",
+          "name": "Refresh metadata",
+          "request": {
+            "name": "Refresh metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "refresh_metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4df8e6b1-0ba7-434c-834c-5c3c08c7fcef",
+              "name": "Data source metadata refreshed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "refresh_metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7e96e7f-5345-4e34-8495-7eafbcdfbcdd",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "refresh_metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0d6a6e6-886f-4acc-b191-31cc769a8d41",
+          "name": "Update data source",
+          "request": {
+            "name": "Update data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"options\": {\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\"\n  },\n  \"force\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10cd9014-32dd-4aec-ab75-c4bf88e16a8e",
+              "name": "Virtual graph updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "228e424d-f6f0-4dea-babb-6e6c799e517e",
+          "name": "Delete data source",
+          "request": {
+            "name": "Delete data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f74e9ee-9fe5-456e-94fb-f258fc5e965d",
+              "name": "Data source deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1bbe3242-7aa6-4249-bdc8-678d961b1c96",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05bc85e8-3309-42bf-9c4c-f2d41955bd09",
+          "name": "Query data source",
+          "request": {
+            "name": "Query data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"options\": {\n    \"base\": \"<URI>\",\n    \"jdbc.url\": \"<string>\",\n    \"jdbc.username\": \"<string>\",\n    \"jdbc.password\": \"<string>\",\n    \"jdbc.driver\": \"<string>\",\n    \"jdbc.statement.fetch.size\": \"<integer>\",\n    \"mappings.syntax\": \"<string>\",\n    \"mappings.format\": \"<string>\",\n    \"mongodb.uri\": \"<string>\",\n    \"elasticsearch.rest.urls\": \"<string>\",\n    \"elasticsearch.indexes\": \"<string>\",\n    \"elasticsearch.username\": \"<string>\",\n    \"elasticsearch.password\": \"<string>\",\n    \"cassandra.contact.point\": \"<string>\",\n    \"cassandra.port\": 9042,\n    \"cassandra.keyspace\": \"<string>\",\n    \"cassandra.username\": \"<string>\",\n    \"cassandra.password\": \"<string>\",\n    \"cassandra.allow.filtering\": false,\n    \"sparql.url\": \"<URI>\",\n    \"sparql.username\": \"<string>\",\n    \"sparql.password\": \"<string>\",\n    \"sparql.graphname\": \"<string>\",\n    \"sparql.statsbasedoptimization\": true,\n    \"parser.sql.quoting\": \"<string>\",\n    \"sql.functions\": \"<string>\",\n    \"percent.encode\": true,\n    \"unique.key.sets\": \"<string>\",\n    \"sql.dialect\": \"<string>\",\n    \"sql.schemas\": \"<string>\",\n    \"sql.default.schema\": \"<string>\",\n    \"default.mapping.include.tables\": \"<string>\",\n    \"default.mapping.exclude.tables\": \"<string>\",\n    \"schema.in.generated.mappings\": \"<boolean>\",\n    \"union.strategy\": \"<string>\",\n    \"charset.handling\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a97898e5-8fe9-4be1-bf27-46b76df98685",
+              "name": "Query executed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7a15bda-2af9-40ef-8536-35977dbb1f29",
+          "name": "List data sources' info",
+          "request": {
+            "name": "List data sources' info",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5045e94a-7a0b-436d-9c5b-3c3274e30802",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_sources\": [\n    {\n      \"sharable\": true,\n      \"available\": false,\n      \"entityName\": \"string\"\n    },\n    {\n      \"sharable\": true,\n      \"available\": true,\n      \"entityName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f67b52f2-5707-4a00-8da4-e8e02e9880c3",
+          "name": "Get data source info",
+          "request": {
+            "name": "Get data source info",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "edea3430-d863-4f47-84b8-63ff65967fa6",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"sharable\": false,\n    \"available\": false,\n    \"entityName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50b929e9-a2af-47fb-be28-f8bdd14e0d3e",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e732254b-0959-4cb4-b35d-85b7001ee323",
+          "name": "Online data source",
+          "request": {
+            "name": "Online data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "online"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87052aa8-9146-4283-80b9-2b2722ea4073",
+              "name": "Data source onlined",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2dde2858-425f-455c-bc3f-51f58505111c",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5df2357-4016-4afb-97b9-dd6482f92e21",
+          "name": "Refresh table row-count estimates",
+          "request": {
+            "name": "Refresh table row-count estimates",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "refresh_counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fcd01139-e482-42b0-aecd-c7d940e367b2",
+              "name": "Data source counts refreshed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "refresh_counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "abd91bd3-b2a0-4285-be5d-fceaaf82c901",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "refresh_counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4e5b052-c095-4d74-863c-2d6fefcf75b1",
+          "name": "Share data source",
+          "request": {
+            "name": "Share data source",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "share"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28778fe1-8e96-483e-b174-a595aeca5159",
+              "name": "Data source shared",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "478c2ba5-2edd-430a-b3b4-53f769fda7b0",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65ef1142-a4da-4e9a-bf71-d9cefeee3b73",
+          "name": "Test an existing data source connection",
+          "request": {
+            "name": "Test an existing data source connection",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "test_data_source"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96c8e9eb-c4b2-4b04-b795-9517c888c188",
+              "name": "Data source test successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "test_data_source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91601ce6-cd06-455a-a789-8be1fb4fd322",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "test_data_source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a071b73-b418-41f7-ae66-c5dfcbf0f925",
+              "name": "Data source test failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "test_data_source"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d452ffe0-f7a8-4ca2-a54d-335a65eb7175",
+          "name": "Describe the supported data source types and their options.",
+          "request": {
+            "name": "Describe the supported data source types and their options.",
+            "description": {},
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                "data_source_type_description"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff6a5098-4e52-4b7b-8896-08d75c4da782",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    "data_source_type_description"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_source_type_description\": {\n    \"DATA_SOURCE_OPTIONS\": {\n      \"key_0\": {\n        \"default\": {},\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": false,\n        \"optionGroup\": \"advanced options\"\n      },\n      \"key_1\": {\n        \"default\": {},\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": false,\n        \"optionGroup\": \"connection pool options\"\n      },\n      \"key_2\": {\n        \"default\": {},\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": false,\n        \"optionGroup\": \"connection pool options\"\n      }\n    },\n    \"VIRTUAL_GRAPH_OPTIONS\": {\n      \"key_0\": {\n        \"default\": {},\n        \"type\": \"string\",\n        \"description\": \"string\",\n        \"required\": false,\n        \"optionGroup\": \"connection pool options\"\n      }\n    },\n    \"DATA_SOURCE_FAMILIES\": {\n      \"DATA_SOURCE_OPTIONS\": {\n        \"key_0\": {\n          \"default\": {},\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": false,\n          \"optionGroup\": \"advanced options\"\n        },\n        \"key_1\": {\n          \"default\": {},\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": false,\n          \"optionGroup\": \"advanced options\"\n        }\n      },\n      \"VIRTUAL_GRAPH_OPTIONS\": {\n        \"key_0\": {\n          \"default\": {},\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": false,\n          \"optionGroup\": \"advanced options\"\n        },\n        \"key_1\": {\n          \"default\": {},\n          \"type\": \"string\",\n          \"description\": \"string\",\n          \"required\": false,\n          \"optionGroup\": \"connection pool options\"\n        }\n      }\n    },\n    \"DATA_SOURCE_TYPES\": {\n      \"label\": \"string\",\n      \"dataSourceFamily\": \"MONGODB\",\n      \"vendorClientDownloadUrl\": \"string\",\n      \"vendorClientDocumentationUrl\": \"string\",\n      \"driverInstalled\": true,\n      \"DATA_SOURCE_OPTIONS\": {\n        \"jdbc.url\": {\n          \"examples\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"jdbc.driver\": {\n          \"default\": \"string\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60cdee31-17ed-4645-b4c2-e1bb664dc58c",
+          "name": "Available",
+          "request": {
+            "name": "Available",
+            "description": {
+              "content": "Returns whether or not the data source is available",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "data_sources",
+                ":name",
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the data source"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c83dcb2b-821e-4140-8ff9-f10a39767f04",
+              "name": "Operation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a00e1870-c509-4f1e-941c-ceb013b330f3",
+              "name": "Data Source does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "data_sources",
+                    ":name",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the data source"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Data Source does not exist",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:5820",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6730dd72-47f6-47ad-9143-defdcbd638cc",
+    "name": "Stardog HTTP Checkpoints Data Sources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n",
+      "type": "text/plain"
+    }
+  }
+}

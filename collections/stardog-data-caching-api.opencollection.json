@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Data Caching API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Caching",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Refresh cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/refresh/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cache"
+              }
+            ]
+          },
+          "docs": "Refresh cache"
+        },
+        {
+          "info": {
+            "name": "Create cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new cached dataset from a virtual graph"
+        },
+        {
+          "info": {
+            "name": "Get cached graphs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cache/graphs"
+          },
+          "docs": "Get cached graphs"
+        },
+        {
+          "info": {
+            "name": "Orphan cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/target/:name/orphan",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the target"
+              }
+            ]
+          },
+          "docs": "Orphan a cache target but do not destroy the contents"
+        },
+        {
+          "info": {
+            "name": "Drop cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the cache"
+              }
+            ]
+          },
+          "docs": "Drop cache"
+        },
+        {
+          "info": {
+            "name": "Remove cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/cache/target/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the target"
+              }
+            ]
+          },
+          "docs": "Remove a cache target and destroy its contents"
+        },
+        {
+          "info": {
+            "name": "List cache targets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/cache/target"
+          },
+          "docs": "List cache targets"
+        },
+        {
+          "info": {
+            "name": "Add cache target",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/target",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add cache target"
+        },
+        {
+          "info": {
+            "name": "Get cache status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/cache/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the status of one or more cached graphs or queries"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

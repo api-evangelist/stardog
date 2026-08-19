@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Knowledge Catalog API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validates cron string",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/is_valid"
+          },
+          "docs": "Checks if the string is a valid Quartz cron schedule.  Returns true if valid and false if it is not valid."
+        },
+        {
+          "info": {
+            "name": "Remove credentials from catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/catalog/credentials/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The credential key"
+              }
+            ]
+          },
+          "docs": "Removes the credentials for the specified key"
+        },
+        {
+          "info": {
+            "name": "Reloads metadata from a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/reload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Drops and reloads the metadata for the specified provider"
+        },
+        {
+          "info": {
+            "name": "Drops and reloads the built-in model for the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/reloadModel"
+          },
+          "docs": "Drops and reloads the built-in model for the catalog"
+        },
+        {
+          "info": {
+            "name": "Runs the specified job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/run",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers the scheduled job to run immediately"
+        },
+        {
+          "info": {
+            "name": "Get credentials list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/catalog/credentials"
+          },
+          "docs": "Returns a list of stored credentials"
+        },
+        {
+          "info": {
+            "name": "Stores username and password data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stores username and password data and returns an associated access key"
+        },
+        {
+          "info": {
+            "name": "Provides a cron summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/summary"
+          },
+          "docs": "Returns a text explanation of the cron string."
+        },
+        {
+          "info": {
+            "name": "Returns the next scheduled date",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/catalog/jobs/cron/next_date"
+          },
+          "docs": "Returns the next date the cron schedule would fire a job."
+        },
+        {
+          "info": {
+            "name": "Knowledge Catalog status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/catalog/status"
+          },
+          "docs": "Returns status information about the catalog, metadata providers and scheduled jobs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Graph Store Protocol API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Graph Store Protocol",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the named graph to retrieve"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Retrieves an RDF payload that is a serialization of the named graph paired with the graph IRI in the database"
+        },
+        {
+          "info": {
+            "name": "POST graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Merges the enclosed RDF payload with the specified graph content"
+        },
+        {
+          "info": {
+            "name": "PUT graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/:db",
+            "headers": [
+              {
+                "name": "Content-Encoding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Stores the enclosed RDF payload as RDF graph content"
+        },
+        {
+          "info": {
+            "name": "DELETE graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the named graph to delete"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Deletes the RDF graph content identified by either the request or encoded IRI"
+        },
+        {
+          "info": {
+            "name": "HEAD graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:5820/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "graph",
+                "value": "",
+                "type": "query",
+                "description": "IRI of the target named graph"
+              },
+              {
+                "name": "default",
+                "value": "",
+                "type": "query",
+                "description": "Include instead of 'graph' to operate on the default graph"
+              }
+            ]
+          },
+          "docs": "Test dereferenceable IRIs for validity and accessibility"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

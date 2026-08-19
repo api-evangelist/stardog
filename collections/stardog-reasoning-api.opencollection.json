@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Reasoning API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reasoning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Explain inference in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/reasoning/:txid/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain how the inference engine inferred a specific piece of data"
+        },
+        {
+          "info": {
+            "name": "Explain inconsistency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/explain/inconsistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Explain how, if at all, the data are inconsistent with respect to the ontology"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/query/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              }
+            ]
+          },
+          "docs": "Perform SPARQL query with reasoning enabled"
+        },
+        {
+          "info": {
+            "name": "Perform SPARQL query with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/query/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Query to run"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Perform SPARQL query with reasoning enabled"
+        },
+        {
+          "info": {
+            "name": "Explain inference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/reasoning/explain",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Explain how the inference engine inferred a specific piece of data"
+        },
+        {
+          "info": {
+            "name": "Check consistency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/consistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the data in the database are consistent with respect to the ontology"
+        },
+        {
+          "info": {
+            "name": "Get reasoning schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Retrieve the reasoning schema in RDF of the given database"
+        },
+        {
+          "info": {
+            "name": "Explain inconsistency in transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/reasoning/:txid/explain/inconsistency",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "txid",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID"
+              }
+            ]
+          },
+          "docs": "Explain how, if at all, the data are inconsistent with respect to the ontology"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

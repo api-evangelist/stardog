@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Matcher, aligning schemas from various data sources API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matcher, aligning schemas from various data sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aligns the source and target data source schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/matcher/suggestions"
+          },
+          "docs": "Aligns the source and target data source schemas"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

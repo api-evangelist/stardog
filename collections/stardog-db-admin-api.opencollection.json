@@ -1,0 +1,567 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints DB Admin API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DB Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases"
+          },
+          "docs": "List all the databases in the server"
+        },
+        {
+          "info": {
+            "name": "Create database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Add a new database to the server, optionally with RDF bulk-loaded"
+        },
+        {
+          "info": {
+            "name": "Get all DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Get the value of every metadata option for a database"
+        },
+        {
+          "info": {
+            "name": "Set DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of specific metadata options for a database"
+        },
+        {
+          "info": {
+            "name": "Get DB options",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/options",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the value of specific metadata options for a database"
+        },
+        {
+          "info": {
+            "name": "Restore database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/restore",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The location on the server of the backup"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to overwrite an existing database with this backup"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the restored database, if different"
+              }
+            ]
+          },
+          "docs": "Restore a database from backup"
+        },
+        {
+          "info": {
+            "name": "Get all metadata properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/config_properties"
+          },
+          "docs": "Get information on all database metadata properties, including description and example values"
+        },
+        {
+          "info": {
+            "name": "Return transaction Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/:db/txlog",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Return a chunk (or the entirety) of this database's transaction log for point in time recovers."
+        },
+        {
+          "info": {
+            "name": "Replay Transaction Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/txlog",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "path",
+                "description": "Server should validate the transaction log before applying it. Checks if the last committed transaction is at the beginning of the Log. Default is true"
+              }
+            ]
+          },
+          "docs": "Replay a transaction log onto an existing database. This operation applies the provided transaction log to the database, typically for point in time restore."
+        },
+        {
+          "info": {
+            "name": "Verify database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/verify",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Checks that the data in the database is not corrupted, for example, there're no inconsistencies across indexes"
+        },
+        {
+          "info": {
+            "name": "Repair database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/repair",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Attempt to recover a corrupted database"
+        },
+        {
+          "info": {
+            "name": "Online database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/online",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bring a database online"
+        },
+        {
+          "info": {
+            "name": "Backup all databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/backup_all",
+            "params": [
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "File location on the server to which to save the backups (defaults to $STARDOG_HOME/.backup)"
+              }
+            ]
+          },
+          "docs": "Create a backup of all databases on the server"
+        },
+        {
+          "info": {
+            "name": "Backup a database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/backup",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "File location on the server to which to save the backup (defaults to $STARDOG_HOME/.backup)"
+              }
+            ]
+          },
+          "docs": "Create a backup of a database on the server"
+        },
+        {
+          "info": {
+            "name": "Drop database",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/databases/:db",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Delete the database"
+        },
+        {
+          "info": {
+            "name": "Return all databases along with their configuration options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/databases/options"
+          },
+          "docs": "List all the databases in the server including all database configuration options"
+        },
+        {
+          "info": {
+            "name": "Rename database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/databases/:db/rename",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Make existing database to be identified by a new name"
+        },
+        {
+          "info": {
+            "name": "Offline database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/offline",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Take a database offline"
+        },
+        {
+          "info": {
+            "name": "Optimize database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/databases/:db/optimize",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Optimize a database"
+        },
+        {
+          "info": {
+            "name": "Get server properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/properties",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Specific names of server properties to retrieve (multiple params can be specified)"
+              }
+            ]
+          },
+          "docs": "Gets the property value for a server configuration option. This value will be the default for the option or the override in the properties file."
+        },
+        {
+          "info": {
+            "name": "Set server properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/properties",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the value of specific server properties"
+        },
+        {
+          "info": {
+            "name": "Get DB Size",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/size",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "exact",
+                "value": "",
+                "type": "query",
+                "description": "Whether to request that the database size be exact instead of approximate"
+              }
+            ]
+          },
+          "docs": "Retrieve the size of the db. Size is approximate unless the exact parameter is set to true"
+        },
+        {
+          "info": {
+            "name": "Generate Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/model",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "output",
+                "value": "",
+                "type": "query",
+                "description": "Desired output format (text, owl, shacl, sql, graphql)"
+              }
+            ]
+          },
+          "docs": "Generate the reasoning model used by this database in various formats"
+        },
+        {
+          "info": {
+            "name": "Export database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/export",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "obf",
+                "value": "",
+                "type": "query",
+                "description": "Path to an obfuscation configuration file, or DEFAULT"
+              }
+            ]
+          },
+          "docs": "Export database"
+        },
+        {
+          "info": {
+            "name": "Export database (obfuscated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/export",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Export database (obfuscated)"
+        },
+        {
+          "info": {
+            "name": "Get namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/namespaces",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Retrieve the namespaces stored in the database"
+        },
+        {
+          "info": {
+            "name": "Import namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/namespaces",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Add namespaces to the database via a block or blocks of RDF that declares them"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

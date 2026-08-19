@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Data Sources API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources"
+          },
+          "docs": "List data sources"
+        },
+        {
+          "info": {
+            "name": "Add data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add data source"
+        },
+        {
+          "info": {
+            "name": "Test the connection for a new data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/test_new_connection",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test the connection for a new data source"
+        },
+        {
+          "info": {
+            "name": "Get data source options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/options",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Get data source options"
+        },
+        {
+          "info": {
+            "name": "Refresh metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/refresh_metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh metadata"
+        },
+        {
+          "info": {
+            "name": "Update data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/admin/data_sources/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update data source"
+        },
+        {
+          "info": {
+            "name": "Delete data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/data_sources/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Delete data source"
+        },
+        {
+          "info": {
+            "name": "Query data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/query",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query data source"
+        },
+        {
+          "info": {
+            "name": "List data sources' info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/list"
+          },
+          "docs": "List data sources' info"
+        },
+        {
+          "info": {
+            "name": "Get data source info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/info",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Get data source info"
+        },
+        {
+          "info": {
+            "name": "Online data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/online",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Online data source"
+        },
+        {
+          "info": {
+            "name": "Refresh table row-count estimates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/refresh_counts",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh table row-count estimates"
+        },
+        {
+          "info": {
+            "name": "Share data source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/share",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Share data source"
+        },
+        {
+          "info": {
+            "name": "Test an existing data source connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/data_sources/:name/test_data_source",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Test an existing data source connection"
+        },
+        {
+          "info": {
+            "name": "Describe the supported data source types and their options.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/data_source_type_description"
+          },
+          "docs": "Describe the supported data source types and their options."
+        },
+        {
+          "info": {
+            "name": "Available",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/data_sources/:name/available",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the data source"
+              }
+            ]
+          },
+          "docs": "Returns whether or not the data source is available"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

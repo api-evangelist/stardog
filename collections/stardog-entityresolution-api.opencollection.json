@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints EntityResolution API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EntityResolution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Resolve entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/entityresolution",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Resolve entities"
+        },
+        {
+          "info": {
+            "name": "Resolve entities with reasoning enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/entityresolution/reasoning",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "reasoning",
+                "value": "",
+                "type": "query",
+                "description": "Enable Reasoning"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Resolve entities with reasoning enabled"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

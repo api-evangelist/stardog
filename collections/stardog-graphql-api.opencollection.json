@@ -1,0 +1,298 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints GraphQL API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/schemas",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "List schemas"
+        },
+        {
+          "info": {
+            "name": "Clear schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db/graphql/schemas",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ]
+          },
+          "docs": "Clear schemas"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query with schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Perform GraphQL query with schema"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query with schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform GraphQL query with schema"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Perform GraphQL query"
+        },
+        {
+          "info": {
+            "name": "Perform GraphQL query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform GraphQL query"
+        },
+        {
+          "info": {
+            "name": "Get schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Get schema"
+        },
+        {
+          "info": {
+            "name": "Add schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Add schema"
+        },
+        {
+          "info": {
+            "name": "Update schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Update schema"
+        },
+        {
+          "info": {
+            "name": "Remove schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/:db/graphql/schemas/:schema",
+            "params": [
+              {
+                "name": "db",
+                "value": "myDb",
+                "type": "path",
+                "description": "Database name"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "query",
+                "description": "The name of the schema"
+              },
+              {
+                "name": "schema",
+                "value": "",
+                "type": "path",
+                "description": "The name of the schema"
+              }
+            ]
+          },
+          "docs": "Remove schema"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

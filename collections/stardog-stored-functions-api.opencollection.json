@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Stardog HTTP Checkpoints Stored Functions API",
+    "version": "12.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stored Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/functions/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored function"
+              }
+            ]
+          },
+          "docs": "Get Stored Function"
+        },
+        {
+          "info": {
+            "name": "Delete Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/functions/stored/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the stored function"
+              }
+            ]
+          },
+          "docs": "Delete the stored function specified in the query string parameter"
+        },
+        {
+          "info": {
+            "name": "Get Stored Functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:5820/admin/functions/stored",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Stored Function name"
+              }
+            ]
+          },
+          "docs": "Retrieve all stored functions on the server, or optionally just the function specified in the query string parameter"
+        },
+        {
+          "info": {
+            "name": "Add Stored Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:5820/admin/functions/stored"
+          },
+          "docs": "Add Stored Function"
+        },
+        {
+          "info": {
+            "name": "Delete Stored Functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:5820/admin/functions/stored",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Stored Function name"
+              }
+            ]
+          },
+          "docs": "Delete all stored functions on the server, or optionally just the function specified in the query string parameter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

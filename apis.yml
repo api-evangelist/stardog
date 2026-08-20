@@ -45,6 +45,13 @@ apis:
   tags:
   - Databases
   - SPARQL
+  - Transaction
+  - Reasoning
+  - Virtual Graphs
+  - Admin
+  tags_raw:
+  - Databases
+  - SPARQL
   - Transactions
   - Reasoning
   - Virtual Graphs
@@ -114,6 +121,8 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
+  - Entity Resolution
+  tags_raw:
   - EntityResolution
   properties:
   - type: OpenAPI
@@ -167,7 +176,8 @@ apis:
     aligning schemas from various data sources.
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
-  tags:
+  tags: []
+  tags_raw:
   - Matcher, aligning schemas from various data sources
   properties:
   - type: OpenAPI
@@ -198,6 +208,8 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
+  - Query
+  tags_raw:
   - Queries
   properties:
   - type: OpenAPI
@@ -268,6 +280,8 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -278,6 +292,8 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI

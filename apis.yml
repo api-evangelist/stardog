@@ -133,7 +133,7 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
-  - EntityResolution
+  - Entity Resolution
   tags_raw:
   - EntityResolution
   properties:

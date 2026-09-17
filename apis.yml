@@ -127,18 +127,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stardog-db-admin-api-openapi.yml
-- aid: stardog:stardog-entityresolution-api
-  name: Stardog EntityResolution API
-  description: Operations for running Entity Resolution
-  humanURL: https://stardog-union.github.io/http-docs/
-  baseURL: https://cloud.stardog.com
-  tags:
-  - Entity Resolution
-  tags_raw:
-  - EntityResolution
-  properties:
-  - type: OpenAPI
-    url: openapi/stardog-entityresolution-api-openapi.yml
 - aid: stardog:stardog-graph-store-protocol-api
   name: Stardog Graph Store Protocol API
   description: >-
@@ -150,16 +138,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stardog-graph-store-protocol-api-openapi.yml
-- aid: stardog:stardog-graphql-api
-  name: Stardog GraphQL API
-  description: GraphQL Queries
-  humanURL: https://stardog-union.github.io/http-docs/
-  baseURL: https://cloud.stardog.com
-  tags:
-  - GraphQL
-  properties:
-  - type: OpenAPI
-    url: openapi/stardog-graphql-api-openapi.yml
 - aid: stardog:stardog-integrity-constraints-shacl-api
   name: Stardog Integrity Constraints / SHACL API
   description: >-
@@ -330,6 +308,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/stardog-virtual-graphs-external-compute-api-openapi.yml
+- aid: stardog:stardog-entity-resolution-api
+  name: Stardog Entity Resolution API
+  description: Operations for running Entity Resolution
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Entity Resolution
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-entity-resolution-api-openapi.yml
+- aid: stardog:stardog-graph-ql-api
+  name: Stardog Graph QL API
+  description: GraphQL Queries
+  humanURL: https://stardog-union.github.io/http-docs/
+  baseURL: https://cloud.stardog.com
+  tags:
+  - Graph QL
+  properties:
+  - type: OpenAPI
+    url: openapi/stardog-graph-ql-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/stardog-agentic-access.yml

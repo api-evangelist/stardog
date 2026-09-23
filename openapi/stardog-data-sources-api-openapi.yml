@@ -1,7 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Stardog HTTP Checkpoints Data Sources API
-  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  title: Stardog HTTP Data Sources API
+  description: '# Overview
+
+    Stardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.'
   contact:
     url: https://stardog.com
   license:
@@ -214,7 +216,7 @@ paths:
     get:
       tags:
       - Data Sources
-      summary: Describe the supported data source types and their options.
+      summary: Describe the supported data source types and their options
       operationId: getDbTypeOptionsDescription
       responses:
         '200':
@@ -243,32 +245,6 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_DS_404'
 components:
-  requestBodies:
-    DATA_SOURCE_QUERY:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_QUERY'
-    DATA_SOURCE_REFRESH_TABLE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_REFRESH_TABLE'
-    DATA_SOURCE_UPDATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
-    DATA_SOURCE_CREATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
-    DATA_SOURCE_OPTIONS:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
   schemas:
     DATA_SOURCE_TYPE_DESCRIPTION:
       required:
@@ -354,118 +330,27 @@ components:
                           description: Default value for the jdbc client driver class name
                   description: Additional descriptions for data source options for this data source type
               description: Map of data source types and their descriptions - ATHENA, ORACLE, CASSANDRA, MONGODB, etc.
-    DATA_SOURCE_QUERY:
+    DATA_SOURCE_CREATE:
+      required:
+      - name
+      - options
       properties:
-        query:
+        name:
           type: string
-          description: Data source native query string
         options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    DATA_SOURCE_OPTIONS:
+          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+    DATA_SOURCE:
+      required:
+      - name
+      - sharable
+      - available
       properties:
-        jdbc.url:
+        entityName:
           type: string
-          description: The URL of the JDBC connection
-        jdbc.username:
-          type: string
-          description: The username used to make the JDBC connection
-        jdbc.password:
-          type: string
-          description: The password used to make the JDBC connection
-        jdbc.driver:
-          type: string
-          description: The driver class name used to make the JDBC connection. If omitted, driver will be taken from registered Service Providers.
-        mongodb.uri:
-          type: string
-          description: The URI for a MongoDB connection
-        elasticsearch.rest.urls:
-          type: string
-          description: Whitespace-delimited list of connection `scheme://host:port` values for Elasticsearch. Scheme defaults to `http`.
-          example: https://server1:9200 http://server2:9200 server3:9200
-        elasticsearch.indexes:
-          type: string
-          description: Optional comma-delimited list of indexes to make visible to the data source. Defaults to all indexes.
-          example: my_index1,other_index
-        elasticsearch.username:
-          type: string
-        elasticsearch.password:
-          type: string
-        cassandra.contact.point:
-          type: string
-          description: The address of the Cassandra node(s) that the driver uses to discover the cluster topology
-        cassandra.port:
-          type: integer
-          description: The port to use to connect to the Cassandra host.
-          format: int32
-          example: 42
-          default: 9042
-        cassandra.keyspace:
-          type: string
-          description: The Cassandra keyspace to use for this session
-        cassandra.username:
-          type: string
-          description: The username for the Cassandra cluster
-        cassandra.password:
-          type: string
-          description: The password for the Cassandra cluster
-        sparql.url:
-          type: string
-          description: SPARQL query endpoint/connection string with database specified
-          format: URI
-          example: http://myhost:26023/testdb/query
-        sparql.username:
-          type: string
-          description: The username to access the SPARQL endpoint
-        sparql.password:
-          type: string
-          description: The password to access the SPARQL endpoint
-        sparql.graphname:
-          type: string
-          description: The graph name on the SPARQL endpoint to be mapped as virtual graph
-        unique.key.sets:
-          type: string
-          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
-        sql.dialect:
-          type: string
-          description: The format of the generated SQL, for use when using an unsupported JDBC driver
-          example: MYSQL
-        sql.schemas:
-          type: string
-          description: A comma-separated list of schemas to append to the schema search path
-        sql.default.schema:
-          type: string
-          description: Override the default schema for the connected user
-      additionalProperties:
-        pattern: ext\..+
-        type: string
-        description: Additional properties to pass directly to the JDBC driver
-      externalDocs:
-        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    DATA_SOURCE_OPTION_DESCRIPTION:
-      type: object
-      properties:
-        default:
-          description: The default value for the option.
-        type:
-          type: string
-          description: The data type of the option value
-        description:
-          type: string
-          description: A description of the option
-        examples:
-          type: array
-          description: List of all possible values, or a list with a single template or example value
-          items: {}
-        required:
+        sharable:
           type: boolean
-          description: Whether the option is required for the family of data source types that support the option
-          default: false
-        optionGroup:
-          type: string
-          description: The name of the group of options that an option belongs to, if any
-          enum:
-          - advanced options
-          - connection pool options
+        available:
+          type: boolean
     DATA_SOURCE_UPDATE:
       required:
       - options
@@ -476,32 +361,6 @@ components:
           type: boolean
           description: If true, data source will be updated even while in use
           default: false
-    DATA_SOURCE_NAME_LIST:
-      required:
-      - data_sources
-      properties:
-        data_sources:
-          type: array
-          items:
-            type: string
-            example: data-source://myDS
-    DATA_SOURCE_CREATE:
-      required:
-      - name
-      - options
-      properties:
-        name:
-          type: string
-        options:
-          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-    DATA_SOURCE_LIST:
-      required:
-      - data_sources
-      properties:
-        data_sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/DATA_SOURCE'
     VIRTUAL_GRAPH_OPTIONS:
       properties:
         base:
@@ -636,6 +495,141 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    DATA_SOURCE_NAME_LIST:
+      required:
+      - data_sources
+      properties:
+        data_sources:
+          type: array
+          items:
+            type: string
+            example: data-source://myDS
+    DATA_SOURCE_OPTIONS:
+      properties:
+        jdbc.url:
+          type: string
+          description: The URL of the JDBC connection
+        jdbc.username:
+          type: string
+          description: The username used to make the JDBC connection
+        jdbc.password:
+          type: string
+          description: The password used to make the JDBC connection
+        jdbc.driver:
+          type: string
+          description: The driver class name used to make the JDBC connection. If omitted, driver will be taken from registered Service Providers.
+        mongodb.uri:
+          type: string
+          description: The URI for a MongoDB connection
+        elasticsearch.rest.urls:
+          type: string
+          description: Whitespace-delimited list of connection `scheme://host:port` values for Elasticsearch. Scheme defaults to `http`.
+          example: https://server1:9200 http://server2:9200 server3:9200
+        elasticsearch.indexes:
+          type: string
+          description: Optional comma-delimited list of indexes to make visible to the data source. Defaults to all indexes.
+          example: my_index1,other_index
+        elasticsearch.username:
+          type: string
+        elasticsearch.password:
+          type: string
+        cassandra.contact.point:
+          type: string
+          description: The address of the Cassandra node(s) that the driver uses to discover the cluster topology
+        cassandra.port:
+          type: integer
+          description: The port to use to connect to the Cassandra host.
+          format: int32
+          example: 42
+          default: 9042
+        cassandra.keyspace:
+          type: string
+          description: The Cassandra keyspace to use for this session
+        cassandra.username:
+          type: string
+          description: The username for the Cassandra cluster
+        cassandra.password:
+          type: string
+          description: The password for the Cassandra cluster
+        sparql.url:
+          type: string
+          description: SPARQL query endpoint/connection string with database specified
+          format: URI
+          example: http://myhost:26023/testdb/query
+        sparql.username:
+          type: string
+          description: The username to access the SPARQL endpoint
+        sparql.password:
+          type: string
+          description: The password to access the SPARQL endpoint
+        sparql.graphname:
+          type: string
+          description: The graph name on the SPARQL endpoint to be mapped as virtual graph
+        unique.key.sets:
+          type: string
+          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
+        sql.dialect:
+          type: string
+          description: The format of the generated SQL, for use when using an unsupported JDBC driver
+          example: MYSQL
+        sql.schemas:
+          type: string
+          description: A comma-separated list of schemas to append to the schema search path
+        sql.default.schema:
+          type: string
+          description: Override the default schema for the connected user
+      additionalProperties:
+        pattern: ext\..+
+        type: string
+        description: Additional properties to pass directly to the JDBC driver
+      externalDocs:
+        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    DATA_SOURCE_AVAILABLE:
+      required:
+      - available
+      properties:
+        available:
+          type: boolean
+    DATA_SOURCE_LIST:
+      required:
+      - data_sources
+      properties:
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DATA_SOURCE'
+    DATA_SOURCE_QUERY:
+      properties:
+        query:
+          type: string
+          description: Data source native query string
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
+    DATA_SOURCE_OPTION_DESCRIPTION:
+      type: object
+      properties:
+        default:
+          description: The default value for the option.
+        type:
+          type: string
+          description: The data type of the option value
+        description:
+          type: string
+          description: A description of the option
+        examples:
+          type: array
+          description: List of all possible values, or a list with a single template or example value
+          items: {}
+        required:
+          type: boolean
+          description: Whether the option is required for the family of data source types that support the option
+          default: false
+        optionGroup:
+          type: string
+          description: The name of the group of options that an option belongs to, if any
+          enum:
+          - advanced options
+          - connection pool options
     SINGLE_DATA_SOURCE_INFO:
       required:
       - info
@@ -647,24 +641,32 @@ components:
         name:
           type: string
           description: 'Optional table to refresh. Example formats (case-sensitive): `catalog.schema.table`, `schema.table`, `table`'
-    DATA_SOURCE_AVAILABLE:
-      required:
-      - available
-      properties:
-        available:
-          type: boolean
-    DATA_SOURCE:
-      required:
-      - name
-      - sharable
-      - available
-      properties:
-        entityName:
-          type: string
-        sharable:
-          type: boolean
-        available:
-          type: boolean
+  requestBodies:
+    DATA_SOURCE_OPTIONS:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+    DATA_SOURCE_CREATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
+    DATA_SOURCE_UPDATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
+    DATA_SOURCE_REFRESH_TABLE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_REFRESH_TABLE'
+    DATA_SOURCE_QUERY:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_QUERY'
   responses:
     NAME_DS_404:
       description: Data Source does not exist

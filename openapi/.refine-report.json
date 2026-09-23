@@ -1,37 +1,14 @@
 {
   "provider": "stardog",
   "sources": [
-    "stardog-checkpoints-api-openapi.yml",
-    "stardog-cluster-admin-api-openapi.yml",
-    "stardog-data-caching-api-openapi.yml",
-    "stardog-data-sources-api-openapi.yml",
-    "stardog-db-admin-api-openapi.yml",
-    "stardog-entityresolution-api-openapi.yml",
-    "stardog-graph-store-protocol-api-openapi.yml",
-    "stardog-graphql-api-openapi.yml",
-    "stardog-integrity-constraints-shacl-api-openapi.yml",
-    "stardog-knowledge-catalog-api-openapi.yml",
-    "stardog-matcher-aligning-schemas-from-various-data-sources-api-openapi.yml",
-    "stardog-monitoring-api-openapi.yml",
-    "stardog-permissions-api-openapi.yml",
-    "stardog-queries-api-openapi.yml",
-    "stardog-reasoning-api-openapi.yml",
-    "stardog-roles-api-openapi.yml",
-    "stardog-server-admin-api-openapi.yml",
-    "stardog-server-status-metrics-api-openapi.yml",
-    "stardog-sparql-api-openapi.yml",
-    "stardog-stored-functions-api-openapi.yml",
-    "stardog-transactions-api-openapi.yml",
-    "stardog-users-api-openapi.yml",
-    "stardog-virtual-graphs-api-openapi.yml",
-    "stardog-virtual-graphs-external-compute-api-openapi.yml"
+    "_original/stardog-openapi.json"
   ],
   "outputs": [
     "stardog-checkpoints-api-openapi.yml",
     "stardog-cluster-admin-api-openapi.yml",
+    "stardog-db-admin-api-openapi.yml",
     "stardog-data-caching-api-openapi.yml",
     "stardog-data-sources-api-openapi.yml",
-    "stardog-db-admin-api-openapi.yml",
     "stardog-entityresolution-api-openapi.yml",
     "stardog-graph-store-protocol-api-openapi.yml",
     "stardog-graphql-api-openapi.yml",
@@ -43,21 +20,53 @@
     "stardog-queries-api-openapi.yml",
     "stardog-reasoning-api-openapi.yml",
     "stardog-roles-api-openapi.yml",
+    "stardog-sparql-api-openapi.yml",
     "stardog-server-admin-api-openapi.yml",
     "stardog-server-status-metrics-api-openapi.yml",
-    "stardog-sparql-api-openapi.yml",
     "stardog-stored-functions-api-openapi.yml",
     "stardog-transactions-api-openapi.yml",
     "stardog-users-api-openapi.yml",
     "stardog-virtual-graphs-api-openapi.yml",
     "stardog-virtual-graphs-external-compute-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
   "errors": [
-    "stardog-queries-api-openapi.yml: dangling $ref: #/components/parameters/STORED_QUERY_ID",
-    "stardog-sparql-api-openapi.yml: dangling $ref: #/components/parameters/exclude-graph-uri"
+    "stardog-openapi.json: dangling $ref: #/components/parameters/STORED_QUERY_ID",
+    "stardog-openapi.json: dangling $ref: #/components/parameters/exclude-graph-uri"
   ],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "stardog-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "superseded outputs removed: stardog-entity-resolution-api-openapi.yml, stardog-graph-ql-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 25 total)"
+  ],
+  "skipped": [
+    "stardog-checkpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-cluster-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-data-caching-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-data-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-db-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-entity-resolution-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-graph-ql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-graph-store-protocol-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-integrity-constraints-shacl-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-knowledge-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-matcher-aligning-schemas-from-various-data-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-queries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-reasoning-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-server-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-server-status-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-sparql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-stored-functions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-virtual-graphs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "stardog-virtual-graphs-external-compute-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

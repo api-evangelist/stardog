@@ -1,7 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Stardog HTTP Checkpoints Virtual Graphs API
-  description: "# Overview\nStardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.\nStardog also supports SPARQL 1.1’s Service Description format. See the [spec](https://www.w3.org/TR/sparql11-service-description/) if you want details.\n### Generating URLs\nIf you are running the HTTP server at\n\n ```http://localhost:12345```\n\nTo form the URI of a particular Stardog Database, the Database Short Name is the first URL path segment appended to the deployment URI. For example, for the Database called `cytwombly`, deployed in the above example HTTP server, the Database Network Name might be\n\n```http://localhost:12345/cytwombly```\n\nAll the resources related to this database are identified by URL path segments relative to the Database Network Name; hence:\n\n```http://localhost:12345/cytwombly/size```\n# Error Codes\nHere are explanations of what the various error codes mean:\n\nError Code | Category | Meaning\n-----------|----------|---------\n000012 | GENERIC |UNKNOWN\n000IA2 | GENERIC |ILLEGAL_ARGUMENT\n000SD4 | GENERIC |SHUTTING_DOWN\n00PCE2 | GENERIC |PROCESS_CANCELLED\n00PE2 | GENERIC |PROCESS_EXISTS\n00PNE2 | GENERIC |PROCESS_NOT_FOUND\n00UOE2 | GENERIC |UNSUPPORTED_OPERATION\n0D0012 | DATABASE |UNKNOWN_DATABASE_EXCEPTION\n0D0CE3 | DATABASE |DATABASE_CONSISTENCY_EXCEPTION\n0D0DC2 | DATABASE |DATABASE_CONFLICT\n0D0DE2 | DATABASE |DATABASE_EXISTS\n0D0DU2 | DATABASE |DATABASE_UNKNOWN\n0D0TU2 | DATABASE |TRANSACTION_UNKNOWN\n0DICC2 | DATABASE |INVALID_CONFIGURATION\n0DIDN2 | DATABASE |INVALID_DATABASE_NAME\n0DIDS2 | DATABASE |INVALID_DATABASE_STATE\nCLNIC3 | CLUSTER_ERROR |NOT_IN_CLUSTER\nCLOEF3 | CLUSTER_ERROR |EXPEL_FAILED\nHS0012 | HTTP |UNKNOWN_CONNECTION_EXCEPTION\nHSJSE2 | HTTP |JSON_SYNTAX_EXCEPTION\nHSJSO2 | HTTP |JSON_EXCEPTION\nHSSSL3 | HTTP |SSL_EXCEPTION\nQE0012 | QUERY_EXECUTION |UNKNOWN_QUERY_EXCEPTION\nQE0FE2 | QUERY_EXECUTION |FUNCTION_EXISTS\nQE0PE2 | QUERY_EXECUTION |PARSE_EXCEPTION\nQE0QE2 | QUERY_EXECUTION |QUERY_EXISTS\nQECTP2 | QUERY_EXECUTION |CANNOT_TRANSLATE_PLAN\nQEFNF2 | QUERY_EXECUTION |FUNCTION_NOT_FOUND\nQEIQT2 | QUERY_EXECUTION |INVALID_QUERY_TYPE\nQEIVR2 | QUERY_EXECUTION |INVALID_RDF\nQEMAQ2 | QUERY_EXECUTION |MALFORMED_QUERY\nQEONS2 | QUERY_EXECUTION |OPERATION_NOT_SUPPORTED\nQEQNF2 | QUERY_EXECUTION |QUERY_NOT_FOUND\nQEQOE2 | QUERY_EXECUTION |OPERATOR_EXCEPTION\nQEQPE2 | QUERY_EXECUTION |QUERY_PARSE_EXCEPTION\nQEWCE2 | QUERY_EXECUTION |WRITE_CONFLICT_EXCEPTION\nSE0012 | SECURITY |UNKNOWN_SECURITY_EXCEPTION\nSE0IP2 | SECURITY |ILLEGAL_PASSWORD\nSE0RE2 | SECURITY |SECURITY_RESOURCE_EXISTS\nSEAEE2 | SECURITY |AUTHENTICATION_EXCEPTION\nSEAOE2 | SECURITY |AUTHORIZATION_EXCEPTION\nSEIPT2 | SECURITY |INCORRECT_PRINCIPAL_TRANSACTION\nSERIU2 | SECURITY |SECURITY_RESOURCE_IN_USE\nSERNF2 | SECURITY |SECURITY_RESOURCE_NOT_FOUND\nSERNI2 | SECURITY |SECURITY_RESOURCE_NAME_INVALID\nSERTI2 | SECURITY |SECURITY_RESOURCE_TYPE_INVALID\nZK0013 | ZOOKEEPER_ERROR |ZOOKEEPER_UNKNOWN_EXCEPTION\nZK00U3 | ZOOKEEPER_ERROR |UNIMPLEMENTED\nZK0AE3 | ZOOKEEPER_ERROR |API_ERROR\nZK0AF3 | ZOOKEEPER_ERROR |AUTH_FAILED\nZK0BV3 | ZOOKEEPER_ERROR |BAD_VERSION\nZK0CE3 | ZOOKEEPER_ERROR |NO_CHILDREN_FOR_EPHEMERAL\nZK0CL3 | ZOOKEEPER_ERROR |CONNECTION_LOSS\nZK0CR3 | ZOOKEEPER_ERROR |ZOOKEEPER_CONNECTION_REFUSED\nZK0DI3 | ZOOKEEPER_ERROR |DATA_INCONSISTENCY\nZK0IA3 | ZOOKEEPER_ERROR |BAD_ARGUMENTS\nZK0ME3 | ZOOKEEPER_ERROR |MARSHALLING_ERROR\nZK0NA3 | ZOOKEEPER_ERROR |NO_AUTH\nZK0NE3 | ZOOKEEPER_ERROR |NODE_EXISTS\nZK0NN3 | ZOOKEEPER_ERROR |NO_NODE\nZK0OT3 | ZOOKEEPER_ERROR |OPERATION_TIMEOUT\nZK0RI3 | ZOOKEEPER_ERROR |RUNTIME_INCONSISTENCY\nZK0SE3 | ZOOKEEPER_ERROR |SYSTEM_ERROR\nZK0SM3 | ZOOKEEPER_ERROR |SESSION_MOVED\nZKEXS3 | ZOOKEEPER_ERROR |SESSION_EXPIRED\nZKIAL3 | ZOOKEEPER_ERROR |INVALIDACL\nZKICB3 | ZOOKEEPER_ERROR |INVALID_CALLBACK\nZKNEY3 | ZOOKEEPER_ERROR |NOT_EMPTY\nZKNRO3 | ZOOKEEPER_ERROR |NOT_READONLY\n"
+  title: Stardog HTTP Virtual Graphs API
+  description: '# Overview
+
+    Stardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.'
   contact:
     url: https://stardog.com
   license:
@@ -288,17 +290,23 @@ components:
           description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    VIRTUAL_GRAPH:
+    VIRTUAL_GRAPH_CREATE:
       required:
       - name
-      - available
+      - mappings
       properties:
         name:
           type: string
-        database:
+        data_source:
           type: string
-        available:
-          type: boolean
+        db:
+          type: string
+          description: The database to associate with the virtual graph
+        mappings:
+          type: string
+          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
     VIRTUAL_GRAPH_NAME_LIST:
       required:
       - virtual_graphs
@@ -308,28 +316,6 @@ components:
           items:
             type: string
             example: virtual://myVG
-    GENERIC_JSONLD:
-      properties:
-        '@id':
-          type: string
-          example: urn:example:Entity1
-        '@type':
-          type: string
-          example: urn:example:Entity
-        urn:example:hasProp:
-          required:
-          - '@id'
-          type: array
-          items:
-            required:
-            - '@value'
-            properties:
-              '@type':
-                type: string
-                example: http://www.w3.org/2001/XMLSchema#integer
-              '@value':
-                type: string
-                example: '42'
     VIRTUAL_GRAPH_IMPORT:
       required:
       - db
@@ -352,43 +338,20 @@ components:
           description: Should the target named graph be cleared before importing?
         options:
           $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    VIRTUAL_GRAPH_IMPORT_FILE:
+    VIRTUAL_GRAPH_UPDATE:
       required:
-      - database
       - mappings
-      - options
-      - input_file_type
-      - input_file
       properties:
-        database:
+        data_source:
           type: string
-          description: The database into which to import the file
+        db:
+          type: string
+          description: The database to associate with the virtual graph
         mappings:
           type: string
+          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
         options:
-          $ref: '#/components/schemas/IMPORT_FILE_OPTIONS'
-        named_graph:
-          type: string
-          format: URI
-        input_file_type:
-          type: string
-          enum:
-          - JSON
-          - DELIMITED
-        input_file:
-          type: string
-    VIRTUAL_GRAPH_AVAILABLE:
-      required:
-      - available
-      properties:
-        available:
-          type: boolean
-    SINGLE_VIRTUAL_GRAPH_INFO:
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH'
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
     VIRTUAL_GRAPH_OPTIONS:
       properties:
         base:
@@ -523,6 +486,29 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    VIRTUAL_GRAPH:
+      required:
+      - name
+      - available
+      properties:
+        name:
+          type: string
+        database:
+          type: string
+        available:
+          type: boolean
+    SINGLE_VIRTUAL_GRAPH_INFO:
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH'
+    VIRTUAL_GRAPH_AVAILABLE:
+      required:
+      - available
+      properties:
+        available:
+          type: boolean
     VIRTUAL_GRAPH_LIST:
       required:
       - virtual_graphs
@@ -531,48 +517,53 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VIRTUAL_GRAPH'
-    VIRTUAL_GRAPH_UPDATE:
+    VIRTUAL_GRAPH_IMPORT_FILE:
       required:
+      - database
       - mappings
+      - options
+      - input_file_type
+      - input_file
       properties:
-        data_source:
+        database:
           type: string
-        db:
-          type: string
-          description: The database to associate with the virtual graph
+          description: The database into which to import the file
         mappings:
           type: string
-          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
         options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    VIRTUAL_GRAPH_CREATE:
-      required:
-      - name
-      - mappings
+          $ref: '#/components/schemas/IMPORT_FILE_OPTIONS'
+        named_graph:
+          type: string
+          format: URI
+        input_file_type:
+          type: string
+          enum:
+          - JSON
+          - DELIMITED
+        input_file:
+          type: string
+    GENERIC_JSONLD:
       properties:
-        name:
+        '@id':
           type: string
-        data_source:
+          example: urn:example:Entity1
+        '@type':
           type: string
-        db:
-          type: string
-          description: The database to associate with the virtual graph
-        mappings:
-          type: string
-          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
-        options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-  requestBodies:
-    VIRTUAL_GRAPH_CREATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VIRTUAL_GRAPH_CREATE'
-    VIRTUAL_GRAPH_UPDATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VIRTUAL_GRAPH_UPDATE'
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
   responses:
     NAME_VG_404:
       description: Virtual Graph does not exist
@@ -580,20 +571,31 @@ components:
         text/plain:
           example: Virtual Graph does not exist
   examples:
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
     GENERIC_TRIG:
       value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
     GENERIC_NQUADS:
       value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
 
         <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
     GENERIC_NTRIPLES:
       value: '<urn:example:Entity1> a <urn:example:Entity> .
 
         <urn:example:Entity1> <urn:example:hasProp> 42 .'
+  requestBodies:
+    VIRTUAL_GRAPH_UPDATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VIRTUAL_GRAPH_UPDATE'
+    VIRTUAL_GRAPH_CREATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VIRTUAL_GRAPH_CREATE'
   parameters:
     name_vg:
       name: name

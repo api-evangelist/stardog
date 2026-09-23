@@ -1,0 +1,137 @@
+openapi: 3.2.0
+info:
+  title: Stardog HTTP Entity Resolution API
+  description: '# Overview
+
+    Stardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.'
+  contact:
+    url: https://stardog.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 12.0.3
+  x-logo:
+    url: https://d33wubrfki0l68.cloudfront.net/66e9dcff51317cfc11b9f3d4ce2917a11ba81681/543c1/img/stardog-logo-optimized.svg
+servers:
+- url: http://localhost:5820
+tags:
+- name: Entity Resolution
+  description: Operations for running Entity Resolution
+paths:
+  /{db}/entityresolution:
+    post:
+      tags:
+      - Entity Resolution
+      summary: Resolve entities
+      operationId: resolveEntities
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      responses:
+        '200':
+          description: Operation successful
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+  /{db}/entityresolution/reasoning:
+    post:
+      tags:
+      - Entity Resolution
+      summary: Resolve entities with reasoning enabled
+      operationId: resolveEntitiesWithReasoningEnabled
+      parameters:
+      - name: db
+        $ref: '#/components/parameters/db'
+      - $ref: '#/components/parameters/reasoning'
+      - $ref: '#/components/parameters/schema'
+      responses:
+        '200':
+          description: Operation successful
+        '404':
+          description: Database does not exist
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                - code
+                properties:
+                  message:
+                    type: string
+                    example: Database does not exist
+                  code:
+                    type: string
+                    example: 0D0DU2
+components:
+  parameters:
+    schema:
+      name: schema
+      in: query
+      description: The name of the schema
+      schema:
+        type: string
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
+      schema:
+        type: boolean
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+externalDocs:
+  url: https://docs.stardog.com
+x-tagGroups:
+- name: Data Unification
+  tags:
+  - Data Sources
+  - Virtual Graphs
+- name: Virtual Graphs External Compute
+  tags:
+  - Virtual Graphs External Compute
+- name: Server
+  tags:
+  - Monitoring
+  - Stored Functions
+  - Server Status/Metrics
+  - Server Admin
+  - Queries
+  - Cluster Admin
+- name: Database
+  tags:
+  - Checkpoints
+  - DB Admin
+  - Integrity Constraints / SHACL
+  - Data Caching
+  - Graph Store Protocol
+  - Matcher, aligning schemas from various data sources
+  - Reasoning
+  - Transactions
+  - GraphQL
+  - SPARQL
+  - EntityResolution
+- name: Security
+  tags:
+  - Roles
+  - Permissions
+  - Users
+- name: Knowledge Catalog
+  tags:
+  - Knowledge Catalog

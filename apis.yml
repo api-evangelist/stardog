@@ -75,8 +75,6 @@ apis:
     url: https://cloud.stardog.com/api/v1/docs
   - type: Developer Docs
     url: https://docs.stardog.com/developing/http-api
-  - url: graphql/stardog-graphql.md
-    type: GraphQL
 - aid: stardog:stardog-checkpoints-api
   name: Stardog Checkpoints API
   description: Operations for database checkpoints

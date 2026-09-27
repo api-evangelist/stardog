@@ -369,44 +369,21 @@ paths:
                     type: string
                     example: 0D0DU2
 components:
-  parameters:
-    txid:
-      name: txid
-      in: path
-      description: Transaction ID
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
-    db:
-      name: db
-      in: path
-      description: Database name
-      required: true
-      schema:
-        type: string
-      example: myDb
-    graph-uri:
-      name: graph-uri
-      in: query
-      description: Named Graph / Context
-      required: false
-      schema:
-        type: string
-        format: URI
-      example: https://stardog.com/graphs/myGraph
-    header_content_encoding:
-      name: Content-Encoding
-      in: header
-      description: Allowable encodings for request body
-      schema:
-        type: string
-        enum:
-        - NONE
-        - GZIP
-        - BZIP2
-        - ZIP
+  examples:
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
   schemas:
     COMMIT_RESULT:
       required:
@@ -476,21 +453,44 @@ components:
               status:
                 type: string
                 example: IDLE
-  examples:
-    GENERIC_TRIG:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
-    GENERIC_NQUADS:
-      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
-    GENERIC_NTRIPLES:
-      value: '<urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+  parameters:
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    graph-uri:
+      name: graph-uri
+      in: query
+      description: Named Graph / Context
+      required: false
+      schema:
+        type: string
+        format: URI
+      example: https://stardog.com/graphs/myGraph
+    txid:
+      name: txid
+      in: path
+      description: Transaction ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+    header_content_encoding:
+      name: Content-Encoding
+      in: header
+      description: Allowable encodings for request body
+      schema:
+        type: string
+        enum:
+        - NONE
+        - GZIP
+        - BZIP2
+        - ZIP
   responses:
     EMPTY_SUCCESS:
       description: Operation successful

@@ -256,7 +256,34 @@ components:
       required: true
       schema:
         type: string
+  requestBodies:
+    PERMISSION:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PERMISSION'
+  responses:
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    PERMISSION_LIST:
+      description: List of Permissions in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PERMISSION_LIST'
   schemas:
+    PERMISSION_LIST:
+      required:
+      - permissions
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PERMISSION'
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
       - message
@@ -310,33 +337,6 @@ components:
           type: array
           items:
             type: string
-    PERMISSION_LIST:
-      required:
-      - permissions
-      properties:
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PERMISSION'
-  requestBodies:
-    PERMISSION:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PERMISSION'
-  responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    PERMISSION_LIST:
-      description: List of Permissions in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PERMISSION_LIST'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

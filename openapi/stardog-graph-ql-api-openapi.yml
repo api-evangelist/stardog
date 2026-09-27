@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Stardog HTTP Graph QL API
+  title: Stardog HTTP GraphQL API
   description: '# Overview
 
     Stardog supports the standard SPARQL Protocol HTTP bindings, as well as additional functionality via HTTP.'
@@ -339,27 +339,9 @@ paths:
                     example: 0D0DU2
 components:
   schemas:
-    GRAPHQL_SCHEMAS:
-      required:
-      - schemas
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
     GRAPHQL_QUERY:
       type: string
       example: '{ Human { name } }'
-    GRAPHQL_QUERY_RESULT:
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
     GRAPHQL_QUERY_POST:
       required:
       - query
@@ -370,14 +352,25 @@ components:
           type: string
         variables:
           type: object
+    GRAPHQL_QUERY_RESULT:
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+    GRAPHQL_SCHEMAS:
+      required:
+      - schemas
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
   parameters:
-    name_schema:
-      name: schema
-      in: path
-      description: The name of the schema
-      required: true
-      schema:
-        type: string
     schema:
       name: schema
       in: query
@@ -392,6 +385,20 @@ components:
       schema:
         type: string
       example: myDb
+    name_schema:
+      name: schema
+      in: path
+      description: The name of the schema
+      required: true
+      schema:
+        type: string
+  responses:
+    GRAPHQL_QUERY_RESULT:
+      description: Result of GraphQL query
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GRAPHQL_QUERY_RESULT'
   requestBodies:
     GRAPHQL_SCHEMA:
       content:
@@ -402,13 +409,6 @@ components:
             GRAPHQL_SCHEMA:
               value: null
               $ref: '#/components/examples/GRAPHQL_SCHEMA'
-  responses:
-    GRAPHQL_QUERY_RESULT:
-      description: Result of GraphQL query
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GRAPHQL_QUERY_RESULT'
   examples:
     GRAPHQL_SCHEMA:
       value: "type Author {\n  id: Int!\n  firstName: String\n  lastName: String\n  posts: [Post]\n}type Post {\n  id: Int!\n  title: String\n  author: Author\n  votes: Int\n}type Query {\n  posts: [Post]\n  author(id: Int!): Author\n}\n"

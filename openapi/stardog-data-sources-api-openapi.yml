@@ -246,121 +246,6 @@ paths:
           $ref: '#/components/responses/NAME_DS_404'
 components:
   schemas:
-    DATA_SOURCE_TYPE_DESCRIPTION:
-      required:
-      - data_source_type_description
-      properties:
-        data_source_type_description:
-          required:
-          - DATA_SOURCE_OPTIONS
-          - VIRTUAL_GRAPH_OPTIONS
-          - DATA_SOURCE_FAMILIES
-          - DATA_SOURCE_TYPES
-          type: object
-          properties:
-            DATA_SOURCE_OPTIONS:
-              type: object
-              additionalProperties:
-                $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
-              description: Map of data source option names to their descriptions
-            VIRTUAL_GRAPH_OPTIONS:
-              type: object
-              additionalProperties:
-                $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
-              description: Map of virtual graph option names to their descriptions
-            DATA_SOURCE_FAMILIES:
-              type: object
-              properties:
-                DATA_SOURCE_OPTIONS:
-                  type: object
-                  additionalProperties:
-                    $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
-                  description: Additional descriptions of data source options that are supported by this family
-                VIRTUAL_GRAPH_OPTIONS:
-                  type: object
-                  additionalProperties:
-                    $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
-                  description: Additional descriptions of virtual graph options that are supported by this family
-              description: Map of data source type families - JDBC, CASSANDRA, etc.
-            DATA_SOURCE_TYPES:
-              required:
-              - label
-              - dataSourceFamily
-              type: object
-              properties:
-                label:
-                  type: string
-                  description: A display name for the data source type
-                dataSourceFamily:
-                  type: string
-                  description: Which data source family this data source type belongs to
-                  enum:
-                  - CASSANDRA
-                  - ELASTICSEARCH
-                  - JDBC
-                  - MONGODB
-                  - SPARQL
-                vendorClientDownloadUrl:
-                  type: string
-                  description: A link to where the client driver for the data source can be downloaded
-                  format: URI
-                vendorClientDocumentationUrl:
-                  type: string
-                  description: A link to the vendor documentation for the client driver
-                  format: URI
-                driverInstalled:
-                  type: boolean
-                  description: Whether the client driver for the data source was detected by Stardog
-                DATA_SOURCE_OPTIONS:
-                  type: object
-                  properties:
-                    jdbc.url:
-                      type: object
-                      properties:
-                        examples:
-                          type: array
-                          description: Singleton list containing a template connection string
-                          items:
-                            type: string
-                    jdbc.driver:
-                      type: object
-                      properties:
-                        default:
-                          type: string
-                          description: Default value for the jdbc client driver class name
-                  description: Additional descriptions for data source options for this data source type
-              description: Map of data source types and their descriptions - ATHENA, ORACLE, CASSANDRA, MONGODB, etc.
-    DATA_SOURCE_CREATE:
-      required:
-      - name
-      - options
-      properties:
-        name:
-          type: string
-        options:
-          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-    DATA_SOURCE:
-      required:
-      - name
-      - sharable
-      - available
-      properties:
-        entityName:
-          type: string
-        sharable:
-          type: boolean
-        available:
-          type: boolean
-    DATA_SOURCE_UPDATE:
-      required:
-      - options
-      properties:
-        options:
-          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-        force:
-          type: boolean
-          description: If true, data source will be updated even while in use
-          default: false
     VIRTUAL_GRAPH_OPTIONS:
       properties:
         base:
@@ -495,15 +380,16 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    DATA_SOURCE_NAME_LIST:
+    DATA_SOURCE_UPDATE:
       required:
-      - data_sources
+      - options
       properties:
-        data_sources:
-          type: array
-          items:
-            type: string
-            example: data-source://myDS
+        options:
+          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+        force:
+          type: boolean
+          description: If true, data source will be updated even while in use
+          default: false
     DATA_SOURCE_OPTIONS:
       properties:
         jdbc.url:
@@ -584,12 +470,121 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    DATA_SOURCE_AVAILABLE:
-      required:
-      - available
+    DATA_SOURCE_QUERY:
       properties:
-        available:
-          type: boolean
+        query:
+          type: string
+          description: Data source native query string
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
+    DATA_SOURCE_CREATE:
+      required:
+      - name
+      - options
+      properties:
+        name:
+          type: string
+        options:
+          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+    SINGLE_DATA_SOURCE_INFO:
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/DATA_SOURCE'
+    DATA_SOURCE_TYPE_DESCRIPTION:
+      required:
+      - data_source_type_description
+      properties:
+        data_source_type_description:
+          required:
+          - DATA_SOURCE_OPTIONS
+          - VIRTUAL_GRAPH_OPTIONS
+          - DATA_SOURCE_FAMILIES
+          - DATA_SOURCE_TYPES
+          type: object
+          properties:
+            DATA_SOURCE_OPTIONS:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
+              description: Map of data source option names to their descriptions
+            VIRTUAL_GRAPH_OPTIONS:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
+              description: Map of virtual graph option names to their descriptions
+            DATA_SOURCE_FAMILIES:
+              type: object
+              properties:
+                DATA_SOURCE_OPTIONS:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
+                  description: Additional descriptions of data source options that are supported by this family
+                VIRTUAL_GRAPH_OPTIONS:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/DATA_SOURCE_OPTION_DESCRIPTION'
+                  description: Additional descriptions of virtual graph options that are supported by this family
+              description: Map of data source type families - JDBC, CASSANDRA, etc.
+            DATA_SOURCE_TYPES:
+              required:
+              - label
+              - dataSourceFamily
+              type: object
+              properties:
+                label:
+                  type: string
+                  description: A display name for the data source type
+                dataSourceFamily:
+                  type: string
+                  description: Which data source family this data source type belongs to
+                  enum:
+                  - CASSANDRA
+                  - ELASTICSEARCH
+                  - JDBC
+                  - MONGODB
+                  - SPARQL
+                vendorClientDownloadUrl:
+                  type: string
+                  description: A link to where the client driver for the data source can be downloaded
+                  format: URI
+                vendorClientDocumentationUrl:
+                  type: string
+                  description: A link to the vendor documentation for the client driver
+                  format: URI
+                driverInstalled:
+                  type: boolean
+                  description: Whether the client driver for the data source was detected by Stardog
+                DATA_SOURCE_OPTIONS:
+                  type: object
+                  properties:
+                    jdbc.url:
+                      type: object
+                      properties:
+                        examples:
+                          type: array
+                          description: Singleton list containing a template connection string
+                          items:
+                            type: string
+                    jdbc.driver:
+                      type: object
+                      properties:
+                        default:
+                          type: string
+                          description: Default value for the jdbc client driver class name
+                  description: Additional descriptions for data source options for this data source type
+              description: Map of data source types and their descriptions - ATHENA, ORACLE, CASSANDRA, MONGODB, etc.
+    DATA_SOURCE_NAME_LIST:
+      required:
+      - data_sources
+      properties:
+        data_sources:
+          type: array
+          items:
+            type: string
+            example: data-source://myDS
     DATA_SOURCE_LIST:
       required:
       - data_sources
@@ -598,13 +593,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DATA_SOURCE'
-    DATA_SOURCE_QUERY:
+    DATA_SOURCE_AVAILABLE:
+      required:
+      - available
       properties:
-        query:
+        available:
+          type: boolean
+    DATA_SOURCE:
+      required:
+      - name
+      - sharable
+      - available
+      properties:
+        entityName:
           type: string
-          description: Data source native query string
-        options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
+        sharable:
+          type: boolean
+        available:
+          type: boolean
+    DATA_SOURCE_REFRESH_TABLE:
+      properties:
+        name:
+          type: string
+          description: 'Optional table to refresh. Example formats (case-sensitive): `catalog.schema.table`, `schema.table`, `table`'
     DATA_SOURCE_OPTION_DESCRIPTION:
       type: object
       properties:
@@ -630,49 +641,32 @@ components:
           enum:
           - advanced options
           - connection pool options
-    SINGLE_DATA_SOURCE_INFO:
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/DATA_SOURCE'
-    DATA_SOURCE_REFRESH_TABLE:
-      properties:
-        name:
-          type: string
-          description: 'Optional table to refresh. Example formats (case-sensitive): `catalog.schema.table`, `schema.table`, `table`'
   requestBodies:
-    DATA_SOURCE_OPTIONS:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-    DATA_SOURCE_CREATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
-    DATA_SOURCE_UPDATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
     DATA_SOURCE_REFRESH_TABLE:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/DATA_SOURCE_REFRESH_TABLE'
+    DATA_SOURCE_UPDATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
+    DATA_SOURCE_OPTIONS:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
     DATA_SOURCE_QUERY:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/DATA_SOURCE_QUERY'
-  responses:
-    NAME_DS_404:
-      description: Data Source does not exist
+    DATA_SOURCE_CREATE:
       content:
-        text/plain:
-          example: Data Source does not exist
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
   parameters:
     name_ds:
       name: name
@@ -681,6 +675,12 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    NAME_DS_404:
+      description: Data Source does not exist
+      content:
+        text/plain:
+          example: Data Source does not exist
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

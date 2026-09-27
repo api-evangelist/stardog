@@ -112,6 +112,16 @@ paths:
           $ref: '#/components/responses/ROLE_LIST_DETAILED'
 components:
   schemas:
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
     USER_LIST:
       required:
       - users
@@ -120,6 +130,20 @@ components:
           type: array
           items:
             type: string
+    ROLE_LIST:
+      required:
+      - roles
+      properties:
+        roles:
+          type: array
+          items:
+            type: string
+    ROLENAME:
+      required:
+      - rolename
+      properties:
+        rolename:
+          type: string
     PERMISSION_WITH_EXPLICIT:
       required:
       - action
@@ -166,16 +190,6 @@ components:
         explicit:
           type: boolean
           description: Whether this permission is explicitly granted to the user versus granted via a role
-    GENERIC_RESPONSE_ERROR_MESSAGE:
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          example: Unexpected end of file [L9]
-        code:
-          type: string
-          example: QEIVR2
     ROLE_LIST_DETAILED:
       type: array
       items:
@@ -189,20 +203,37 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
-    ROLENAME:
-      required:
-      - rolename
-      properties:
-        rolename:
-          type: string
+  responses:
     ROLE_LIST:
-      required:
-      - roles
-      properties:
-        roles:
-          type: array
-          items:
-            type: string
+      description: List of Roles in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST'
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    ROLE_LIST_DETAILED:
+      description: List of Roles in system, including their permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
+    USER_LIST:
+      description: List of Users in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/USER_LIST'
+  requestBodies:
+    ROLENAME:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLENAME'
   parameters:
     role:
       name: role
@@ -211,37 +242,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    ROLE_LIST_DETAILED:
-      description: List of Roles in system, including their permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    USER_LIST:
-      description: List of Users in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/USER_LIST'
-    ROLE_LIST:
-      description: List of Roles in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST'
-  requestBodies:
-    ROLENAME:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLENAME'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

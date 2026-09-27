@@ -167,15 +167,6 @@ paths:
                 $ref: '#/components/schemas/CATALOG_STATUS'
 components:
   schemas:
-    CATALOG_JOB:
-      properties:
-        jobname:
-          type: string
-    CATALOG_RELOAD:
-      properties:
-        provider:
-          type: string
-          format: URI
     CATALOG_JOB_STATUS:
       properties:
         name:
@@ -189,6 +180,30 @@ components:
     ACCESS_KEY:
       properties:
         accessKey:
+          type: string
+    CATALOG_JOB_CRON_NEXT_DATE:
+      properties:
+        cron:
+          type: string
+        next_date:
+          type: string
+    CREDENTIALS_ADD:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        label:
+          type: string
+    CATALOG_PROVIDER:
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+        schedule:
+          type: string
+        lastupdate:
           type: string
     CATALOG_STATUS:
       properties:
@@ -208,41 +223,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CATALOG_JOB_STATUS'
-    CATALOG_JOB_CRON_VALID:
+    CATALOG_RELOAD:
       properties:
-        cron:
+        provider:
           type: string
-        is_valid:
-          type: boolean
-    CATALOG_JOB_CRON_SUMMARY:
+          format: URI
+    CATALOG_JOB:
       properties:
-        cron:
-          type: string
-        summary:
-          type: string
-    CREDENTIALS_ADD:
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        label:
-          type: string
-    CATALOG_JOB_CRON_NEXT_DATE:
-      properties:
-        cron:
-          type: string
-        next_date:
-          type: string
-    CATALOG_PROVIDER:
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-        schedule:
-          type: string
-        lastupdate:
+        jobname:
           type: string
     CREDENTIALS_LIST:
       properties:
@@ -250,6 +238,18 @@ components:
           type: string
         key:
           type: string
+    CATALOG_JOB_CRON_SUMMARY:
+      properties:
+        cron:
+          type: string
+        summary:
+          type: string
+    CATALOG_JOB_CRON_VALID:
+      properties:
+        cron:
+          type: string
+        is_valid:
+          type: boolean
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

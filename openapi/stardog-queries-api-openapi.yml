@@ -158,57 +158,9 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_QUERY_404'
 components:
-  responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    NAME_STORED_QUERY_404:
-      description: Stored query does not exist
-      content:
-        application/json:
-          schema:
-            required:
-            - message
-            - code
-            properties:
-              message:
-                type: string
-                example: Stored query does not exist
-              code:
-                type: string
-                example: QEQNF2
-    PROCESS:
-      description: Process
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PROCESS'
-    NAME_QUERY_404:
-      description: Query does not exist
-      content:
-        application/json:
-          schema:
-            required:
-            - message
-            - code
-            properties:
-              message:
-                type: string
-                example: Query does not exist
-              code:
-                type: string
-                example: QEQNF2
-    QUERY_LIST:
-      description: List of Queries in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/QUERY_LIST'
-    STORED_QUERIES:
-      description: RDF serialization of server's stored queries
+  requestBodies:
+    STORED_QUERY:
+      description: RDF serialization of the stored query
       content:
         text/turtle:
           schema:
@@ -252,17 +204,18 @@ components:
             STORED_QUERY_JSONLD:
               value: null
               $ref: '#/components/examples/STORED_QUERY_JSONLD'
+      required: true
   examples:
-    STORED_QUERY_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:system=\"http://system.stardog.com/\">\n    <rdf:Description rdf:about=\"http://system.stardog.com/QuerymyQuery\">\n        <rdf:type rdf:resource=\"http://system.stardog.com/StoredQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/SharedQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/ReasoningQuery\"/>\n        <system:queryName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myQuery</system:queryName>\n        <system:queryString rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">select * {?s ?p ?o}</system:queryString>\n        <system:queryCreator rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">admin</system:queryCreator>\n        <system:queryDatabase rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myDb</system:queryDatabase>\n    </rdf:Description>\n</rdf:RDF>"
+    STORED_QUERY_JSONLD:
+      value: "{\n  \"@context\" : {\n    \"rdf\" : \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\n    \"system\" : \"http://system.stardog.com/\",\n    \"owl\" : \"http://www.w3.org/2002/07/owl#\",\n    \"@vocab\" : \"http://api.stardog.com/\",\n    \"rdfs\" : \"http://www.w3.org/2000/01/rdf-schema#\",\n    \"stardog\" : \"tag:stardog:api:\",\n    \"xsd\" : \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@graph\" : [ {\n    \"@id\" : \"system:QuerymyQuery\",\n    \"@type\" : [ \"system:StoredQuery\", \"system:SharedQuery\", \"system:ReasoningQuery\" ],\n    \"system:queryString\" : {\n      \"@value\" : \"select * {?s ?p ?o}\"\n    },\n    \"system:queryCreator\" : {\n      \"@value\" : \"admin\"\n    },\n    \"system:queryDatabase\" : {\n      \"@value\" : \"myDb\"\n    },\n    \"system:queryName\" : {\n      \"@value\" : \"myQuery\"\n    }\n  } ]\n}"
     STORED_QUERY_TURTLE:
       value: "@prefix system: <http://system.stardog.com/> .\n\nsystem:QuerymyQuery a system:StoredQuery, system:SharedQuery , system:ReasoningQuery ;\n   system:queryName \"myQuery\" ;\n   system:queryString \"select * {?s ?p ?o}\" ;\n   system:queryCreator \"admin\" ;\n   system:queryDatabase \"myDb\" ."
     STORED_QUERY_TRIG:
       value: "@prefix system: <http://system.stardog.com/> .\n\n{\n    system:QuerymyQuery a system:StoredQuery , system:SharedQuery , system:ReasoningQuery ;\n      system:queryName \"myQuery\" ;\n      system:queryString \"select * {?s ?p ?o}\" ;\n      system:queryCreator \"admin\" ;\n      system:queryDatabase \"myDb\" .\n}"
     STORED_QUERY_NTRIPLESQUADS:
       value: "<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/StoredQuery> .\n<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/SharedQuery> . \n<http://system.stardog.com/QuerymyQuery> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://system.stardog.com/ReasoningQuery> . \n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryName> \"myQuery\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryString> \"select * {?s ?p ?o}\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryCreator> \"admin\" .\n<http://system.stardog.com/QuerymyQuery> <http://system.stardog.com/queryDatabase> \"myDb\" ."
-    STORED_QUERY_JSONLD:
-      value: "{\n  \"@context\" : {\n    \"rdf\" : \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\n    \"system\" : \"http://system.stardog.com/\",\n    \"owl\" : \"http://www.w3.org/2002/07/owl#\",\n    \"@vocab\" : \"http://api.stardog.com/\",\n    \"rdfs\" : \"http://www.w3.org/2000/01/rdf-schema#\",\n    \"stardog\" : \"tag:stardog:api:\",\n    \"xsd\" : \"http://www.w3.org/2001/XMLSchema#\"\n  },\n  \"@graph\" : [ {\n    \"@id\" : \"system:QuerymyQuery\",\n    \"@type\" : [ \"system:StoredQuery\", \"system:SharedQuery\", \"system:ReasoningQuery\" ],\n    \"system:queryString\" : {\n      \"@value\" : \"select * {?s ?p ?o}\"\n    },\n    \"system:queryCreator\" : {\n      \"@value\" : \"admin\"\n    },\n    \"system:queryDatabase\" : {\n      \"@value\" : \"myDb\"\n    },\n    \"system:queryName\" : {\n      \"@value\" : \"myQuery\"\n    }\n  } ]\n}"
+    STORED_QUERY_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:system=\"http://system.stardog.com/\">\n    <rdf:Description rdf:about=\"http://system.stardog.com/QuerymyQuery\">\n        <rdf:type rdf:resource=\"http://system.stardog.com/StoredQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/SharedQuery\"/>\n        <rdf:type rdf:resource=\"http://system.stardog.com/ReasoningQuery\"/>\n        <system:queryName rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myQuery</system:queryName>\n        <system:queryString rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">select * {?s ?p ?o}</system:queryString>\n        <system:queryCreator rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">admin</system:queryCreator>\n        <system:queryDatabase rdf:datatype=\"http://www.w3.org/2001/XMLSchema#string\">myDb</system:queryDatabase>\n    </rdf:Description>\n</rdf:RDF>"
   schemas:
     QUERY_LIST:
       required:
@@ -272,12 +225,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/QUERY'
-    GENERIC_NAME:
-      required:
-      - name
-      properties:
-        name:
-          type: string
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
       - message
@@ -325,6 +272,12 @@ components:
           - Running
           - Terminating
           - Done
+    GENERIC_NAME:
+      required:
+      - name
+      properties:
+        name:
+          type: string
     QUERY:
       required:
       - query
@@ -377,6 +330,13 @@ components:
           - Terminating
           - Done
   parameters:
+    name_query:
+      name: name
+      in: path
+      description: The name of the query
+      required: true
+      schema:
+        type: string
     name_db:
       name: db
       in: query
@@ -385,13 +345,6 @@ components:
       schema:
         type: string
       example: myDb
-    name_query:
-      name: name
-      in: path
-      description: The name of the query
-      required: true
-      schema:
-        type: string
     name_stored_query:
       name: name
       in: path
@@ -399,9 +352,21 @@ components:
       required: true
       schema:
         type: string
-  requestBodies:
-    STORED_QUERY:
-      description: RDF serialization of the stored query
+  responses:
+    QUERY_LIST:
+      description: List of Queries in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QUERY_LIST'
+    PROCESS:
+      description: Process
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS'
+    STORED_QUERIES:
+      description: RDF serialization of server's stored queries
       content:
         text/turtle:
           schema:
@@ -445,7 +410,42 @@ components:
             STORED_QUERY_JSONLD:
               value: null
               $ref: '#/components/examples/STORED_QUERY_JSONLD'
-      required: true
+    NAME_STORED_QUERY_404:
+      description: Stored query does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Stored query does not exist
+              code:
+                type: string
+                example: QEQNF2
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    NAME_QUERY_404:
+      description: Query does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Query does not exist
+              code:
+                type: string
+                example: QEQNF2
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

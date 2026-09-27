@@ -52,61 +52,6 @@ paths:
           description: Virtual graph imported
 components:
   schemas:
-    IMPORT_FILE_OPTIONS:
-      properties:
-        csv.separator:
-          type: string
-          description: For CSV import, a single-character separator
-          default: ','
-        csv.quote:
-          type: string
-          description: For CSV import, a single character used to encapsulate values containing special characters
-          default: '"'
-        csv.header:
-          type: boolean
-          description: For CSV import, should the import process read the header row?
-          default: true
-        csv.skip.empty:
-          type: boolean
-          description: For CSV import, should empty values be skipped?
-          default: true
-        csv.class:
-          type: string
-          description: For CSV import, which class should imported rows be members of?
-        csv.hash.function:
-          type: string
-          description: 'For CSV import, which hash function should be used when the # notation is used?'
-          default: SHA1
-        unique.key.sets:
-          type: string
-          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
-      externalDocs:
-        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    VIRTUAL_GRAPH_IMPORT_FILE:
-      required:
-      - database
-      - mappings
-      - options
-      - input_file_type
-      - input_file
-      properties:
-        database:
-          type: string
-          description: The database into which to import the file
-        mappings:
-          type: string
-        options:
-          $ref: '#/components/schemas/IMPORT_FILE_OPTIONS'
-        named_graph:
-          type: string
-          format: URI
-        input_file_type:
-          type: string
-          enum:
-          - JSON
-          - DELIMITED
-        input_file:
-          type: string
     VIRTUAL_GRAPH_IMPORT:
       required:
       - db
@@ -261,6 +206,61 @@ components:
         pattern: ext\..+
         type: string
         description: Additional properties to pass directly to the JDBC driver
+      externalDocs:
+        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    VIRTUAL_GRAPH_IMPORT_FILE:
+      required:
+      - database
+      - mappings
+      - options
+      - input_file_type
+      - input_file
+      properties:
+        database:
+          type: string
+          description: The database into which to import the file
+        mappings:
+          type: string
+        options:
+          $ref: '#/components/schemas/IMPORT_FILE_OPTIONS'
+        named_graph:
+          type: string
+          format: URI
+        input_file_type:
+          type: string
+          enum:
+          - JSON
+          - DELIMITED
+        input_file:
+          type: string
+    IMPORT_FILE_OPTIONS:
+      properties:
+        csv.separator:
+          type: string
+          description: For CSV import, a single-character separator
+          default: ','
+        csv.quote:
+          type: string
+          description: For CSV import, a single character used to encapsulate values containing special characters
+          default: '"'
+        csv.header:
+          type: boolean
+          description: For CSV import, should the import process read the header row?
+          default: true
+        csv.skip.empty:
+          type: boolean
+          description: For CSV import, should empty values be skipped?
+          default: true
+        csv.class:
+          type: string
+          description: For CSV import, which class should imported rows be members of?
+        csv.hash.function:
+          type: string
+          description: 'For CSV import, which hash function should be used when the # notation is used?'
+          default: SHA1
+        unique.key.sets:
+          type: string
+          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
 externalDocs:

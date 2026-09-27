@@ -61,6 +61,34 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_PROCESS_404'
 components:
+  responses:
+    PROCESS_LIST:
+      description: List of Processes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS_LIST'
+    PROCESS:
+      description: Process
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS'
+    NAME_PROCESS_404:
+      description: Process does not exist
+      content:
+        application/json:
+          schema:
+            required:
+            - message
+            - code
+            properties:
+              message:
+                type: string
+                example: Process does not exist
+              code:
+                type: string
+                example: QEQNF2
   schemas:
     PROCESS:
       required:
@@ -107,34 +135,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PROCESS'
-  responses:
-    PROCESS:
-      description: Process
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PROCESS'
-    PROCESS_LIST:
-      description: List of Processes
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PROCESS_LIST'
-    NAME_PROCESS_404:
-      description: Process does not exist
-      content:
-        application/json:
-          schema:
-            required:
-            - message
-            - code
-            properties:
-              message:
-                type: string
-                example: Process does not exist
-              code:
-                type: string
-                example: QEQNF2
   parameters:
     name_process:
       name: name

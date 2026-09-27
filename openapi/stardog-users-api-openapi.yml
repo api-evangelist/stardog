@@ -399,12 +399,42 @@ paths:
                     example: SERNF2
 components:
   schemas:
+    USER_LIST:
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          items:
+            type: string
+    AUTO_CREATED:
+      required:
+      - auto_created
+      properties:
+        auto_created:
+          type: boolean
+    ROLENAME:
+      required:
+      - rolename
+      properties:
+        rolename:
+          type: string
     USER_PASSWD:
       required:
       - password
       properties:
         password:
           type: string
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
     USER_LIST_DETAILED:
       type: array
       items:
@@ -429,6 +459,59 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
+    ENABLED:
+      required:
+      - enabled
+      properties:
+        enabled:
+          type: boolean
+    ROLE_LIST:
+      required:
+      - roles
+      properties:
+        roles:
+          type: array
+          items:
+            type: string
+    USER_CREATE:
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: array
+          description: Array of chars
+          items:
+            maxLength: 1
+            minLength: 1
+            type: string
+    SUPERUSER:
+      required:
+      - superuser
+      properties:
+        superuser:
+          type: boolean
+    USER:
+      required:
+      - enabled
+      - superuser
+      - roles
+      - permissions
+      properties:
+        enabled:
+          type: boolean
+        superuser:
+          type: boolean
+        roles:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
     PERMISSION_WITH_EXPLICIT:
       required:
       - action
@@ -475,114 +558,31 @@ components:
         explicit:
           type: boolean
           description: Whether this permission is explicitly granted to the user versus granted via a role
-    GENERIC_RESPONSE_ERROR_MESSAGE:
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          example: Unexpected end of file [L9]
-        code:
-          type: string
-          example: QEIVR2
-    SUPERUSER:
-      required:
-      - superuser
-      properties:
-        superuser:
-          type: boolean
-    AUTO_CREATED:
-      required:
-      - auto_created
-      properties:
-        auto_created:
-          type: boolean
-    ROLENAME:
-      required:
-      - rolename
-      properties:
-        rolename:
-          type: string
-    USER_LIST:
-      required:
-      - users
-      properties:
-        users:
-          type: array
-          items:
-            type: string
-    USER:
-      required:
-      - enabled
-      - superuser
-      - roles
-      - permissions
-      properties:
-        enabled:
-          type: boolean
-        superuser:
-          type: boolean
-        roles:
-          type: array
-          items:
-            type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
-    USER_CREATE:
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-        password:
-          type: array
-          description: Array of chars
-          items:
-            maxLength: 1
-            minLength: 1
-            type: string
-    ENABLED:
-      required:
-      - enabled
-      properties:
-        enabled:
-          type: boolean
-    ROLE_LIST:
-      required:
-      - roles
-      properties:
-        roles:
-          type: array
-          items:
-            type: string
   responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
     USER_LIST_DETAILED:
       description: List of Users in system, including their roles, permissions, and status
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/USER_LIST_DETAILED'
-    USER_LIST:
-      description: List of Users in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/USER_LIST'
     ROLE_LIST:
       description: List of Roles in system
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ROLE_LIST'
+    USER_LIST:
+      description: List of Users in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/USER_LIST'
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
   parameters:
     role:
       name: role

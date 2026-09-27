@@ -212,46 +212,6 @@ paths:
                 $ref: '#/components/schemas/CLUSTER_STATUS'
 components:
   schemas:
-    CLUSTER_STATUS:
-      properties:
-        nodes:
-          required:
-          - nodes
-          type: array
-          items:
-            required:
-            - address
-            - metadata
-            - type
-            - role
-            properties:
-              address:
-                pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
-                type: string
-                example: 165.7.29.42:5820
-              metadata:
-                type: object
-              type:
-                type: string
-                enum:
-                - FULL
-                - STANDBY
-              role:
-                type: string
-                enum:
-                - COORDINATOR
-                - PARTICIPANT
-                - STANDBY
-    STANDBY_NODE_LIST:
-      required:
-      - standbynodes
-      properties:
-        standbynodes:
-          type: array
-          items:
-            pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
-            type: string
-            example: 165.7.29.42:5820
     NODE_LIST:
       required:
       - nodes
@@ -322,6 +282,46 @@ components:
             type: integer
             format: int64
             example: 42
+    STANDBY_NODE_LIST:
+      required:
+      - standbynodes
+      properties:
+        standbynodes:
+          type: array
+          items:
+            pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
+            type: string
+            example: 165.7.29.42:5820
+    CLUSTER_STATUS:
+      properties:
+        nodes:
+          required:
+          - nodes
+          type: array
+          items:
+            required:
+            - address
+            - metadata
+            - type
+            - role
+            properties:
+              address:
+                pattern: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}(:[0-9]{3,5})?$
+                type: string
+                example: 165.7.29.42:5820
+              metadata:
+                type: object
+              type:
+                type: string
+                enum:
+                - FULL
+                - STANDBY
+              role:
+                type: string
+                enum:
+                - COORDINATOR
+                - PARTICIPANT
+                - STANDBY
   parameters:
     standbyid:
       name: standbyid

@@ -293,7 +293,95 @@ paths:
         group: '3'
         order: '2'
 components:
+  examples:
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    ICV_CONSTRAINT_TTL:
+      value: <urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> .
+    ICV_CONSTRAINT_JSONLD:
+      value: "[\n  {\n    \"@id\": \"urn:Employee\",\n    \"http://www.w3.org/2000/01/rdf-schema#subClassOf\": [\n      {\n        \"@id\": \"urn:Person\"\n      }\n    ]\n  }\n]"
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_CSV:
+      value: 's,label
+
+        http://example.org/stardog#Example1,42
+
+        http://example.org/stardog#Example2,foo'
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    ICV_CONSTRAINT_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <rdf:Description rdf:about=\"urn:Employee\">\n        <subClassOf xmlns=\"http://www.w3.org/2000/01/rdf-schema#\" rdf:resource=\"urn:Person\"/>\n    </rdf:Description>\n</rdf:RDF>"
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+  parameters:
+    txid:
+      name: txid
+      in: path
+      description: Transaction ID
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
+    graph-uri:
+      name: graph-uri
+      in: query
+      description: Named Graph / Context
+      required: false
+      schema:
+        type: string
+        format: URI
+      example: https://stardog.com/graphs/myGraph
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
+      schema:
+        type: boolean
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
   schemas:
+    BOOLEAN:
+      type: boolean
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
     SPARQL_RESULTS_JSON:
       required:
       - head
@@ -334,62 +422,16 @@ components:
       properties:
         valid:
           type: boolean
-    BOOLEAN:
-      type: boolean
-    GENERIC_JSONLD:
-      properties:
-        '@id':
-          type: string
-          example: urn:example:Entity1
-        '@type':
-          type: string
-          example: urn:example:Entity
-        urn:example:hasProp:
-          required:
-          - '@id'
-          type: array
-          items:
-            required:
-            - '@value'
-            properties:
-              '@type':
-                type: string
-                example: http://www.w3.org/2001/XMLSchema#integer
-              '@value':
-                type: string
-                example: '42'
-  examples:
-    SPARQL_RESULTS_XML:
-      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
-    SPARQL_RESULTS_CSV:
-      value: 's,label
-
-        http://example.org/stardog#Example1,42
-
-        http://example.org/stardog#Example2,foo'
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
-    ICV_CONSTRAINT_TTL:
-      value: <urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> .
-    SPARQL_RESULTS_TSV:
-      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
-    GENERIC_TRIG:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
-    GENERIC_NQUADS:
-      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    ICV_CONSTRAINT_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <rdf:Description rdf:about=\"urn:Employee\">\n        <subClassOf xmlns=\"http://www.w3.org/2000/01/rdf-schema#\" rdf:resource=\"urn:Person\"/>\n    </rdf:Description>\n</rdf:RDF>"
-    ICV_CONSTRAINT_JSONLD:
-      value: "[\n  {\n    \"@id\": \"urn:Employee\",\n    \"http://www.w3.org/2000/01/rdf-schema#subClassOf\": [\n      {\n        \"@id\": \"urn:Person\"\n      }\n    ]\n  }\n]"
-    GENERIC_NTRIPLES:
-      value: '<urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:example:Entity1> <urn:example:hasProp> 42 .'
   responses:
+    ICV_CONSTRAINT_VALIDATION:
+      description: ICV Constraint Validation
+      content:
+        text/boolean:
+          schema:
+            $ref: '#/components/schemas/BOOLEAN'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ICV_VALIDATION'
     SHACL_VALIDATION_REPORT:
       description: SHACL validation report
       content:
@@ -455,48 +497,6 @@ components:
             SPARQL_RESULTS_TSV:
               value: null
               $ref: '#/components/examples/SPARQL_RESULTS_TSV'
-    ICV_CONSTRAINT_VALIDATION:
-      description: ICV Constraint Validation
-      content:
-        text/boolean:
-          schema:
-            $ref: '#/components/schemas/BOOLEAN'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ICV_VALIDATION'
-  parameters:
-    txid:
-      name: txid
-      in: path
-      description: Transaction ID
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
-    db:
-      name: db
-      in: path
-      description: Database name
-      required: true
-      schema:
-        type: string
-      example: myDb
-    reasoning:
-      name: reasoning
-      in: query
-      description: Enable Reasoning
-      schema:
-        type: boolean
-    graph-uri:
-      name: graph-uri
-      in: query
-      description: Named Graph / Context
-      required: false
-      schema:
-        type: string
-        format: URI
-      example: https://stardog.com/graphs/myGraph
   requestBodies:
     ICV_CONSTRAINT:
       description: The ICV constraint(s)

@@ -52,28 +52,6 @@ paths:
           description: Virtual graph imported
 components:
   schemas:
-    VIRTUAL_GRAPH_IMPORT:
-      required:
-      - db
-      - mappings
-      - named_graph
-      - remove_all
-      - options
-      properties:
-        db:
-          type: string
-          description: The database into which to import the graph
-        mappings:
-          type: string
-        data_source:
-          type: string
-        named_graph:
-          type: string
-        remove_all:
-          type: boolean
-          description: Should the target named graph be cleared before importing?
-        options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
     VIRTUAL_GRAPH_OPTIONS:
       properties:
         base:
@@ -208,6 +186,28 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    VIRTUAL_GRAPH_IMPORT:
+      required:
+      - db
+      - mappings
+      - named_graph
+      - remove_all
+      - options
+      properties:
+        db:
+          type: string
+          description: The database into which to import the graph
+        mappings:
+          type: string
+        data_source:
+          type: string
+        named_graph:
+          type: string
+        remove_all:
+          type: boolean
+          description: Should the target named graph be cleared before importing?
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
     VIRTUAL_GRAPH_IMPORT_FILE:
       required:
       - database

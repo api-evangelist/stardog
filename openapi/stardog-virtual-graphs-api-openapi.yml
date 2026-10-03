@@ -259,6 +259,21 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_VG_404'
 components:
+  examples:
+    GENERIC_TRIG:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
+    GENERIC_NQUADS:
+      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
   schemas:
     VIRTUAL_GRAPH_OPTIONS:
       properties:
@@ -394,48 +409,6 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    IMPORT_FILE_OPTIONS:
-      properties:
-        csv.separator:
-          type: string
-          description: For CSV import, a single-character separator
-          default: ','
-        csv.quote:
-          type: string
-          description: For CSV import, a single character used to encapsulate values containing special characters
-          default: '"'
-        csv.header:
-          type: boolean
-          description: For CSV import, should the import process read the header row?
-          default: true
-        csv.skip.empty:
-          type: boolean
-          description: For CSV import, should empty values be skipped?
-          default: true
-        csv.class:
-          type: string
-          description: For CSV import, which class should imported rows be members of?
-        csv.hash.function:
-          type: string
-          description: 'For CSV import, which hash function should be used when the # notation is used?'
-          default: SHA1
-        unique.key.sets:
-          type: string
-          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
-      externalDocs:
-        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    VIRTUAL_GRAPH_AVAILABLE:
-      required:
-      - available
-      properties:
-        available:
-          type: boolean
-    SINGLE_VIRTUAL_GRAPH_INFO:
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH'
     VIRTUAL_GRAPH_UPDATE:
       required:
       - mappings
@@ -450,53 +423,12 @@ components:
           description: The mappings from data source schema to RDF, or an empty string to generate the mappings
         options:
           $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    VIRTUAL_GRAPH_LIST:
+    VIRTUAL_GRAPH_AVAILABLE:
       required:
-      - virtual_graphs
+      - available
       properties:
-        virtual_graphs:
-          type: array
-          items:
-            $ref: '#/components/schemas/VIRTUAL_GRAPH'
-    VIRTUAL_GRAPH_CREATE:
-      required:
-      - name
-      - mappings
-      properties:
-        name:
-          type: string
-        data_source:
-          type: string
-        db:
-          type: string
-          description: The database to associate with the virtual graph
-        mappings:
-          type: string
-          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
-        options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    GENERIC_JSONLD:
-      properties:
-        '@id':
-          type: string
-          example: urn:example:Entity1
-        '@type':
-          type: string
-          example: urn:example:Entity
-        urn:example:hasProp:
-          required:
-          - '@id'
-          type: array
-          items:
-            required:
-            - '@value'
-            properties:
-              '@type':
-                type: string
-                example: http://www.w3.org/2001/XMLSchema#integer
-              '@value':
-                type: string
-                example: '42'
+        available:
+          type: boolean
     VIRTUAL_GRAPH_NAME_LIST:
       required:
       - virtual_graphs
@@ -531,6 +463,100 @@ components:
           - DELIMITED
         input_file:
           type: string
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
+    IMPORT_FILE_OPTIONS:
+      properties:
+        csv.separator:
+          type: string
+          description: For CSV import, a single-character separator
+          default: ','
+        csv.quote:
+          type: string
+          description: For CSV import, a single character used to encapsulate values containing special characters
+          default: '"'
+        csv.header:
+          type: boolean
+          description: For CSV import, should the import process read the header row?
+          default: true
+        csv.skip.empty:
+          type: boolean
+          description: For CSV import, should empty values be skipped?
+          default: true
+        csv.class:
+          type: string
+          description: For CSV import, which class should imported rows be members of?
+        csv.hash.function:
+          type: string
+          description: 'For CSV import, which hash function should be used when the # notation is used?'
+          default: SHA1
+        unique.key.sets:
+          type: string
+          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
+      externalDocs:
+        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    VIRTUAL_GRAPH:
+      required:
+      - name
+      - available
+      properties:
+        name:
+          type: string
+        database:
+          type: string
+        available:
+          type: boolean
+    VIRTUAL_GRAPH_LIST:
+      required:
+      - virtual_graphs
+      properties:
+        virtual_graphs:
+          type: array
+          items:
+            $ref: '#/components/schemas/VIRTUAL_GRAPH'
+    VIRTUAL_GRAPH_CREATE:
+      required:
+      - name
+      - mappings
+      properties:
+        name:
+          type: string
+        data_source:
+          type: string
+        db:
+          type: string
+          description: The database to associate with the virtual graph
+        mappings:
+          type: string
+          description: The mappings from data source schema to RDF, or an empty string to generate the mappings
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
+    SINGLE_VIRTUAL_GRAPH_INFO:
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH'
     VIRTUAL_GRAPH_IMPORT:
       required:
       - db
@@ -553,32 +579,23 @@ components:
           description: Should the target named graph be cleared before importing?
         options:
           $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    VIRTUAL_GRAPH:
-      required:
-      - name
-      - available
-      properties:
-        name:
-          type: string
-        database:
-          type: string
-        available:
-          type: boolean
-  examples:
-    GENERIC_NTRIPLES:
-      value: '<urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
-    GENERIC_TRIG:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
-    GENERIC_NQUADS:
-      value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+  requestBodies:
+    VIRTUAL_GRAPH_UPDATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VIRTUAL_GRAPH_UPDATE'
+    VIRTUAL_GRAPH_CREATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VIRTUAL_GRAPH_CREATE'
+  responses:
+    NAME_VG_404:
+      description: Virtual Graph does not exist
+      content:
+        text/plain:
+          example: Virtual Graph does not exist
   parameters:
     name_vg:
       name: name
@@ -587,23 +604,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    NAME_VG_404:
-      description: Virtual Graph does not exist
-      content:
-        text/plain:
-          example: Virtual Graph does not exist
-  requestBodies:
-    VIRTUAL_GRAPH_CREATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VIRTUAL_GRAPH_CREATE'
-    VIRTUAL_GRAPH_UPDATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/VIRTUAL_GRAPH_UPDATE'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

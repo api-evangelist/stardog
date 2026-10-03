@@ -167,19 +167,9 @@ paths:
                 $ref: '#/components/schemas/CATALOG_STATUS'
 components:
   schemas:
-    CATALOG_JOB_STATUS:
+    CATALOG_JOB:
       properties:
-        name:
-          type: string
-        group:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
-    ACCESS_KEY:
-      properties:
-        accessKey:
+        jobname:
           type: string
     CATALOG_JOB_CRON_NEXT_DATE:
       properties:
@@ -187,24 +177,17 @@ components:
           type: string
         next_date:
           type: string
-    CREDENTIALS_ADD:
+    CATALOG_RELOAD:
       properties:
-        username:
+        provider:
           type: string
-        password:
-          type: string
-        label:
-          type: string
-    CATALOG_PROVIDER:
+          format: URI
+    CATALOG_JOB_CRON_VALID:
       properties:
-        name:
+        cron:
           type: string
-        type:
-          type: string
-        schedule:
-          type: string
-        lastupdate:
-          type: string
+        is_valid:
+          type: boolean
     CATALOG_STATUS:
       properties:
         scheduler:
@@ -223,14 +206,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CATALOG_JOB_STATUS'
-    CATALOG_RELOAD:
+    CATALOG_JOB_STATUS:
       properties:
-        provider:
+        name:
           type: string
-          format: URI
-    CATALOG_JOB:
+        group:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+    CREDENTIALS_ADD:
       properties:
-        jobname:
+        username:
+          type: string
+        password:
+          type: string
+        label:
           type: string
     CREDENTIALS_LIST:
       properties:
@@ -244,12 +236,20 @@ components:
           type: string
         summary:
           type: string
-    CATALOG_JOB_CRON_VALID:
+    CATALOG_PROVIDER:
       properties:
-        cron:
+        name:
           type: string
-        is_valid:
-          type: boolean
+        type:
+          type: string
+        schedule:
+          type: string
+        lastupdate:
+          type: string
+    ACCESS_KEY:
+      properties:
+        accessKey:
+          type: string
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

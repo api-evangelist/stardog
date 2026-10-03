@@ -563,39 +563,45 @@ paths:
                     example: 0D0DU2
 components:
   examples:
-    REASONING_AXIOM_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <rdf:Description rdf:about=\"urn:Employee1\">\n        <rdf:type rdf:resource=\"urn:Person\"/>\n    </rdf:Description>\n</rdf:RDF>"
-    GENERIC_NTRIPLES:
-      value: '<urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
-    SPARQL_RESULTS_TSV:
-      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
-    SPARQL_RESULTS_XML:
-      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
-    REASONING_AXIOM_JSONLD:
-      value: "[\n    {\n        \"@id\": \"urn:Employee1\",\n        \"@type\": [\n            \"urn:Person\"\n        ]\n    }\n]"
-    REASONING_AXIOM_TTL:
-      value: <urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> .
     GENERIC_TRIG:
       value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    REASONING_AXIOM_JSONLD:
+      value: "[\n    {\n        \"@id\": \"urn:Employee1\",\n        \"@type\": [\n            \"urn:Person\"\n        ]\n    }\n]"
+    SPARQL_QUERY:
+      value: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
+    REASONING_AXIOM_TTL:
+      value: <urn:Employee> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <urn:Person> .
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
     SPARQL_RESULTS_CSV:
       value: 's,label
 
         http://example.org/stardog#Example1,42
 
         http://example.org/stardog#Example2,foo'
-    SPARQL_QUERY:
-      value: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    REASONING_AXIOM_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n    <rdf:Description rdf:about=\"urn:Employee1\">\n        <rdf:type rdf:resource=\"urn:Person\"/>\n    </rdf:Description>\n</rdf:RDF>"
     GENERIC_NQUADS:
       value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
 
         <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
   parameters:
+    QUERY_NOT_REQ:
+      name: query
+      in: query
+      description: Query to run
+      schema:
+        type: string
     txid:
       name: txid
       in: path
@@ -605,19 +611,6 @@ components:
         type: string
         format: uuid
         example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
-    QUERY_NOT_REQ:
-      name: query
-      in: query
-      description: Query to run
-      schema:
-        type: string
-    query:
-      name: query
-      in: query
-      description: Query to run
-      required: true
-      schema:
-        type: string
     db:
       name: db
       in: path
@@ -626,19 +619,26 @@ components:
       schema:
         type: string
       example: myDb
+    query:
+      name: query
+      in: query
+      description: Query to run
+      required: true
+      schema:
+        type: string
   responses:
-    INVALID_QUERY:
-      description: Invalid query sent
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
     REASONING_PROOF_LIST:
       description: List of reasoning proofs
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/REASONING_PROOF_LIST'
+    INVALID_QUERY:
+      description: Invalid query sent
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
   schemas:
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
@@ -650,6 +650,83 @@ components:
         code:
           type: string
           example: QEIVR2
+    SPARQL_RESULTS_JSON:
+      required:
+      - head
+      - results
+      properties:
+        head:
+          required:
+          - vars
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+        results:
+          required:
+          - bindings
+          properties:
+            bindings:
+              type: array
+              items:
+                additionalProperties:
+                  required:
+                  - type
+                  - value
+                  properties:
+                    type:
+                      type: string
+                      example: literal
+                    value:
+                      type: string
+                      example: '42'
+    CONSISTENT:
+      required:
+      - consistent
+      properties:
+        consistent:
+          type: boolean
+    REASONING_PROOF:
+      properties:
+        status:
+          type: string
+          enum:
+          - INFERRED
+          - ASSERTED
+          - VIOLATED
+        expression:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/REASONING_PROOF'
+        namedGraphs:
+          type: array
+          items:
+            type: string
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
     SPARQL_QUERY:
       required:
       - query
@@ -701,83 +778,6 @@ components:
         exclude-graph-uri:
           type: string
           description: URI(s) of graphs to exclude from the query dataset (from both default and named scopes)
-    GENERIC_JSONLD:
-      properties:
-        '@id':
-          type: string
-          example: urn:example:Entity1
-        '@type':
-          type: string
-          example: urn:example:Entity
-        urn:example:hasProp:
-          required:
-          - '@id'
-          type: array
-          items:
-            required:
-            - '@value'
-            properties:
-              '@type':
-                type: string
-                example: http://www.w3.org/2001/XMLSchema#integer
-              '@value':
-                type: string
-                example: '42'
-    REASONING_PROOF:
-      properties:
-        status:
-          type: string
-          enum:
-          - INFERRED
-          - ASSERTED
-          - VIOLATED
-        expression:
-          type: string
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/REASONING_PROOF'
-        namedGraphs:
-          type: array
-          items:
-            type: string
-    SPARQL_RESULTS_JSON:
-      required:
-      - head
-      - results
-      properties:
-        head:
-          required:
-          - vars
-          properties:
-            vars:
-              type: array
-              items:
-                type: string
-        results:
-          required:
-          - bindings
-          properties:
-            bindings:
-              type: array
-              items:
-                additionalProperties:
-                  required:
-                  - type
-                  - value
-                  properties:
-                    type:
-                      type: string
-                      example: literal
-                    value:
-                      type: string
-                      example: '42'
-    CONSISTENT:
-      required:
-      - consistent
-      properties:
-        consistent:
-          type: boolean
     REASONING_PROOF_LIST:
       required:
       - proofs

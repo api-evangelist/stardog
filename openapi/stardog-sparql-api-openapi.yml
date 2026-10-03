@@ -734,118 +734,41 @@ paths:
           description: Accept header invalid for type of query sent
 components:
   examples:
-    QUERY_PLAN_TEST:
-      value: "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix : <http://example.org/stardog#>\n\nProjection(?s, ?label) [#625]\n`─ MergeJoin(?s) [#625]\n   +─ Scan[POSC](?s, <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, :Example) [#1]\n   `─ Scan[PSOC](?s, rdfs:label, ?label) [#718K]"
-    GENERIC_NTRIPLES:
-      value: '<urn:example:Entity1> a <urn:example:Entity> .
-
-        <urn:example:Entity1> <urn:example:hasProp> 42 .'
-    GENERIC_TURTLE:
-      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
-    SPARQL_RESULTS_TSV:
-      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
-    SPARQL_RESULTS_XML:
-      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
     GENERIC_TRIG:
       value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n{ \t<urn:example:Entity1> a <urn:example:Entity> ;\n\t\t <urn:example:hasProp> 42 .\n}"
+    SPARQL_RESULTS_TSV:
+      value: "?s\t?label\n<http://example.org/stardog#Example1>\t\"42\"\n<http://example.org/stardog#Example2>\t\"foo\""
+    GENERIC_RDFXML:
+      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
+    SPARQL_QUERY:
+      value: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
+    GENERIC_TURTLE:
+      value: "@prefix : <urn:example:> .\n@prefix owl: <http://www.w3.org/2002/07/owl#> .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix stardog: <tag:stardog:api:> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n\n<urn:example:Entity1> a <urn:example:Entity> ;\n\t<urn:example:hasProp> 42 ."
     SPARQL_RESULTS_CSV:
       value: 's,label
 
         http://example.org/stardog#Example1,42
 
         http://example.org/stardog#Example2,foo'
-    SPARQL_UPDATE:
-      value: "PREFIX : <http://example.org/stardog#>\n\nDELETE {\n   ?s a :OldType\n}\nINSERT {\n   ?s a :NewType\n}\nWHERE {\n   ?s a :OldType\n}"
-    SPARQL_QUERY:
-      value: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX : <http://example.org/stardog#>\n \nSELECT ?s ?label WHERE {\n    ?s a :Example ;\n       rdfs:label ?label\n}"
-    GENERIC_RDFXML:
-      value: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rdf:RDF\n\txmlns=\"http://api.stardog.com/\"\n\txmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n\txmlns:owl=\"http://www.w3.org/2002/07/owl#\"\n\txmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"\n\txmlns:stardog=\"tag:stardog:api:\"\n\txmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\">\n\n<rdf:Description rdf:about=\"urn:example:Entity1\">\n\t<rdf:type rdf:resource=\"urn:example:Entity\"/>\n\t<hasProp xmlns=\"urn:example:\" rdf:datatype=\"http://www.w3.org/2001/XMLSchema#integer\">42</hasProp>\n</rdf:Description>\n\n</rdf:RDF>"
     GENERIC_NQUADS:
       value: '<urn:context> <urn:example:Entity1> a <urn:example:Entity> .
 
         <urn:context> <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    SPARQL_RESULTS_XML:
+      value: "<?xml version='1.0' encoding='UTF-8'?>\n<sparql xmlns='http://www.w3.org/2005/sparql-results#'>\n    <head>\n        <variable name='s'/>\n        <variable name='label'/>\n    </head>\n    <results>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example1</uri>\n            </binding>\n            <binding name='label'>\n                <literal>42</literal>\n            </binding>\n        </result>\n        <result>\n            <binding name='s'>\n                <uri>http://example.org/stardog#Example2</uri>\n            </binding>\n            <binding name='label'>\n                <literal>foo</literal>\n            </binding>\n        </result>\n    </results>\n</sparql>"
+    SPARQL_UPDATE:
+      value: "PREFIX : <http://example.org/stardog#>\n\nDELETE {\n   ?s a :OldType\n}\nINSERT {\n   ?s a :NewType\n}\nWHERE {\n   ?s a :OldType\n}"
+    GENERIC_NTRIPLES:
+      value: '<urn:example:Entity1> a <urn:example:Entity> .
+
+        <urn:example:Entity1> <urn:example:hasProp> 42 .'
+    QUERY_PLAN_TEST:
+      value: "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix : <http://example.org/stardog#>\n\nProjection(?s, ?label) [#625]\n`─ MergeJoin(?s) [#625]\n   +─ Scan[POSC](?s, <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, :Example) [#1]\n   `─ Scan[PSOC](?s, rdfs:label, ?label) [#718K]"
   parameters:
-    graph-uri:
-      name: graph-uri
+    UPDATE_NOT_REQ:
+      name: update
       in: query
-      description: Named Graph / Context
-      required: false
-      schema:
-        type: string
-        format: URI
-      example: https://stardog.com/graphs/myGraph
-    named-graph-uri:
-      name: named-graph-uri
-      in: query
-      description: URI(s) to be used as named graphs (equivalent to FROM NAMED)
-      schema:
-        type: string
-        format: URI
-    using-named-graph-uri:
-      name: using-named-graph-uri
-      in: query
-      description: URI(s) to be used as named graphs (equivalent to USING NAMED)
-      schema:
-        type: string
-        format: URI
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of results to return
-      schema:
-        type: integer
-        format: int64
-        example: 42
-    reasoning:
-      name: reasoning
-      in: query
-      description: Enable Reasoning
-      schema:
-        type: boolean
-    QUERY_NOT_REQ:
-      name: query
-      in: query
-      description: Query to run
-      schema:
-        type: string
-    profile:
-      name: profile
-      in: query
-      description: Run query profiler
-      schema:
-        type: boolean
-    baseURI:
-      name: baseURI
-      in: query
-      description: Base URI against which to resolve relative URIs
-      schema:
-        type: string
-      example: 'tag:stardog:api:'
-    insert-graph-uri:
-      name: insert-graph-uri
-      in: query
-      description: URI of the graph to be inserted into
-      schema:
-        type: string
-        format: URI
-    default-graph-uri:
-      name: default-graph-uri
-      in: query
-      description: URI(s) to be used as the default graph (equivalent to FROM)
-      schema:
-        type: string
-        format: URI
-    remove-graph-uri:
-      name: remove-graph-uri
-      in: query
-      description: URI of the graph to be removed from
-      schema:
-        type: string
-        format: URI
-    schema:
-      name: schema
-      in: query
-      description: The name of the schema
+      description: Update query to run
       schema:
         type: string
     offset:
@@ -856,29 +779,127 @@ components:
         type: integer
         format: int64
         example: 42
-    query:
+    QUERY_NOT_REQ:
       name: query
       in: query
       description: Query to run
-      required: true
       schema:
         type: string
-    useNamespaces:
-      name: useNamespaces
+    remove-graph-uri:
+      name: remove-graph-uri
       in: query
-      description: Request query results with namespace substitution/prefix lines
+      description: URI of the graph to be removed from
+      schema:
+        type: string
+        format: URI
+    reasoning:
+      name: reasoning
+      in: query
+      description: Enable Reasoning
       schema:
         type: boolean
+    baseURI:
+      name: baseURI
+      in: query
+      description: Base URI against which to resolve relative URIs
+      schema:
+        type: string
+      example: 'tag:stardog:api:'
     verbose:
       name: verbose
       in: query
       description: Verbose output
       schema:
         type: boolean
+    schema:
+      name: schema
+      in: query
+      description: The name of the schema
+      schema:
+        type: string
+    named-graph-uri:
+      name: named-graph-uri
+      in: query
+      description: URI(s) to be used as named graphs (equivalent to FROM NAMED)
+      schema:
+        type: string
+        format: URI
+    default-graph-uri:
+      name: default-graph-uri
+      in: query
+      description: URI(s) to be used as the default graph (equivalent to FROM)
+      schema:
+        type: string
+        format: URI
+    profile:
+      name: profile
+      in: query
+      description: Run query profiler
+      schema:
+        type: boolean
+    using-graph-uri:
+      name: using-graph-uri
+      in: query
+      description: URI(s) to be used as the default graph (equivalent to USING)
+      schema:
+        type: string
+        format: URI
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    using-named-graph-uri:
+      name: using-named-graph-uri
+      in: query
+      description: URI(s) to be used as named graphs (equivalent to USING NAMED)
+      schema:
+        type: string
+        format: URI
     update:
       name: update
       in: query
       description: Update query to run
+      required: true
+      schema:
+        type: string
+    graph-uri:
+      name: graph-uri
+      in: query
+      description: Named Graph / Context
+      required: false
+      schema:
+        type: string
+        format: URI
+      example: https://stardog.com/graphs/myGraph
+    useNamespaces:
+      name: useNamespaces
+      in: query
+      description: Request query results with namespace substitution/prefix lines
+      schema:
+        type: boolean
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of results to return
+      schema:
+        type: integer
+        format: int64
+        example: 42
+    insert-graph-uri:
+      name: insert-graph-uri
+      in: query
+      description: URI of the graph to be inserted into
+      schema:
+        type: string
+        format: URI
+    query:
+      name: query
+      in: query
+      description: Query to run
       required: true
       schema:
         type: string
@@ -890,36 +911,15 @@ components:
         type: integer
         format: int64
         example: 42
-    db:
-      name: db
-      in: path
-      description: Database name
-      required: true
-      schema:
-        type: string
-      example: myDb
-    UPDATE_NOT_REQ:
-      name: update
-      in: query
-      description: Update query to run
-      schema:
-        type: string
-    using-graph-uri:
-      name: using-graph-uri
-      in: query
-      description: URI(s) to be used as the default graph (equivalent to USING)
-      schema:
-        type: string
-        format: URI
   responses:
+    FUNCTIONALITY_NOT_SUPPORTED:
+      description: Function not implemented
     INVALID_QUERY:
       description: Invalid query sent
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    FUNCTIONALITY_NOT_SUPPORTED:
-      description: Function not implemented
     SPARQL_RESULTS:
       description: Query results
       content:
@@ -986,6 +986,69 @@ components:
               value: null
               $ref: '#/components/examples/SPARQL_RESULTS_TSV'
   schemas:
+    SPARQL_RESULTS_JSON:
+      required:
+      - head
+      - results
+      properties:
+        head:
+          required:
+          - vars
+          properties:
+            vars:
+              type: array
+              items:
+                type: string
+        results:
+          required:
+          - bindings
+          properties:
+            bindings:
+              type: array
+              items:
+                additionalProperties:
+                  required:
+                  - type
+                  - value
+                  properties:
+                    type:
+                      type: string
+                      example: literal
+                    value:
+                      type: string
+                      example: '42'
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
+    GENERIC_JSONLD:
+      properties:
+        '@id':
+          type: string
+          example: urn:example:Entity1
+        '@type':
+          type: string
+          example: urn:example:Entity
+        urn:example:hasProp:
+          required:
+          - '@id'
+          type: array
+          items:
+            required:
+            - '@value'
+            properties:
+              '@type':
+                type: string
+                example: http://www.w3.org/2001/XMLSchema#integer
+              '@value':
+                type: string
+                example: '42'
     SPARQL_QUERY:
       required:
       - query
@@ -1037,69 +1100,19 @@ components:
         exclude-graph-uri:
           type: string
           description: URI(s) of graphs to exclude from the query dataset (from both default and named scopes)
-    GENERIC_RESPONSE_ERROR_MESSAGE:
-      required:
-      - message
+    PLAN_NODE:
       properties:
-        message:
+        label:
           type: string
-          example: Unexpected end of file [L9]
-        code:
-          type: string
-          example: QEIVR2
-    GENERIC_JSONLD:
-      properties:
-        '@id':
-          type: string
-          example: urn:example:Entity1
-        '@type':
-          type: string
-          example: urn:example:Entity
-        urn:example:hasProp:
-          required:
-          - '@id'
+          example: MergeJoin(?s)
+        cardinality:
+          type: integer
+          format: int64
+          example: 42
+        children:
           type: array
           items:
-            required:
-            - '@value'
-            properties:
-              '@type':
-                type: string
-                example: http://www.w3.org/2001/XMLSchema#integer
-              '@value':
-                type: string
-                example: '42'
-    SPARQL_RESULTS_JSON:
-      required:
-      - head
-      - results
-      properties:
-        head:
-          required:
-          - vars
-          properties:
-            vars:
-              type: array
-              items:
-                type: string
-        results:
-          required:
-          - bindings
-          properties:
-            bindings:
-              type: array
-              items:
-                additionalProperties:
-                  required:
-                  - type
-                  - value
-                  properties:
-                    type:
-                      type: string
-                      example: literal
-                    value:
-                      type: string
-                      example: '42'
+            $ref: '#/components/schemas/PLAN_NODE'
     SPARQL_UPDATE_QUERY:
       required:
       - update
@@ -1170,19 +1183,6 @@ components:
           type: object
         plan:
           $ref: '#/components/schemas/PLAN_NODE'
-    PLAN_NODE:
-      properties:
-        label:
-          type: string
-          example: MergeJoin(?s)
-        cardinality:
-          type: integer
-          format: int64
-          example: 42
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/PLAN_NODE'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

@@ -241,27 +241,6 @@ paths:
                     type: string
                     example: SERNF2
 components:
-  parameters:
-    user:
-      name: user
-      in: path
-      description: Username
-      required: true
-      schema:
-        type: string
-    role:
-      name: role
-      in: path
-      description: Role name
-      required: true
-      schema:
-        type: string
-  requestBodies:
-    PERMISSION:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PERMISSION'
   responses:
     MALFORMED_REQUEST_400:
       description: Malformed request body
@@ -275,25 +254,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PERMISSION_LIST'
+  parameters:
+    role:
+      name: role
+      in: path
+      description: Role name
+      required: true
+      schema:
+        type: string
+    user:
+      name: user
+      in: path
+      description: Username
+      required: true
+      schema:
+        type: string
   schemas:
-    PERMISSION_LIST:
-      required:
-      - permissions
-      properties:
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PERMISSION'
-    GENERIC_RESPONSE_ERROR_MESSAGE:
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          example: Unexpected end of file [L9]
-        code:
-          type: string
-          example: QEIVR2
     PERMISSION:
       required:
       - action
@@ -337,6 +313,30 @@ components:
           type: array
           items:
             type: string
+    PERMISSION_LIST:
+      required:
+      - permissions
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PERMISSION'
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
+  requestBodies:
+    PERMISSION:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PERMISSION'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

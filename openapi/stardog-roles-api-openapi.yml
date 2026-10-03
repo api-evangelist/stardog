@@ -112,6 +112,28 @@ paths:
           $ref: '#/components/responses/ROLE_LIST_DETAILED'
 components:
   schemas:
+    ROLENAME:
+      required:
+      - rolename
+      properties:
+        rolename:
+          type: string
+    ROLE_LIST:
+      required:
+      - roles
+      properties:
+        roles:
+          type: array
+          items:
+            type: string
+    USER_LIST:
+      required:
+      - users
+      properties:
+        users:
+          type: array
+          items:
+            type: string
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
       - message
@@ -122,28 +144,19 @@ components:
         code:
           type: string
           example: QEIVR2
-    USER_LIST:
-      required:
-      - users
-      properties:
-        users:
-          type: array
-          items:
+    ROLE_LIST_DETAILED:
+      type: array
+      items:
+        required:
+        - rolename
+        - permissions
+        properties:
+          rolename:
             type: string
-    ROLE_LIST:
-      required:
-      - roles
-      properties:
-        roles:
-          type: array
-          items:
-            type: string
-    ROLENAME:
-      required:
-      - rolename
-      properties:
-        rolename:
-          type: string
+          permissions:
+            type: array
+            items:
+              $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
     PERMISSION_WITH_EXPLICIT:
       required:
       - action
@@ -190,44 +203,31 @@ components:
         explicit:
           type: boolean
           description: Whether this permission is explicitly granted to the user versus granted via a role
-    ROLE_LIST_DETAILED:
-      type: array
-      items:
-        required:
-        - rolename
-        - permissions
-        properties:
-          rolename:
-            type: string
-          permissions:
-            type: array
-            items:
-              $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
   responses:
-    ROLE_LIST:
-      description: List of Roles in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST'
     MALFORMED_REQUEST_400:
       description: Malformed request body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    ROLE_LIST_DETAILED:
-      description: List of Roles in system, including their permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
     USER_LIST:
       description: List of Users in system
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/USER_LIST'
+    ROLE_LIST_DETAILED:
+      description: List of Roles in system, including their permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
+    ROLE_LIST:
+      description: List of Roles in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST'
   requestBodies:
     ROLENAME:
       content:

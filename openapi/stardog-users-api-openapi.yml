@@ -399,32 +399,18 @@ paths:
                     example: SERNF2
 components:
   schemas:
-    USER_LIST:
-      required:
-      - users
-      properties:
-        users:
-          type: array
-          items:
-            type: string
-    AUTO_CREATED:
-      required:
-      - auto_created
-      properties:
-        auto_created:
-          type: boolean
     ROLENAME:
       required:
       - rolename
       properties:
         rolename:
           type: string
-    USER_PASSWD:
+    ENABLED:
       required:
-      - password
+      - enabled
       properties:
-        password:
-          type: string
+        enabled:
+          type: boolean
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
       - message
@@ -435,6 +421,20 @@ components:
         code:
           type: string
           example: QEIVR2
+    USER_CREATE:
+      required:
+      - username
+      - password
+      properties:
+        username:
+          type: string
+        password:
+          type: array
+          description: Array of chars
+          items:
+            maxLength: 1
+            minLength: 1
+            type: string
     USER_LIST_DETAILED:
       type: array
       items:
@@ -459,12 +459,32 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/PERMISSION_WITH_EXPLICIT'
-    ENABLED:
+    USER_LIST:
       required:
-      - enabled
+      - users
       properties:
-        enabled:
+        users:
+          type: array
+          items:
+            type: string
+    SUPERUSER:
+      required:
+      - superuser
+      properties:
+        superuser:
           type: boolean
+    AUTO_CREATED:
+      required:
+      - auto_created
+      properties:
+        auto_created:
+          type: boolean
+    USER_PASSWD:
+      required:
+      - password
+      properties:
+        password:
+          type: string
     ROLE_LIST:
       required:
       - roles
@@ -473,26 +493,6 @@ components:
           type: array
           items:
             type: string
-    USER_CREATE:
-      required:
-      - username
-      - password
-      properties:
-        username:
-          type: string
-        password:
-          type: array
-          description: Array of chars
-          items:
-            maxLength: 1
-            minLength: 1
-            type: string
-    SUPERUSER:
-      required:
-      - superuser
-      properties:
-        superuser:
-          type: boolean
     USER:
       required:
       - enabled
@@ -565,24 +565,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/USER_LIST_DETAILED'
-    ROLE_LIST:
-      description: List of Roles in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST'
-    USER_LIST:
-      description: List of Users in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/USER_LIST'
     MALFORMED_REQUEST_400:
       description: Malformed request body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    USER_LIST:
+      description: List of Users in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/USER_LIST'
+    ROLE_LIST:
+      description: List of Roles in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST'
+  requestBodies:
+    ROLENAME:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLENAME'
   parameters:
     role:
       name: role
@@ -598,12 +604,6 @@ components:
       required: true
       schema:
         type: string
-  requestBodies:
-    ROLENAME:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLENAME'
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

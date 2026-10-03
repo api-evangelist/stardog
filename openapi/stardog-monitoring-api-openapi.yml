@@ -68,12 +68,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PROCESS_LIST'
-    PROCESS:
-      description: Process
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PROCESS'
     NAME_PROCESS_404:
       description: Process does not exist
       content:
@@ -89,6 +83,12 @@ components:
               code:
                 type: string
                 example: QEQNF2
+    PROCESS:
+      description: Process
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS'
   schemas:
     PROCESS:
       required:

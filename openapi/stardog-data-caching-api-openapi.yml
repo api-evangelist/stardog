@@ -191,25 +191,29 @@ components:
           lastRefresh:
             type: string
             format: date
-    URI:
-      type: string
-      format: URI
-    CACHE_GRAPH_LIST:
-      type: array
-      items:
-        properties:
-          name:
-            type: string
-            format: URI
-          target:
-            $ref: '#/components/schemas/CACHE_TARGET'
-          database:
-            type: string
-          refreshScript:
-            type: string
-            description: An optional SPARQL Insert query to run when refreshing the cache
-          graph:
-            type: string
+    CACHE_TARGET:
+      required:
+      - name
+      - hostname
+      - port
+      - username
+      - password
+      properties:
+        name:
+          type: string
+        hostname:
+          type: string
+        port:
+          type: integer
+          format: int32
+        username:
+          type: string
+        password:
+          type: string
+        useExistingDb:
+          type: boolean
+          description: If true, check for an existing cache database to use before creating a new one
+          default: false
     CACHE_OBJ:
       required:
       - name
@@ -235,33 +239,29 @@ components:
           type: boolean
           description: If true, register a cached dataset without loading data from the source graph or query into the cache target's databases
           default: false
-    CACHE_TARGET:
-      required:
-      - name
-      - hostname
-      - port
-      - username
-      - password
-      properties:
-        name:
-          type: string
-        hostname:
-          type: string
-        port:
-          type: integer
-          format: int32
-        username:
-          type: string
-        password:
-          type: string
-        useExistingDb:
-          type: boolean
-          description: If true, check for an existing cache database to use before creating a new one
-          default: false
+    CACHE_GRAPH_LIST:
+      type: array
+      items:
+        properties:
+          name:
+            type: string
+            format: URI
+          target:
+            $ref: '#/components/schemas/CACHE_TARGET'
+          database:
+            type: string
+          refreshScript:
+            type: string
+            description: An optional SPARQL Insert query to run when refreshing the cache
+          graph:
+            type: string
     CACHE_TARGET_LIST:
       type: array
       items:
         $ref: '#/components/schemas/CACHE_TARGET'
+    URI:
+      type: string
+      format: URI
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

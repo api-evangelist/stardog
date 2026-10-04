@@ -322,11 +322,16 @@ apis:
   humanURL: https://stardog-union.github.io/http-docs/
   baseURL: https://cloud.stardog.com
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
     url: openapi/stardog-graph-ql-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/stardog-capability-edges.yml
+  name: Stardog Business Capability Map
 - type: AgenticAccess
   url: agentic-access/stardog-agentic-access.yml
 - type: TrustCenter

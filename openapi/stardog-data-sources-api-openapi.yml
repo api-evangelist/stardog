@@ -245,15 +245,137 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_DS_404'
 components:
+  requestBodies:
+    DATA_SOURCE_CREATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
+    DATA_SOURCE_QUERY:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_QUERY'
+    DATA_SOURCE_OPTIONS:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+    DATA_SOURCE_REFRESH_TABLE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_REFRESH_TABLE'
+    DATA_SOURCE_UPDATE:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
   schemas:
-    DATA_SOURCE_LIST:
-      required:
-      - data_sources
+    DATA_SOURCE_REFRESH_TABLE:
       properties:
-        data_sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/DATA_SOURCE'
+        name:
+          type: string
+          description: 'Optional table to refresh. Example formats (case-sensitive): `catalog.schema.table`, `schema.table`, `table`'
+    DATA_SOURCE_OPTIONS:
+      properties:
+        jdbc.url:
+          type: string
+          description: The URL of the JDBC connection
+        jdbc.username:
+          type: string
+          description: The username used to make the JDBC connection
+        jdbc.password:
+          type: string
+          description: The password used to make the JDBC connection
+        jdbc.driver:
+          type: string
+          description: The driver class name used to make the JDBC connection. If omitted, driver will be taken from registered Service Providers.
+        mongodb.uri:
+          type: string
+          description: The URI for a MongoDB connection
+        elasticsearch.rest.urls:
+          type: string
+          description: Whitespace-delimited list of connection `scheme://host:port` values for Elasticsearch. Scheme defaults to `http`.
+          example: https://server1:9200 http://server2:9200 server3:9200
+        elasticsearch.indexes:
+          type: string
+          description: Optional comma-delimited list of indexes to make visible to the data source. Defaults to all indexes.
+          example: my_index1,other_index
+        elasticsearch.username:
+          type: string
+        elasticsearch.password:
+          type: string
+        cassandra.contact.point:
+          type: string
+          description: The address of the Cassandra node(s) that the driver uses to discover the cluster topology
+        cassandra.port:
+          type: integer
+          description: The port to use to connect to the Cassandra host.
+          format: int32
+          example: 42
+          default: 9042
+        cassandra.keyspace:
+          type: string
+          description: The Cassandra keyspace to use for this session
+        cassandra.username:
+          type: string
+          description: The username for the Cassandra cluster
+        cassandra.password:
+          type: string
+          description: The password for the Cassandra cluster
+        sparql.url:
+          type: string
+          description: SPARQL query endpoint/connection string with database specified
+          format: URI
+          example: http://myhost:26023/testdb/query
+        sparql.username:
+          type: string
+          description: The username to access the SPARQL endpoint
+        sparql.password:
+          type: string
+          description: The password to access the SPARQL endpoint
+        sparql.graphname:
+          type: string
+          description: The graph name on the SPARQL endpoint to be mapped as virtual graph
+        unique.key.sets:
+          type: string
+          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
+        sql.dialect:
+          type: string
+          description: The format of the generated SQL, for use when using an unsupported JDBC driver
+          example: MYSQL
+        sql.schemas:
+          type: string
+          description: A comma-separated list of schemas to append to the schema search path
+        sql.default.schema:
+          type: string
+          description: Override the default schema for the connected user
+      additionalProperties:
+        pattern: ext\..+
+        type: string
+        description: Additional properties to pass directly to the JDBC driver
+      externalDocs:
+        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
+    DATA_SOURCE_CREATE:
+      required:
+      - name
+      - options
+      properties:
+        name:
+          type: string
+        options:
+          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+    DATA_SOURCE_UPDATE:
+      required:
+      - options
+      properties:
+        options:
+          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
+        force:
+          type: boolean
+          description: If true, data source will be updated even while in use
+          default: false
     VIRTUAL_GRAPH_OPTIONS:
       properties:
         base:
@@ -388,62 +510,14 @@ components:
         description: Additional properties to pass directly to the JDBC driver
       externalDocs:
         url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    DATA_SOURCE_UPDATE:
+    DATA_SOURCE_LIST:
       required:
-      - options
+      - data_sources
       properties:
-        options:
-          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-        force:
-          type: boolean
-          description: If true, data source will be updated even while in use
-          default: false
-    DATA_SOURCE_OPTION_DESCRIPTION:
-      type: object
-      properties:
-        default:
-          description: The default value for the option.
-        type:
-          type: string
-          description: The data type of the option value
-        description:
-          type: string
-          description: A description of the option
-        examples:
+        data_sources:
           type: array
-          description: List of all possible values, or a list with a single template or example value
-          items: {}
-        required:
-          type: boolean
-          description: Whether the option is required for the family of data source types that support the option
-          default: false
-        optionGroup:
-          type: string
-          description: The name of the group of options that an option belongs to, if any
-          enum:
-          - advanced options
-          - connection pool options
-    SINGLE_DATA_SOURCE_INFO:
-      required:
-      - info
-      properties:
-        info:
-          $ref: '#/components/schemas/DATA_SOURCE'
-    DATA_SOURCE_CREATE:
-      required:
-      - name
-      - options
-      properties:
-        name:
-          type: string
-        options:
-          $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-    DATA_SOURCE_AVAILABLE:
-      required:
-      - available
-      properties:
-        available:
-          type: boolean
+          items:
+            $ref: '#/components/schemas/DATA_SOURCE'
     DATA_SOURCE_TYPE_DESCRIPTION:
       required:
       - data_source_type_description
@@ -528,6 +602,59 @@ components:
                           description: Default value for the jdbc client driver class name
                   description: Additional descriptions for data source options for this data source type
               description: Map of data source types and their descriptions - ATHENA, ORACLE, CASSANDRA, MONGODB, etc.
+    DATA_SOURCE_OPTION_DESCRIPTION:
+      type: object
+      properties:
+        default:
+          description: The default value for the option.
+        type:
+          type: string
+          description: The data type of the option value
+        description:
+          type: string
+          description: A description of the option
+        examples:
+          type: array
+          description: List of all possible values, or a list with a single template or example value
+          items: {}
+        required:
+          type: boolean
+          description: Whether the option is required for the family of data source types that support the option
+          default: false
+        optionGroup:
+          type: string
+          description: The name of the group of options that an option belongs to, if any
+          enum:
+          - advanced options
+          - connection pool options
+    SINGLE_DATA_SOURCE_INFO:
+      required:
+      - info
+      properties:
+        info:
+          $ref: '#/components/schemas/DATA_SOURCE'
+    DATA_SOURCE_QUERY:
+      properties:
+        query:
+          type: string
+          description: Data source native query string
+        options:
+          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
+    DATA_SOURCE_AVAILABLE:
+      required:
+      - available
+      properties:
+        available:
+          type: boolean
+    DATA_SOURCE_NAME_LIST:
+      required:
+      - data_sources
+      properties:
+        data_sources:
+          type: array
+          items:
+            type: string
+            example: data-source://myDS
     DATA_SOURCE:
       required:
       - name
@@ -540,133 +667,12 @@ components:
           type: boolean
         available:
           type: boolean
-    DATA_SOURCE_NAME_LIST:
-      required:
-      - data_sources
-      properties:
-        data_sources:
-          type: array
-          items:
-            type: string
-            example: data-source://myDS
-    DATA_SOURCE_OPTIONS:
-      properties:
-        jdbc.url:
-          type: string
-          description: The URL of the JDBC connection
-        jdbc.username:
-          type: string
-          description: The username used to make the JDBC connection
-        jdbc.password:
-          type: string
-          description: The password used to make the JDBC connection
-        jdbc.driver:
-          type: string
-          description: The driver class name used to make the JDBC connection. If omitted, driver will be taken from registered Service Providers.
-        mongodb.uri:
-          type: string
-          description: The URI for a MongoDB connection
-        elasticsearch.rest.urls:
-          type: string
-          description: Whitespace-delimited list of connection `scheme://host:port` values for Elasticsearch. Scheme defaults to `http`.
-          example: https://server1:9200 http://server2:9200 server3:9200
-        elasticsearch.indexes:
-          type: string
-          description: Optional comma-delimited list of indexes to make visible to the data source. Defaults to all indexes.
-          example: my_index1,other_index
-        elasticsearch.username:
-          type: string
-        elasticsearch.password:
-          type: string
-        cassandra.contact.point:
-          type: string
-          description: The address of the Cassandra node(s) that the driver uses to discover the cluster topology
-        cassandra.port:
-          type: integer
-          description: The port to use to connect to the Cassandra host.
-          format: int32
-          example: 42
-          default: 9042
-        cassandra.keyspace:
-          type: string
-          description: The Cassandra keyspace to use for this session
-        cassandra.username:
-          type: string
-          description: The username for the Cassandra cluster
-        cassandra.password:
-          type: string
-          description: The password for the Cassandra cluster
-        sparql.url:
-          type: string
-          description: SPARQL query endpoint/connection string with database specified
-          format: URI
-          example: http://myhost:26023/testdb/query
-        sparql.username:
-          type: string
-          description: The username to access the SPARQL endpoint
-        sparql.password:
-          type: string
-          description: The password to access the SPARQL endpoint
-        sparql.graphname:
-          type: string
-          description: The graph name on the SPARQL endpoint to be mapped as virtual graph
-        unique.key.sets:
-          type: string
-          description: 'For data sources that do not express unique constraints in their metadata, either because unique constraints are not supported or because the data source did not include some or all of the valid constraints for reasons such as performance concerns, this property is used to define additional constraints manually. The property value is a comma-separated list of keys that define unique rows in a table. Each key is itself a comma-separated list of schema-qualified columns, enclosed in parentheses. For example, if table `APP.CUSTOMERS` has an `ID` column that serves as a primary key and a pair of columns, `FNAME` and `LNAME`, that together are a unique key, the value to express that is: `(APP.CUSTOMERS.ID),(APP.CUSTOMERS.FNAME,APP.CUSTOMERS.LNAME)`'
-        sql.dialect:
-          type: string
-          description: The format of the generated SQL, for use when using an unsupported JDBC driver
-          example: MYSQL
-        sql.schemas:
-          type: string
-          description: A comma-separated list of schemas to append to the schema search path
-        sql.default.schema:
-          type: string
-          description: Override the default schema for the connected user
-      additionalProperties:
-        pattern: ext\..+
-        type: string
-        description: Additional properties to pass directly to the JDBC driver
-      externalDocs:
-        url: https://docs.stardog.com/virtual-graphs/virtual-graph-configuration#virtual-graph-properties
-    DATA_SOURCE_QUERY:
-      properties:
-        query:
-          type: string
-          description: Data source native query string
-        options:
-          $ref: '#/components/schemas/VIRTUAL_GRAPH_OPTIONS'
-    DATA_SOURCE_REFRESH_TABLE:
-      properties:
-        name:
-          type: string
-          description: 'Optional table to refresh. Example formats (case-sensitive): `catalog.schema.table`, `schema.table`, `table`'
-  requestBodies:
-    DATA_SOURCE_QUERY:
+  responses:
+    NAME_DS_404:
+      description: Data Source does not exist
       content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_QUERY'
-    DATA_SOURCE_REFRESH_TABLE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_REFRESH_TABLE'
-    DATA_SOURCE_OPTIONS:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_OPTIONS'
-    DATA_SOURCE_UPDATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_UPDATE'
-    DATA_SOURCE_CREATE:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DATA_SOURCE_CREATE'
+        text/plain:
+          example: Data Source does not exist
   parameters:
     name_ds:
       name: name
@@ -675,12 +681,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    NAME_DS_404:
-      description: Data Source does not exist
-      content:
-        text/plain:
-          example: Data Source does not exist
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

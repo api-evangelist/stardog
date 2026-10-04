@@ -109,31 +109,6 @@ paths:
                     type: string
                     example: 0D0DU2
 components:
-  responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    CHECKPOINT_LIST:
-      description: Checkpoint List
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CHECKPOINT_LIST'
-    CHECKPOINT_RESTORE:
-      description: Checkpoint Restore
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CHECKPOINT_RESTORE'
-    CHECKPOINT_CREATE:
-      description: Checkpoint Create
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CHECKPOINT_CREATE'
   schemas:
     CHECKPOINT_CREATE:
       properties:
@@ -167,6 +142,31 @@ components:
         checkpoint:
           type: string
           example: system_2021-05-14_04.56
+  responses:
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    CHECKPOINT_CREATE:
+      description: Checkpoint Create
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CHECKPOINT_CREATE'
+    CHECKPOINT_RESTORE:
+      description: Checkpoint Restore
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CHECKPOINT_RESTORE'
+    CHECKPOINT_LIST:
+      description: Checkpoint List
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CHECKPOINT_LIST'
   parameters:
     db:
       name: db

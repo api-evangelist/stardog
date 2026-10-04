@@ -62,12 +62,6 @@ paths:
           $ref: '#/components/responses/NAME_PROCESS_404'
 components:
   responses:
-    PROCESS_LIST:
-      description: List of Processes
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PROCESS_LIST'
     NAME_PROCESS_404:
       description: Process does not exist
       content:
@@ -83,6 +77,12 @@ components:
               code:
                 type: string
                 example: QEQNF2
+    PROCESS_LIST:
+      description: List of Processes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PROCESS_LIST'
     PROCESS:
       description: Process
       content:

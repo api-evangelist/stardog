@@ -241,35 +241,21 @@ paths:
                     type: string
                     example: SERNF2
 components:
-  responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
+  requestBodies:
+    PERMISSION:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    PERMISSION_LIST:
-      description: List of Permissions in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PERMISSION_LIST'
-  parameters:
-    role:
-      name: role
-      in: path
-      description: Role name
-      required: true
-      schema:
-        type: string
-    user:
-      name: user
-      in: path
-      description: Username
-      required: true
-      schema:
-        type: string
+            $ref: '#/components/schemas/PERMISSION'
   schemas:
+    PERMISSION_LIST:
+      required:
+      - permissions
+      properties:
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PERMISSION'
     PERMISSION:
       required:
       - action
@@ -313,14 +299,6 @@ components:
           type: array
           items:
             type: string
-    PERMISSION_LIST:
-      required:
-      - permissions
-      properties:
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PERMISSION'
     GENERIC_RESPONSE_ERROR_MESSAGE:
       required:
       - message
@@ -331,12 +309,34 @@ components:
         code:
           type: string
           example: QEIVR2
-  requestBodies:
-    PERMISSION:
+  responses:
+    PERMISSION_LIST:
+      description: List of Permissions in system
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PERMISSION'
+            $ref: '#/components/schemas/PERMISSION_LIST'
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+  parameters:
+    user:
+      name: user
+      in: path
+      description: Username
+      required: true
+      schema:
+        type: string
+    role:
+      name: role
+      in: path
+      description: Role name
+      required: true
+      schema:
+        type: string
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

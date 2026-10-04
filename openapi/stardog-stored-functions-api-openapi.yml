@@ -127,6 +127,17 @@ paths:
         '404':
           $ref: '#/components/responses/NAME_FUNCTION_404'
 components:
+  parameters:
+    name_function:
+      name: name
+      in: path
+      description: The name of the stored function
+      required: true
+      schema:
+        type: string
+  examples:
+    STORED_FUNCTION:
+      value: "FUNCTION permutation(?n,?r) {\n   (factorial(?n) / factorial((?n - ?r)))\n}"
   responses:
     NAME_FUNCTION_404:
       description: Stored function does not exist
@@ -143,17 +154,6 @@ components:
               code:
                 type: string
                 example: QEFNF2
-  examples:
-    STORED_FUNCTION:
-      value: "FUNCTION permutation(?n,?r) {\n   (factorial(?n) / factorial((?n - ?r)))\n}"
-  parameters:
-    name_function:
-      name: name
-      in: path
-      description: The name of the stored function
-      required: true
-      schema:
-        type: string
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

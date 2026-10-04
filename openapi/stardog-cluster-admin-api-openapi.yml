@@ -222,17 +222,6 @@ components:
         format: uuid
         example: 4ea1ebac-48f0-459c-a9a7-6cad7189403d
   schemas:
-    STANDBY_PAUSED:
-      required:
-      - STATE
-      properties:
-        STATE:
-          type: string
-          enum:
-          - WAITING
-          - SYNCING
-          - PAUSING
-          - PAUSED
     STANDBY_STATUS:
       required:
       - address
@@ -312,6 +301,17 @@ components:
                 - COORDINATOR
                 - PARTICIPANT
                 - STANDBY
+    STANDBY_PAUSED:
+      required:
+      - STATE
+      properties:
+        STATE:
+          type: string
+          enum:
+          - WAITING
+          - SYNCING
+          - PAUSING
+          - PAUSED
     NODE_LIST:
       required:
       - nodes

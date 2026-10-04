@@ -338,15 +338,39 @@ paths:
                     type: string
                     example: 0D0DU2
 components:
+  examples:
+    GRAPHQL_SCHEMA:
+      value: "type Author {\n  id: Int!\n  firstName: String\n  lastName: String\n  posts: [Post]\n}type Post {\n  id: Int!\n  title: String\n  author: Author\n  votes: Int\n}type Query {\n  posts: [Post]\n  author(id: Int!): Author\n}\n"
+  parameters:
+    schema:
+      name: schema
+      in: query
+      description: The name of the schema
+      schema:
+        type: string
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
+    name_schema:
+      name: schema
+      in: path
+      description: The name of the schema
+      required: true
+      schema:
+        type: string
+  responses:
+    GRAPHQL_QUERY_RESULT:
+      description: Result of GraphQL query
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GRAPHQL_QUERY_RESULT'
   schemas:
-    GRAPHQL_SCHEMAS:
-      required:
-      - schemas
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
     GRAPHQL_QUERY_RESULT:
       required:
       - data
@@ -367,38 +391,17 @@ components:
           type: string
         variables:
           type: object
+    GRAPHQL_SCHEMAS:
+      required:
+      - schemas
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
     GRAPHQL_QUERY:
       type: string
       example: '{ Human { name } }'
-  responses:
-    GRAPHQL_QUERY_RESULT:
-      description: Result of GraphQL query
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GRAPHQL_QUERY_RESULT'
-  parameters:
-    name_schema:
-      name: schema
-      in: path
-      description: The name of the schema
-      required: true
-      schema:
-        type: string
-    db:
-      name: db
-      in: path
-      description: Database name
-      required: true
-      schema:
-        type: string
-      example: myDb
-    schema:
-      name: schema
-      in: query
-      description: The name of the schema
-      schema:
-        type: string
   requestBodies:
     GRAPHQL_SCHEMA:
       content:
@@ -409,9 +412,6 @@ components:
             GRAPHQL_SCHEMA:
               value: null
               $ref: '#/components/examples/GRAPHQL_SCHEMA'
-  examples:
-    GRAPHQL_SCHEMA:
-      value: "type Author {\n  id: Int!\n  firstName: String\n  lastName: String\n  posts: [Post]\n}type Post {\n  id: Int!\n  title: String\n  author: Author\n  votes: Int\n}type Query {\n  posts: [Post]\n  author(id: Int!): Author\n}\n"
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

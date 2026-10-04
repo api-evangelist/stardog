@@ -76,6 +76,14 @@ paths:
                     example: 0D0DU2
 components:
   parameters:
+    db:
+      name: db
+      in: path
+      description: Database name
+      required: true
+      schema:
+        type: string
+      example: myDb
     reasoning:
       name: reasoning
       in: query
@@ -88,14 +96,6 @@ components:
       description: The name of the schema
       schema:
         type: string
-    db:
-      name: db
-      in: path
-      description: Database name
-      required: true
-      schema:
-        type: string
-      example: myDb
 externalDocs:
   url: https://docs.stardog.com
 x-tagGroups:

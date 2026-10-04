@@ -167,27 +167,6 @@ paths:
                 $ref: '#/components/schemas/CATALOG_STATUS'
 components:
   schemas:
-    CATALOG_JOB:
-      properties:
-        jobname:
-          type: string
-    CATALOG_JOB_CRON_NEXT_DATE:
-      properties:
-        cron:
-          type: string
-        next_date:
-          type: string
-    CATALOG_RELOAD:
-      properties:
-        provider:
-          type: string
-          format: URI
-    CATALOG_JOB_CRON_VALID:
-      properties:
-        cron:
-          type: string
-        is_valid:
-          type: boolean
     CATALOG_STATUS:
       properties:
         scheduler:
@@ -206,36 +185,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CATALOG_JOB_STATUS'
-    CATALOG_JOB_STATUS:
-      properties:
-        name:
-          type: string
-        group:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
-    CREDENTIALS_ADD:
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        label:
-          type: string
-    CREDENTIALS_LIST:
-      properties:
-        label:
-          type: string
-        key:
-          type: string
-    CATALOG_JOB_CRON_SUMMARY:
+    CATALOG_JOB_CRON_VALID:
       properties:
         cron:
           type: string
-        summary:
-          type: string
+        is_valid:
+          type: boolean
     CATALOG_PROVIDER:
       properties:
         name:
@@ -246,9 +201,54 @@ components:
           type: string
         lastupdate:
           type: string
+    CATALOG_JOB_CRON_SUMMARY:
+      properties:
+        cron:
+          type: string
+        summary:
+          type: string
+    CATALOG_JOB_STATUS:
+      properties:
+        name:
+          type: string
+        group:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
     ACCESS_KEY:
       properties:
         accessKey:
+          type: string
+    CREDENTIALS_LIST:
+      properties:
+        label:
+          type: string
+        key:
+          type: string
+    CREDENTIALS_ADD:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        label:
+          type: string
+    CATALOG_JOB_CRON_NEXT_DATE:
+      properties:
+        cron:
+          type: string
+        next_date:
+          type: string
+    CATALOG_RELOAD:
+      properties:
+        provider:
+          type: string
+          format: URI
+    CATALOG_JOB:
+      properties:
+        jobname:
           type: string
 externalDocs:
   url: https://docs.stardog.com

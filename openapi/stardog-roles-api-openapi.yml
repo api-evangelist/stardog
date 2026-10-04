@@ -111,21 +111,38 @@ paths:
         '200':
           $ref: '#/components/responses/ROLE_LIST_DETAILED'
 components:
-  schemas:
-    ROLENAME:
-      required:
-      - rolename
-      properties:
-        rolename:
-          type: string
+  responses:
+    USER_LIST:
+      description: List of Users in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/USER_LIST'
     ROLE_LIST:
-      required:
-      - roles
-      properties:
-        roles:
-          type: array
-          items:
-            type: string
+      description: List of Roles in system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST'
+    MALFORMED_REQUEST_400:
+      description: Malformed request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
+    ROLE_LIST_DETAILED:
+      description: List of Roles in system, including their permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
+  requestBodies:
+    ROLENAME:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ROLENAME'
+  schemas:
     USER_LIST:
       required:
       - users
@@ -134,16 +151,20 @@ components:
           type: array
           items:
             type: string
-    GENERIC_RESPONSE_ERROR_MESSAGE:
+    ROLE_LIST:
       required:
-      - message
+      - roles
       properties:
-        message:
+        roles:
+          type: array
+          items:
+            type: string
+    ROLENAME:
+      required:
+      - rolename
+      properties:
+        rolename:
           type: string
-          example: Unexpected end of file [L9]
-        code:
-          type: string
-          example: QEIVR2
     ROLE_LIST_DETAILED:
       type: array
       items:
@@ -203,37 +224,16 @@ components:
         explicit:
           type: boolean
           description: Whether this permission is explicitly granted to the user versus granted via a role
-  responses:
-    MALFORMED_REQUEST_400:
-      description: Malformed request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GENERIC_RESPONSE_ERROR_MESSAGE'
-    USER_LIST:
-      description: List of Users in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/USER_LIST'
-    ROLE_LIST_DETAILED:
-      description: List of Roles in system, including their permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST_DETAILED'
-    ROLE_LIST:
-      description: List of Roles in system
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLE_LIST'
-  requestBodies:
-    ROLENAME:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ROLENAME'
+    GENERIC_RESPONSE_ERROR_MESSAGE:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          example: Unexpected end of file [L9]
+        code:
+          type: string
+          example: QEIVR2
   parameters:
     role:
       name: role

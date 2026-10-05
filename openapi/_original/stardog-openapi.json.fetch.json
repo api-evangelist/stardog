@@ -1,0 +1,12 @@
+{
+ "url": "https://stardog-union.github.io/http-docs/openapi.json",
+ "requested_url": "https://stardog-union.github.io/http-docs/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 383821,
+ "sha256": "17561ae17395af2d38efb9268b9b746154a3433856347d5b3e70c69739139f26",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.985), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

@@ -1,4 +1,4 @@
-# Stardog (stardog)
+# Stardog
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,62 +66,151 @@
 
 Stardog is an enterprise knowledge graph platform that unifies data across silos using a semantic data layer combining knowledge graphs, virtualization, inference, and AI. The platform enables organizations to query data via SPARQL, GraphQL, and natural language while supporting RDF, OWL reasoning, and virtual graphs over relational sources. Stardog exposes a comprehensive HTTP API for database, query, transaction, and admin operations using HTTP Basic or OAuth Bearer authentication.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/stardog/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/stardog/refs/heads/main/apis.yml)
+**Areas:** Knowledge Graph · Graph Database · Semantic Web · SPARQL · Data Virtualization · Enterprise Data
 
-## Scope
+## Stardog on APIs.io
 
-- **Type:** Index
+Everything profiled for Stardog is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/stardog/](https://apis.io/providers/stardog/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (25)
 
-- Knowledge Graph
-- Graph Database
-- Semantic Web
-- SPARQL
-- Data Virtualization
-- Enterprise Data
+- [Stardog HTTP API](https://apis.io/apis/stardog/http-api/) — Comprehensive HTTP API for managing Stardog databases, executing SPARQL queries, running transactions, managing users and roles, and administering the…
+- [Stardog Checkpoints API](https://apis.io/apis/stardog/stardog-checkpoints-api/) — Operations for database checkpoints
+- [Stardog Cluster Admin API](https://apis.io/apis/stardog/stardog-cluster-admin-api/) — Cluster administration operations
+- [Stardog Data Caching API](https://apis.io/apis/stardog/stardog-data-caching-api/) — Operations for working with cached data
+- [Stardog Data Sources API](https://apis.io/apis/stardog/stardog-data-sources-api/) — Operations for managing data sources, which are used by virtual graphs
+- [Stardog DB Admin API](https://apis.io/apis/stardog/stardog-db-admin-api/) — Database administration operations
+- [Stardog Graph Store Protocol API](https://apis.io/apis/stardog/stardog-graph-store-protocol-api/) — Operations on named graphs as detailed in https://www.w3.org/TR/sparql11-http-rdf-update/
+- [Stardog Integrity Constraints / SHACL API](https://apis.io/apis/stardog/stardog-integrity-constraints-shacl-api/) — The Integrity Constraints / SHACL API from Stardog — 5 operation(s) for integrity constraints / shacl.
+- [Stardog Knowledge Catalog API](https://apis.io/apis/stardog/stardog-knowledge-catalog-api/) — Operations for managing the Knowledge Catalog module
+- [Stardog Matcher, aligning schemas from various data sources API](https://apis.io/apis/stardog/stardog-matcher-aligning-schemas-from-various-data-sources-api/) — The Matcher, aligning schemas from various data sources API from Stardog — 1 operation(s) for matcher, aligning schemas from various data sources.
+- [Stardog Monitoring API](https://apis.io/apis/stardog/stardog-monitoring-api/) — Operations relating to monitoring processes on the server
+- [Stardog Permissions API](https://apis.io/apis/stardog/stardog-permissions-api/) — Operations on system permissions
+- [Stardog Queries API](https://apis.io/apis/stardog/stardog-queries-api/) — Operations relating to queries running on the server
+- [Stardog Reasoning API](https://apis.io/apis/stardog/stardog-reasoning-api/) — Operations for interacting with the inference engine
+- [Stardog Roles API](https://apis.io/apis/stardog/stardog-roles-api/) — Operations on system roles
+- [Stardog Server Admin API](https://apis.io/apis/stardog/stardog-server-admin-api/) — Server administration operations. May require superuser permissions
+- [Stardog Server Status/Metrics API](https://apis.io/apis/stardog/stardog-server-status-metrics-api/) — The Server Status/Metrics API from Stardog — 3 operation(s) for server status/metrics.
+- [Stardog SPARQL API](https://apis.io/apis/stardog/stardog-sparql-api/) — SPARQL Update Queries
+- [Stardog Stored Functions API](https://apis.io/apis/stardog/stardog-stored-functions-api/) — Operations relating to user-defined functions stored on the server
+- [Stardog Transactions API](https://apis.io/apis/stardog/stardog-transactions-api/) — Transactional operations
+- [Stardog Users API](https://apis.io/apis/stardog/stardog-users-api/) — Operations on system users
+- [Stardog Virtual Graphs API](https://apis.io/apis/stardog/stardog-virtual-graphs-api/) — Operations for virtualizing structured data
+- [Stardog Virtual Graphs External Compute API](https://apis.io/apis/stardog/stardog-virtual-graphs-external-compute-api/) — Operations for virtualizing structured data on external compute engines
+- [Stardog Entity Resolution API](https://apis.io/apis/stardog/stardog-entity-resolution-api/) — Operations for running Entity Resolution
+- [Stardog Graph QL API](https://apis.io/apis/stardog/stardog-graph-ql-api/) — GraphQL Queries
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Stardog HTTP API
+GraphQL schemas.
 
-Comprehensive HTTP API for managing Stardog databases, executing SPARQL queries, running transactions, managing users and roles, and administering the server. Authentication supports HTTP Basic over SSL or OAuth Bearer tokens via JWT in the Authorization header.
+- [Moved to /providers/stardog/](https://apis.io/graphqls/stardog/stardog-graphql/)
 
-- **Human URL:** [https://stardog-union.github.io/http-docs/](https://stardog-union.github.io/http-docs/)
-- **Base URL:** `https://cloud.stardog.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Databases
-- SPARQL
-- Transactions
-- Reasoning
-- Virtual Graphs
-- Admin
+- [Stardog Agentic Access](https://apis.io/agentic-access/stardog/stardog-agentic-access/)
 
-#### Properties
+#### Collections (25)
 
-- [Documentation](https://stardog-union.github.io/http-docs/)
-- [Stardog  Cloud  R E S T  A P I](https://cloud.stardog.com/api/v1/docs)
-- [Developer  Docs](https://docs.stardog.com/developing/http-api)
-- [Postman Collection](collections/stardog.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/stardog.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Stardog HTTP API](https://apis.io/collections/stardog/open-stardog/)
+- [Stardog HTTP Checkpoints API](https://apis.io/collections/stardog/open-stardog-checkpoints-api/)
+- [Stardog HTTP Checkpoints Cluster Admin API](https://apis.io/collections/stardog/open-stardog-cluster-admin-api/)
+- [Stardog HTTP Checkpoints Data Caching API](https://apis.io/collections/stardog/open-stardog-data-caching-api/)
+- [Stardog HTTP Checkpoints Data Sources API](https://apis.io/collections/stardog/open-stardog-data-sources-api/)
+- [Stardog HTTP Checkpoints DB Admin API](https://apis.io/collections/stardog/open-stardog-db-admin-api/)
+- [Stardog HTTP Checkpoints EntityResolution API](https://apis.io/collections/stardog/open-stardog-entityresolution-api/)
+- [Stardog HTTP Checkpoints Graph Store Protocol API](https://apis.io/collections/stardog/open-stardog-graph-store-protocol-api/)
+- [Stardog HTTP Checkpoints GraphQL API](https://apis.io/collections/stardog/open-stardog-graphql-api/)
+- [Stardog HTTP Checkpoints Integrity Constraints / SHACL API](https://apis.io/collections/stardog/open-stardog-integrity-constraints-shacl-api/)
+- [Stardog HTTP Checkpoints Knowledge Catalog API](https://apis.io/collections/stardog/open-stardog-knowledge-catalog-api/)
+- [Stardog HTTP Checkpoints Matcher, aligning schemas from various data sources API](https://apis.io/collections/stardog/open-stardog-matcher-aligning-schemas-from-various-data-sources-api/)
+- [Stardog HTTP Checkpoints Monitoring API](https://apis.io/collections/stardog/open-stardog-monitoring-api/)
+- [Stardog HTTP Checkpoints Permissions API](https://apis.io/collections/stardog/open-stardog-permissions-api/)
+- [Stardog HTTP Checkpoints Queries API](https://apis.io/collections/stardog/open-stardog-queries-api/)
+- [Stardog HTTP Checkpoints Reasoning API](https://apis.io/collections/stardog/open-stardog-reasoning-api/)
+- [Stardog HTTP Checkpoints Roles API](https://apis.io/collections/stardog/open-stardog-roles-api/)
+- [Stardog HTTP Checkpoints Server Admin API](https://apis.io/collections/stardog/open-stardog-server-admin-api/)
+- [Stardog HTTP Checkpoints Server Status/Metrics API](https://apis.io/collections/stardog/open-stardog-server-status-metrics-api/)
+- [Stardog HTTP Checkpoints SPARQL API](https://apis.io/collections/stardog/open-stardog-sparql-api/)
+- [Stardog HTTP Checkpoints Stored Functions API](https://apis.io/collections/stardog/open-stardog-stored-functions-api/)
+- [Stardog HTTP Checkpoints Transactions API](https://apis.io/collections/stardog/open-stardog-transactions-api/)
+- [Stardog HTTP Checkpoints Users API](https://apis.io/collections/stardog/open-stardog-users-api/)
+- [Stardog HTTP Checkpoints Virtual Graphs API](https://apis.io/collections/stardog/open-stardog-virtual-graphs-api/)
+- [Stardog HTTP Checkpoints Virtual Graphs External Compute API](https://apis.io/collections/stardog/open-stardog-virtual-graphs-external-compute-api/)
 
-- [LinkedIn](https://www.linkedin.com/company/stardog-union)
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Stardog Domain Security](https://apis.io/security/stardog/stardog-domain-security/)
+- [Stardog Trust Center](https://apis.io/security/stardog/stardog-trust-center/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.stardog.com)
 - [Documentation](https://docs.stardog.com/)
 - [Pricing](https://www.stardog.com/pricing/)
-- [Sign Up](https://cloud.stardog.com/)
-- [Git Hub](https://github.com/stardog-union)
+- [Blog](https://www.stardog.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 40.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 31.6 |
+
+**Agent readiness 24.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/stardog/](https://apis.io/providers/stardog/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Stardog: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/stardog/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
